@@ -19,9 +19,10 @@ class stockmove(models.Model):
     _inherit = 'stock.move'
 
     ship_order_move = fields.Char(compute="_get_purchase_ship_order")
-
-    @api.depends('default_picking_id')
+    picking_id = fields.Char()
+    
+    @api.depends('picking_id')
     def _get_purchase_ship_order(self):
         for record in self:
             record.ship_order_move = record.env['stock.picking'].browse(
-                record.default_picking_id.purchase_ship_order)
+                record.picking_id.purchase_ship_order)
