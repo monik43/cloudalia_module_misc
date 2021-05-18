@@ -13,7 +13,7 @@ class stockpicking(models.Model):
 
         for record in self:
 
-            if record.purchase_id.ship_order:
+            if record.purchase_id & record.purchase_id.ship_order:
                 record.purchase_ship_order = record.purchase_id.ship_order
 
 
