@@ -12,7 +12,9 @@ class stockpicking(models.Model):
     def _get_ship_order(self):
 
         for record in self:
-            record.purchase_ship_order = record.purchase_id.ship_order
+
+            if record.purchase_id.ship_order:
+                record.purchase_ship_order = record.purchase_id.ship_order
 
 
 class stockmove(models.Model):
@@ -20,9 +22,12 @@ class stockmove(models.Model):
 
     ship_order_move = fields.Char(compute="_get_purchase_ship_order")
     picking_id = fields.Char()
-    
+
     @api.depends('picking_id')
     def _get_purchase_ship_order(self):
         for record in self:
-            record.ship_order_move = record.env['stock.picking'].browse(
-                record.picking_id.purchase_ship_order)
+            if record.env['stock.picking'].browse(
+                record.picking_id.purchase_ship_order):
+
+                record.ship_order_move=record.env['stock.picking'].browse(
+                    record.picking_id.purchase_ship_order)
