@@ -1,5 +1,6 @@
 <odoo>
     <data>
+    <!--
         <record id="stock_move_op_nosg_form_inherit" model="ir.ui.view">
             <field name="name">cloud_stock.move.operations.nosuggest.form</field>
             <field name="model">stock.move</field>
@@ -11,8 +12,7 @@
                     </group>
                 </xpath>
             </field>
-        </record>
-        <!--
+        </record> -->
         <record id="stock_picking_form_inherit_inherit" model="ir.ui.view">
             <field name="name">cloud_stock.picking.form</field>
             <field name="model">stock.picking</field>
@@ -23,6 +23,5 @@
                 </xpath>
             </field>
         </record>
-        -->
     </data>
 </odoo>
