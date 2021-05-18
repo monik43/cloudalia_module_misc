@@ -12,6 +12,7 @@
                 </xpath>
             </field>
         </record>
+        <!--
         <record id="stock_picking_form_inherit_inherit" model="ir.ui.view">
             <field name="name">cloud_stock.picking.form</field>
             <field name="model">stock.picking</field>
@@ -22,5 +23,6 @@
                 </xpath>
             </field>
         </record>
+        -->
     </data>
 </odoo>
