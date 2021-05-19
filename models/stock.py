@@ -12,8 +12,8 @@ class stockpicking(models.Model):
     def _get_ship_order(self):
 
         for record in self:
-
-            if record.purchase_id & record.purchase_id.ship_order:
+            
+            if record.purchase_id.id & record.purchase_id.ship_order:
                 
                 record.purchase_ship_order = record.purchase_id.ship_order
                 print("wWw"*10, record.purchase_ship_order, "/"*10)
