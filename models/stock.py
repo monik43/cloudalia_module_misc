@@ -14,9 +14,11 @@ class stockpicking(models.Model):
         for record in self:
 
             if record.purchase_id & record.purchase_id.ship_order:
+                
                 record.purchase_ship_order = record.purchase_id.ship_order
+                print(record.purchase_ship_order)
 
-
+"""
 class stockmove(models.Model):
     _inherit = 'stock.move'
 
@@ -33,3 +35,4 @@ class stockmove(models.Model):
 
                 record.ship_order_move = record.env['stock.picking'].browse(
                     record.picking_id.purchase_ship_order)[0]
+"""
