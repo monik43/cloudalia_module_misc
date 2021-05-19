@@ -16,7 +16,7 @@ class stockpicking(models.Model):
             if record.purchase_id & record.purchase_id.ship_order:
                 
                 record.purchase_ship_order = record.purchase_id.ship_order
-                print(record.purchase_ship_order)
+                print("wWw"*10, record.purchase_ship_order, "/"*10)
 
 """
 class stockmove(models.Model):
