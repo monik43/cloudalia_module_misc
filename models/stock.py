@@ -21,7 +21,7 @@ class stockmove(models.Model):
     _inherit = 'stock.move'
 
     #ship_order_move = fields.Char(compute="_get_purchase_ship_order")
-    picking_id = fields.Char()
+    #picking_id = fields.Char()
 
     """
     @api.depends('picking_id')
