@@ -12,9 +12,9 @@ class stockpicking(models.Model):
     def _get_ship_order(self):
 
         for record in self:
-            
+
             if record.purchase_id.ship_order:
-                
+
                 record.purchase_ship_order = record.purchase_id.ship_order
                 print("wWw"*10, record.purchase_ship_order, "/"*10)
 
@@ -28,11 +28,12 @@ class stockmove(models.Model):
     def _get_purchase_ship_order(self):
 
         for record in self:
-            
 
-            if record.env['stock.picking'].browse(
-                record.picking_id)[0].purchase_ship_order:
+            print(record.env['stock.picking'].browse(
+                record.picking_id))
+            """if record.env['stock.picking'].browse(
+                    record.picking_id):
 
                 record.ship_order_move = record.env['stock.picking'].browse(
-                record.picking_id)
-                print("wWw"*10, record.ship_order_move, "/"*10)
+                    record.picking_id)
+                print("wWw"*10, record.ship_order_move, "/"*10)"""
