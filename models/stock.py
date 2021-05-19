@@ -27,9 +27,9 @@ class stockmove(models.Model):
 
         for record in self:
             picking_id = record.env['stock.picking'].browse(
-                record.picking_id)
+                record.picking_id)[0]
 
             if picking_id & picking_id.purchase_ship_order:
 
                 record.ship_order_move = record.env['stock.picking'].browse(
-                    record.picking_id.purchase_ship_order)
+                    record.picking_id.purchase_ship_order)[0]
