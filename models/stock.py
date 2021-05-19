@@ -29,10 +29,9 @@ class stockmove(models.Model):
 
         for record in self:
 
-            print(record.env['stock.picking'].search([('id', '=', record.picking_id.id)]).id)
-            """if record.env['stock.picking'].browse(
-                    record.picking_id):
+            #record.env['stock.picking'].search([('id', '=', record.picking_id.id)]).id
+            if record.env['stock.picking'].browse(
+                    record.picking_id.id):
 
                 record.ship_order_move = record.env['stock.picking'].browse(
-                    record.picking_id)
-                print("wWw"*10, record.ship_order_move, "/"*10)"""
+                    record.picking_id.id).purchase_ship_order
