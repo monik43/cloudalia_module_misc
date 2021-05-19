@@ -34,5 +34,5 @@ class stockmove(models.Model):
                 record.picking_id)[0].purchase_ship_order:
 
                 record.ship_order_move = record.env['stock.picking'].browse(
-                record.picking_id)[0].purchase_ship_order
+                record.picking_id)
                 print("wWw"*10, record.ship_order_move, "/"*10)
