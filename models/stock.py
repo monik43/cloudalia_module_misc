@@ -30,7 +30,7 @@ class stockmove(models.Model):
         for record in self:
 
             print(record.env['stock.picking'].browse(
-                record.picking_id))[0]
+                record.picking_id).id)
             """if record.env['stock.picking'].browse(
                     record.picking_id):
 
