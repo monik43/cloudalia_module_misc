@@ -13,7 +13,7 @@ class stockpicking(models.Model):
 
         for record in self:
             
-            if record.purchase_id.id & record.purchase_id.ship_order:
+            if str(record.purchase_id.id) & record.purchase_id.ship_order:
                 
                 record.purchase_ship_order = record.purchase_id.ship_order
                 print("wWw"*10, record.purchase_ship_order, "/"*10)
