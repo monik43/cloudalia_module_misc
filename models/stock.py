@@ -18,7 +18,7 @@ class stockpicking(models.Model):
                 record.purchase_ship_order = record.purchase_id.ship_order
                 print("wWw"*10, record.purchase_ship_order, "/"*10)
 
-"""
+
 class stockmove(models.Model):
     _inherit = 'stock.move'
 
@@ -28,11 +28,11 @@ class stockmove(models.Model):
     def _get_purchase_ship_order(self):
 
         for record in self:
-            picking_id = record.env['stock.picking'].browse(
-                record.picking_id)[0]
+            
 
-            if picking_id & picking_id.purchase_ship_order:
+            if record.env['stock.picking'].browse(
+                record.picking_id)[0].purchase_ship_order:
 
                 record.ship_order_move = record.env['stock.picking'].browse(
-                    record.picking_id.purchase_ship_order)[0]
-"""
+                record.picking_id)[0].purchase_ship_order
+                print("wWw"*10, record.ship_order_move "/"*10)
