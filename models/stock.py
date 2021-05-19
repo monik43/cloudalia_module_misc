@@ -29,7 +29,7 @@ class stockmove(models.Model):
 
         for record in self:
 
-            print(record.env['stock.picking'].search([('id', '=', record.picking_id)]))
+            print(record.env['stock.picking'].search([('id', '=', record.picking_id.id)]))
             """if record.env['stock.picking'].browse(
                     record.picking_id):
 
