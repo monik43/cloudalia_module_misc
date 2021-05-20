@@ -20,7 +20,8 @@
                 <xpath expr="//button[@name='action_show_details']" position="attributes">
                     <attribute name="icon"></attribute>
                     <attribute name="style">width: 200px !important;</attribute>
-                    <attribute name="class">btn btn-info</attribute>
+                    <attribute name="class">btn btn-primary</attribute>
+                    <attribute name="string">Ver más</attribute>
                 </xpath>
             </field>
         </record>
