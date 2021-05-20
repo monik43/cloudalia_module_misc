@@ -19,7 +19,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='action_show_details']" position="attributes">
                     <attribute name="icon"></attribute>
-                    <!--<attribute name="style">width: 145px !important;</attribute>-->
+                    <attribute name="style">margin-right: -50px !important;</attribute>
                     <attribute name="class">btn btn-primary</attribute>
                     <attribute name="string">Ver más</attribute>
                 </xpath>
