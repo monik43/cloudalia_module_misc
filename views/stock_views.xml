@@ -18,8 +18,8 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='action_show_details']" position="attributes">
-                    <attribute name="icon">fa-square</attribute>
-                    <attribute name="style">max-width: 200px !important;</attribute>
+                    <attribute name="icon"></attribute>
+                    <attribute name="style">width: 200px !important;</attribute>
                 </xpath>
             </field>
         </record>
