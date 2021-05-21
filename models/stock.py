@@ -25,11 +25,11 @@ class stockpicking(models.Model):
             if product.quantity_done < product.product_uom_qty:
                 product.quantity_done = product.product_uom_qty
             """
-            print("Nom: " + product.product_id)
+            print("Nom: " + str(product.product_id))
             print("#" * 25)
-            print("qty_done:        " + product.qty_done)
+            print("qty_done:        " + str(product.qty_done))
             print("#" * 25)
-            print("product_qty:        " + product.product_qty)
+            print("product_qty:        " + str(product.product_qty))
             print("#" * 25)
 
         
