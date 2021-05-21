@@ -16,7 +16,11 @@ class stockpicking(models.Model):
             if record.purchase_id.ship_order:
 
                 record.purchase_ship_order = record.purchase_id.ship_order
-                print("wWw"*10, record.purchase_ship_order, "/"*10)
+
+    @api.multi
+    def fill_all_product_quantities(self):
+        print(self.move_lines)
+
 
 
 class stockmove(models.Model):
@@ -28,10 +32,8 @@ class stockmove(models.Model):
     def _get_purchase_ship_order(self):
 
         for record in self:
+            stock_picking = record.env['stock.picking']
 
-            #record.env['stock.picking'].search([('id', '=', record.picking_id.id)]).id
-            if record.env['stock.picking'].browse(
-                    record.picking_id.id):
+            if stock_picking.browse(record.picking_id.id):
 
-                record.ship_order_move = record.env['stock.picking'].browse(
-                    record.picking_id.id).purchase_ship_order
+                record.ship_order_move = stock_picking.browse(record.picking_id.id).purchase_ship_order
