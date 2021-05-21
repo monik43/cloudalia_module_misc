@@ -19,7 +19,7 @@ class stockpicking(models.Model):
 
     @api.multi
     def fill_all_product_quantities(self):
-        print(self.move_lines.product_id)
+        print(self.move_lines.quantity_done)
 
 
 
