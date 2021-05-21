@@ -20,12 +20,14 @@ class stockpicking(models.Model):
     @api.multi
     def fill_all_product_quantities(self):
         
-        for product in self.move_lines:
+        for o in self.move_line_ids:
             """
             if product.quantity_done < product.product_uom_qty:
                 product.quantity_done = product.product_uom_qty
             """
-            print("Nom: " + str(product.product_id))
+            print("" + str(o.qty_done))
+            print("#" * 25)
+            print("" + str(o.product_qty))
             print("#" * 25)
 
         
