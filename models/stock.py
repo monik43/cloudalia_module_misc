@@ -27,10 +27,6 @@ class stockpicking(models.Model):
             """
             print("Nom: " + str(product.product_id))
             print("#" * 25)
-            print("qty_done:        " + str(product.qty_done))
-            print("#" * 25)
-            print("product_qty:        " + str(product.product_qty))
-            print("#" * 25)
 
         
 
