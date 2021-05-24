@@ -34,8 +34,8 @@ class stockpicking(models.Model):
 
     @api.multi
     def button_validate(self):
-        self.ensure_one()
-        if not self.move_lines and not self.move_line_ids and self.move_lines.move_line_nosuggest_ids:
+        
+        if not self.move_lines and not self.move_line_ids and not self.move_lines.move_line_nosuggest_ids:
             raise UserError(_('Please add some lines to move'))
 
         # If no lots when needed, raise error
