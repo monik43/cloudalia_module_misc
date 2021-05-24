@@ -119,4 +119,4 @@ class stockmove(models.Model):
             if stock_picking.browse(record.picking_id.id):
 
                 record.ship_order_move=stock_picking.browse(
-                    record.picking_id.id).purchase_ship_order
+                    record.picking_id.id).purchase_ship_order)
