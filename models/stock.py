@@ -110,7 +110,7 @@ class stockmove(models.Model):
 
     ship_order_move=fields.Char(compute="_get_purchase_ship_order")
 
-    @ api.depends('picking_id')
+    @api.depends('picking_id')
     def _get_purchase_ship_order(self):
 
         for record in self:
