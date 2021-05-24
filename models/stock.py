@@ -43,8 +43,9 @@ class stockpicking(models.Model):
         precision_digits = self.env['decimal.precision'].precision_get(
             'Product Unit of Measure')
 
-        for move_line in self.move_lines.move_line_nosuggest_ids.filtered(lambda m: m.state not in ('done', 'cancel'):
-            no_quantities_done=all(float_is_zero(move_line.qty_done, precision_digits=precision_digits)
+        for move_line in self.move_lines.move_line_nosuggest_ids:
+            no_quantities_done=all(float_is_zero(move_line.qty_done, precision_digits=precision_digits))
+            
             no_reserved_quantities=all(float_is_zero(move_line.product_qty, precision_rounding=move_line.product_uom_id.rounding)
 
             if no_reserved_quantities and no_quantities_done:
