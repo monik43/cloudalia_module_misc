@@ -19,8 +19,8 @@
     'depends': ['base', 'stock', 'cloudedu_mods'],
 
     'data': [
-        'views/stock_views.xml',
         'views/res_partner_views.xml',
+        #'views/stock_views.xml',
         #'views/views.xml',
     ],
 }
