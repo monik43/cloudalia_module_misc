@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-from cloudalia_module_misc.models import auth_signup
-
-
 {
     'name': "cloudalia_module_misc",
 
