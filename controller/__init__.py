@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from . import auth_signup#main
+from . import auth_signup
