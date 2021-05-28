@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 
-
 class authsignupescola(AuthSignupHome):
     def _signup_with_values(self, token, values):
         context = self.get_auth_signup_qcontext()
