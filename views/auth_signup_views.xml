@@ -1,0 +1,10 @@
+<odoo>
+    <template id="signup_fields" inherit_id="auth_signup.fields" name="Auth Signup street form field">
+        <xpath expr="//div[last()]" position="after">
+            <div class="form-group field-login">
+                <label for="escola">Escuela</label>
+                <input type="text" name="escola" id="escola" placeholder="Por ejemplo, Col·legi Montserrat" class="form-control form-control-sm"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
