@@ -8,16 +8,40 @@ from odoo.addons.auth_signup.models.res_users import SignupError
 from odoo.addons.web.controllers.main import ensure_db, Home
 from odoo.exceptions import UserError
 from odoo.http import request
+
 _logger = logging.getLogger(__name__)
 
-class authsignuphome_escola(AuthSignupHome):
+
+class AuthSignupHomeInherit(AuthSignupHome):
+
+    @http.route()
+    def web_login_escola(self, *args, **kw):
+        ensure_db()
+        response = super(AuthSignupHome, self).web_login(*args, **kw)
+        response.qcontext.update(self.get_auth_signup_config())
+        if request.httprequest.method == 'GET' and request.session.uid and request.params.get('redirect'):
+            # Redirect if already logged in and redirect param is present
+            return http.redirect_with_hash(request.params.get('redirect'))
+        return response
+
+    def get_auth_signup_qcontext(self):
+        qcontext = request.params.copy()
+        qcontext.update(self.get_auth_signup_config())
+        if not qcontext.get('token') and request.session.get('auth_signup_token'):
+            qcontext['token'] = request.session.get('auth_signup_token')
+        if qcontext.get('token'):
+            try:
+                # retrieve the user info (name, login or email) corresponding to a signup token
+                token_infos = request.env['res.partner'].sudo().signup_retrieve_info(qcontext.get('token'))
+                for k, v in token_infos.items():
+                    qcontext.setdefault(k, v)
+            except:
+                qcontext['error'] = _("Invalid signup token")
+                qcontext['invalid_token'] = True
+        return qcontext
 
     @http.route('/web/signup_2', type='http', auth='public', website=True, sitemap=False)
     def web_auth_signup_escoles(self, *args, **kw):
-        """
-            Partimos de nueva url para separar logins, el metodo es idéntico excepto en la llamada del 
-            do_signup_escoles
-        """
         qcontext = self.get_auth_signup_qcontext()
 
         if not qcontext.get('token') and not qcontext.get('signup_enabled'):
@@ -38,7 +62,7 @@ class authsignuphome_escola(AuthSignupHome):
                             auth_login=werkzeug.url_encode(
                                 {'auth_login': user_sudo.email}),
                         ).send_mail(user_sudo.id, force_send=True)
-                return self.web_login(*args, **kw)
+                return self.web_login_escola(*args, **kw)
             except UserError as e:
                 qcontext['error'] = e.name or e.value
             except (SignupError, AssertionError) as e:
