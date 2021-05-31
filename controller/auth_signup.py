@@ -49,7 +49,7 @@ class authsignuphome_escola(AuthSignupHome):
                     _logger.error("%s", e)
                     qcontext['error'] = _("Could not create a new account.")
 
-        response = request.render('auth_signup.signup_escola', qcontext)
+        response = request.render('cloudalia_module_misc.signup_escola', qcontext)
         response.headers['X-Frame-Options'] = 'DENY'
         return response
 
