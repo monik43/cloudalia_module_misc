@@ -1,6 +1,6 @@
 <odoo>
     <!--SIGNUP PARA TIENDA: Pidiendo datos de factura, etc-->
-    <template id="auth_signup.fields_escola" name="Auth Signup/ResetPassword form fields per escoles">
+    <template id="cloudalia_module_misc.fields_escola" name="Auth Signup/ResetPassword form fields per escoles">
 
         <div class="form-group field-login">
             <label for="login" class="control-label">Your Email</label>
@@ -62,7 +62,7 @@
         </div>
     </template>
     <!--TEMPLATE INTERMEDIARIA ENTRE PYTHON Y FORM-->
-    <template id="auth_signup.signup_escola" name="Sign up login escola">
+    <template id="cloudalia_module_misc.signup_escola" name="Sign up login escola">
         <t t-call="web.login_layout">
             <form class="oe_signup_form" role="form" method="post" t-if="not message">
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
