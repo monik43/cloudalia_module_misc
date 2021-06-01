@@ -17,7 +17,7 @@ class AuthSignupHomeInherit(AuthSignupHome):
     @http.route()
     def web_login_escola(self, *args, **kw):
         ensure_db()
-        response = super(AuthSignupHome, self).web_login(*args, **kw)
+        response = super(AuthSignupHomeInherit, self).web_login(*args, **kw)
         response.qcontext.update(self.get_auth_signup_config())
         if request.httprequest.method == 'GET' and request.session.uid and request.params.get('redirect'):
             # Redirect if already logged in and redirect param is present
@@ -80,7 +80,7 @@ class AuthSignupHomeInherit(AuthSignupHome):
                             auth_login=werkzeug.url_encode(
                                 {'auth_login': user_sudo.email}),
                         ).send_mail(user_sudo.id, force_send=True)
-                return super(AuthSignupHome, self).web_login_escola(*args, **kw)
+                return super(AuthSignupHomeInherit, self).web_login_escola(*args, **kw)
             except UserError as e:
                 qcontext['error'] = e.name or e.value
             except (SignupError, AssertionError) as e:
