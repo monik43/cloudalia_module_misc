@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-group field-name">
                     <label for="escola" class="control-label">Escola</label>
-                    <input type="text" name="escola" t-att-value="escola" id="escolae" class="form-control" placeholder="e.g. John Doe" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+                    <input type="text" name="escola" t-att-value="escola" id="escola" class="form-control" placeholder="e.g. John Doe" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
                 </div>
             </xpath>
             <xpath expr="//div[@class='form-group field-password']" position="after">
