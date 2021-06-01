@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <template id="auth_signup_fields_escoles" inherit_id="auth_signup.fields" name="Signup Fields Extend">
-            <!--<xpath expr="//div[hasclass('form-group field-name')]" position="replace">
+            <xpath expr="//div[@class='form-group field-name']" position="replace">
                 <div class="form-group field-name">
                     <label for="firstname" class="control-label">Nombre</label>
                     <input type="text" name="firstname" t-att-value="firstname" id="firstname" class="form-control" placeholder="e.g. John Doe" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
@@ -11,9 +11,10 @@
                     <label for="lastname" class="control-label">Apellidos</label>
                     <input type="text" name="lastname" t-att-value="lastname" id="lastname" class="form-control" placeholder="e.g. John Doe" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
                 </div>
-            </xpath>-->
+                <input type="hidden" name="escola" t-att-value="escola" id="escola"/>
+            </xpath>
             <xpath expr="//div[@class='form-group field-password']" position="after">
-                <!--<t t-if="escola == 'c_montserrat' ">-->
+                <t t-if="escola == 'c_montserrat' ">
                     <div class="form-group field-phone">
                         <label for="phone" class="control-label">Phone</label>
                         <input type="text" name="phone" t-att-value="phone" id="phone" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
@@ -49,9 +50,8 @@
                             </t>
                         </select>
                     </div>
-                    <input type="hidden" name="escola" t-att-value="escola" id="escola"/>
                 </xpath>
-            <!--</t>-->
+            </t>
         </template>
     </data>
 </odoo>
