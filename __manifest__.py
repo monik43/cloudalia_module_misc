@@ -19,7 +19,7 @@
     'depends': ['base', 'stock', 'cloudedu_mods', 'auth_signup', 'website'],
 
     'data': [
-        'views/auth_signup_views.xml'
+        'views/auth_signup_views.xml',
         'views/res_partner_views.xml',
         #'views/stock_views.xml',
         #'views/views.xml',
