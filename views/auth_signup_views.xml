@@ -18,7 +18,7 @@
             </xpath>
             <xpath expr="//div[@class='form-group field-password']" position="after">
 
-                <t t-if="'cmontserrat_c' in o.escola">
+                <t t-if="'cmontserrat_c' in escola">
                     <p>test</p>
                     <!--<div class="form-group field-phone">
                             <label for="phone" class="control-label">Phone</label>
