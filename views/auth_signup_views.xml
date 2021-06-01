@@ -50,17 +50,6 @@
                             </t>
                         </select>
                     </div>
-                    <div t-attf-class="form-group">
-                        <label class="control-label" for="state_id">State / Province</label>
-                        <select name="state_id" class="form-control" data-init="1">
-                            <option value="">State / Province...</option>
-                            <t t-foreach="country and country.state_ids or []" t-as="s">
-                                <option t-att-value="s.id" t-att-selected="s.id == ('state_id' in checkout and country and checkout['state_id'] != '' and int(checkout['state_id']))">
-                                    <t t-esc="s.name" />
-                                </option>
-                            </t>
-                        </select>
-                    </div>
                 </div>
             </xpath>
         </template>
