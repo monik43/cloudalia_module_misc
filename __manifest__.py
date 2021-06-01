@@ -16,7 +16,7 @@
 
     'version': '11.0.0.1',
 
-    'depends': ['base', 'stock', 'cloudedu_mods', 'auth_signup', 'res_users', 'website'],
+    'depends': ['base', 'stock', 'cloudedu_mods', 'auth_signup', 'website'],
 
     'data': [
         'views/auth_signup_views.xml'
