@@ -19,7 +19,7 @@
             <xpath expr="//div[@class='form-group field-password']" position="after">
 
                 <p>test</p>
-                <t t-foreach="AuthSignupHome as o">
+                <t t-foreach="AuthSignupHome" t-as="o">
                     <div class="form-group field-phone" t-if="o.escola == 'cmontserrat_c'">
                         <p>test2</p>
                         <label for="phone" class="control-label">Phone</label>
