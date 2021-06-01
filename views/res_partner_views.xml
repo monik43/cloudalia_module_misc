@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//group[@string='Misc']" position="inside">
-                    <field name="acces_botiga" />
+                    <field name="escola" />
                 </xpath>
             </field>
         </record>
