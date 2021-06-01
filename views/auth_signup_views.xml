@@ -50,8 +50,8 @@
                             </t>
                         </select>
                     </div>
-                </xpath>
-            </t>
+                </t>
+            </xpath>
         </template>
     </data>
 </odoo>
