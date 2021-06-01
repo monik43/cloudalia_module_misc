@@ -5,7 +5,7 @@ from odoo import models, fields, api, _
 class respartner(models.Model):
     _inherit = 'res.partner'
 
-    escola_associada = fields.Many2One(compute="_get_escola_from_user")
+    escola_associada = fields.Many2one(compute="_get_escola_from_user")
 
     vat = fields.Char(compute="_get_nif_from_user")
     @api.depends('payment_responsible_id')
