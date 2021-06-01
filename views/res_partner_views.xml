@@ -1,6 +1,6 @@
 <odoo>
     <data>
-        <record id="res_partner_add_botiga_bool_field" model="ir.ui.view">
+        <record id="res_partner_add_escola_field" model="ir.ui.view">
             <field name="name">cloud_base.view_partner_form_botiga</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
