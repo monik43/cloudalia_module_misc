@@ -50,8 +50,8 @@
                         </select>
                     </div>
                     <input type="hidden" name="escola" t-att-value="escola" id="escola"/>
-                <!--</xpath>-->
-            </t>
+                </xpath>
+            <!--</t>-->
         </template>
     </data>
 </odoo>
