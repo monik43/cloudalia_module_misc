@@ -6,3 +6,4 @@ class resusers(models.Model):
     _inherit = 'res.users'
 
     escola = fields.Char()
+    dni = fields.Char()

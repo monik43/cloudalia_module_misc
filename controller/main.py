@@ -14,41 +14,19 @@ _logger = logging.getLogger(__name__)
 
 class AuthSignupHomeInherit(AuthSignupHome):
 
-    @http.route()
-    def web_login_escola(self, *args, **kw):
-        ensure_db()
-        response = super(AuthSignupHomeInherit, self).web_login(*args, **kw)
-        response.qcontext.update(self.get_auth_signup_config())
-        if request.httprequest.method == 'GET' and request.session.uid and request.params.get('redirect'):
-            # Redirect if already logged in and redirect param is present
-            return http.redirect_with_hash(request.params.get('redirect'))
-        return response
-
-    def get_auth_signup_qcontext(self):
-        qcontext = request.params.copy()
-        qcontext.update(self.get_auth_signup_config())
-        if not qcontext.get('token') and request.session.get('auth_signup_token'):
-            qcontext['token'] = request.session.get('auth_signup_token')
-        if qcontext.get('token'):
-            try:
-                # retrieve the user info (name, login or email) corresponding to a signup token
-                token_infos = request.env['res.partner'].sudo(
-                ).signup_retrieve_info(qcontext.get('token'))
-                for k, v in token_infos.items():
-                    qcontext.setdefault(k, v)
-            except:
-                qcontext['error'] = _("Invalid signup token")
-                qcontext['invalid_token'] = True
-        return qcontext
-
-    def do_signup_escoles(self, qcontext):
+    def do_signup(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
         values = {key: qcontext.get(key) for key in (
-            'login', 'name', 'password', 'phone', 'street', 'city', 'country_id', 'escola')}
+            'login', 'firstname','lastname', 'password', 'phone', 'dni', 'street', 'street2', 'zip', 'city', 'country_id', 'escola')}
         if not values:
             raise UserError(_("The form was not properly filled in."))
         if values.get('password') != qcontext.get('confirm_password'):
             raise UserError(_("Passwords do not match; please retype them."))
+
+        if values.get('escola') not in {'cmontserrat_c'}:
+            values = {key: qcontext.get(key) for key in (
+                'login', 'name', 'password')}
+
         supported_langs = [
             lang['code'] for lang in request.env['res.lang'].sudo().search_read([], ['code'])]
         if request.lang in supported_langs:
@@ -56,8 +34,8 @@ class AuthSignupHomeInherit(AuthSignupHome):
         self._signup_with_values(qcontext.get('token'), values)
         request.env.cr.commit()
 
-    @http.route('/web/signup_2', type='http', auth='public', website=True, sitemap=False)
-    def web_auth_signup_escoles(self, *args, **kw):
+    @http.route('/web/signup', type='http', auth='public', website=True, sitemap=False)
+    def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
         qcontext['states'] = request.env['res.country.state'].sudo().search([])
         qcontext['countries'] = request.env['res.country'].sudo().search([])
@@ -80,7 +58,8 @@ class AuthSignupHomeInherit(AuthSignupHome):
                             auth_login=werkzeug.url_encode(
                                 {'auth_login': user_sudo.email}),
                         ).send_mail(user_sudo.id, force_send=True)
-                return super(AuthSignupHomeInherit, self).web_login_escola(*args, **kw)
+
+                return super(AuthSignupHome, self).web_login(*args, **kw)
             except UserError as e:
                 qcontext['error'] = e.name or e.value
             except (SignupError, AssertionError) as e:
@@ -92,6 +71,6 @@ class AuthSignupHomeInherit(AuthSignupHome):
                     qcontext['error'] = _("Could not create a new account.")
 
         response = request.render(
-            'cloudalia_module_misc.signup_escola', qcontext)
+            'auth_signup.signup', qcontext)
         response.headers['X-Frame-Options'] = 'DENY'
         return response
