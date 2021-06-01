@@ -17,10 +17,10 @@
                 </div>
             </xpath>
             <xpath expr="//div[@class='form-group field-password']" position="after">
-                <t t-foreach="website_sale as o">
-                    <t t-if="'cmontserrat_c' in o.escola">
+
+                <t t-if="'cmontserrat_c' in o.escola">
                     <p>test</p>
-                        <!--<div class="form-group field-phone">
+                    <!--<div class="form-group field-phone">
                             <label for="phone" class="control-label">Phone</label>
                             <input type="text" name="phone" t-att-value="phone" id="phone" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
                         </div>
@@ -56,8 +56,8 @@
                             </select>
                         </div>
                         -->
-                    </t>
                 </t>
+
             </xpath>
         </template>
     </data>
