@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="fields_escola" name="Auth Signup/ResetPassword form fields escola">
+        <template id="cloudalia_module_misc.campos_login" name="Auth Signup/ResetPassword form fields escola">
             <p>Escola</p>
             <div class="form-group field-login">
                 <label for="login" class="control-label">Your Email</label>
@@ -30,7 +30,7 @@
 
         </template>
 
-        <template id="signup_escola" name="Sign up login escola">
+        <template id="cloudalia_module_misc.registro_login" name="Sign up login escola">
             <t t-call="web.login_layout">
                 <form class="oe_signup_form" role="form" method="post" t-if="not message">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
