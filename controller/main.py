@@ -55,6 +55,7 @@ class AuthSignupHome(AuthSignupHome):
                                 'auth_login': user_sudo.email
                             }),
                         ).send_mail(user_sudo.id, force_send=True)
+                print(object.escola)    #test
                 return super(AuthSignupHome, self).web_login(*args, **kw)
             except UserError as e:
                 qcontext['error'] = e.name or e.value
