@@ -35,7 +35,7 @@
                 <form class="oe_signup_form" role="form" method="post" t-if="not message">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
-                    <t t-call="fields_escola">
+                    <t t-call="cloudalia_module_misc.campos_login">
                         <t t-set="only_passwords" t-value="bool(token and not invalid_token)"/>
                     </t>
 
