@@ -55,7 +55,6 @@ class AuthSignupHome(AuthSignupHome):
                                 'auth_login': user_sudo.email
                             }),
                         ).send_mail(user_sudo.id, force_send=True)
-                print(object.escola)    #test
                 return super(AuthSignupHome, self).web_login(*args, **kw)
             except UserError as e:
                 qcontext['error'] = e.name or e.value
@@ -71,3 +70,22 @@ class AuthSignupHome(AuthSignupHome):
         response = request.render('auth_signup.signup', qcontext)
         response.headers['X-Frame-Options'] = 'DENY'
         return response
+
+    def get_auth_signup_qcontext(self):
+        """ Shared helper returning the rendering context for signup and reset password """
+        qcontext = request.params.copy()
+        print(request.params['escola'])
+        qcontext.update(self.get_auth_signup_config())
+        if not qcontext.get('token') and request.session.get('auth_signup_token'):
+            qcontext['token'] = request.session.get('auth_signup_token')
+        if qcontext.get('token'):
+            try:
+                # retrieve the user info (name, login or email) corresponding to a signup token
+                token_infos = request.env['res.partner'].sudo(
+                ).signup_retrieve_info(qcontext.get('token'))
+                for k, v in token_infos.items():
+                    qcontext.setdefault(k, v)
+            except:
+                qcontext['error'] = _("Invalid signup token")
+                qcontext['invalid_token'] = True
+        return qcontext
