@@ -32,10 +32,8 @@ class AuthSignupHome(AuthSignupHome):
     @http.route('/web/signup', type='http', auth='public', website=True,
                 sitemap=False)
     def web_auth_signup(self, *args, **kw):
-        print(http.request.httprequest," 222 ", "#/"*50)
+        print(request.META.get('HTTP_REFERER')," 222 ", "#/"*50)
         print(request.httprequest.url," 333 ", "#/"*50)
-        print(request.httprequest.base_url," 444 ", "#/"*50)
-        print(request.httprequest.host_url," 555 ", "#/"*50)
         
         qcontext = self.get_auth_signup_qcontext()
         qcontext['states'] = request.env['res.country.state'].sudo().search([])
