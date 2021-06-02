@@ -15,7 +15,6 @@ class AuthSignupHome(AuthSignupHome):
 
     def do_signup(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
-        print(http.request.httprequest," 111 ", "#/"*50)
         values = {key: qcontext.get(key) for key in (
             'login', 'name', 'password', 'escola')}
         if not values:
@@ -32,11 +31,12 @@ class AuthSignupHome(AuthSignupHome):
     @http.route('/web/signup', type='http', auth='public', website=True,
                 sitemap=False)
     def web_auth_signup(self, *args, **kw):
-        print(request.httprequest.environ['HTTP_REFERER']," 222 ", "#/"*50)
-        print(request.httprequest.environ['HTTP_COOKIE'][0]," 33 ", "#/"*50)
-        print(request.httprequest.environ['HTTP_COOKIE'][3]," 44 ", "#/"*50)
-        print(request.httprequest.url," 333 ", "#/"*50)
         
+        if request.httprequest.environ['HTTP_REFERER'].find('holi') != -1:
+            print("holi es el url anterior")
+        else:
+            print("holi no es url anterior")
+
         qcontext = self.get_auth_signup_qcontext()
         qcontext['states'] = request.env['res.country.state'].sudo().search([])
         qcontext['countries'] = request.env['res.country'].sudo().search([])
