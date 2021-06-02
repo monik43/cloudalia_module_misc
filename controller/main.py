@@ -81,7 +81,7 @@ class AuthSignupHome(AuthSignupHome):
                         qcontext['error'] = _(
                             "Could not create a new account.")
 
-            response = request.render('cloudalia_module_misc.signup_escola', qcontext)
+            response = request.render('signup_escola', qcontext)
 
         else:
             qcontext = self.get_auth_signup_qcontext()
