@@ -31,8 +31,8 @@ class AuthSignupHome(AuthSignupHome):
     @http.route('/web/signup', type='http', auth='public', website=True,
                 sitemap=False)
     def web_auth_signup(self, *args, **kw):
-        
-        if request.httprequest.environ['HTTP_REFERER'].find('holi') != -1:
+        last_url = request.httprequest.environ['HTTP_REFERER']
+        if last_url.find(['holi','cmontserrat']) != -1:
             print("holi es el url anterior")
         else:
             print("holi no es url anterior")
