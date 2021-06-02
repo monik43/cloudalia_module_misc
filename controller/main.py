@@ -32,10 +32,15 @@ class AuthSignupHome(AuthSignupHome):
                 sitemap=False)
     def web_auth_signup(self, *args, **kw):
         last_url = request.httprequest.environ['HTTP_REFERER']
-        if last_url.find(['holi','cmontserrat']) != -1:
-            print("holi es el url anterior")
-        else:
-            print("holi no es url anterior")
+        url_escola = False
+        escoles = {'holi', 'cmontserrat'}
+        for escola in escoles:
+            if last_url.find(escola) != -1:
+                print("holi es el url anterior")
+                url_escola = True
+                print(url_escola)
+            else:
+                print("holi no es url anterior")
 
         qcontext = self.get_auth_signup_qcontext()
         qcontext['states'] = request.env['res.country.state'].sudo().search([])
