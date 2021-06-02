@@ -32,7 +32,9 @@ class AuthSignupHome(AuthSignupHome):
     @http.route('/web/signup', type='http', auth='public', website=True,
                 sitemap=False)
     def web_auth_signup(self, *args, **kw):
-        print(request.httprequest.environ['HTTP_COOKIE'][0]," 222 ", "#/"*50)
+        print(request.httprequest.environ['HTTP_COOKIE']," 222 ", "#/"*50)
+        print(request.httprequest.environ['HTTP_COOKIE'][0]," 33 ", "#/"*50)
+        print(request.httprequest.environ['HTTP_COOKIE'][3]," 44 ", "#/"*50)
         print(request.httprequest.url," 333 ", "#/"*50)
         
         qcontext = self.get_auth_signup_qcontext()
