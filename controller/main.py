@@ -133,7 +133,7 @@ class AuthSignupHome(AuthSignupHome):
             'name', 'login', 'password', 'phone', 'vat', 'street',
             'street2', 'zip', 'city', 'state_id', 'country_id',
             'escola')}
-        print(values.get('escola'), "#|"*50)
+        
         if not values:
             raise UserError(_("The form was not properly filled in."))
         if values.get('password') != qcontext.get('confirm_password'):
@@ -143,4 +143,5 @@ class AuthSignupHome(AuthSignupHome):
         if request.lang in supported_langs:
             values['lang'] = request.lang
         self._signup_with_values(qcontext.get('token'), values)
+        print(qcontext.get('escola'), "#|"*50)
         request.env.cr.commit()
