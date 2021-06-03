@@ -8,13 +8,15 @@ class respartner(models.Model):
     escola = fields.Char(compute="_assignar_escola")
     user_id = fields.Many2one('res.users', compute="_assignar_usuari")
 
-    @api.depends('user_id')
-    def _assignar_escola(self):
-        for record in self:
-            record.escola = record.user_id.escola
+    
 
     def _assignar_usuari(self):
-
         for record in self:
             record.user_id = record.env['res.users'].search([('partner_id','=',self.id)])
             print(record.user_id, "#/"*50)
+
+    def _assignar_escola(self):
+        for record in self:
+            print(record.user_id, "#/"*50)
+            print(record.user_id.escola, "#/"*50)
+            record.escola = record.user_id.escola
