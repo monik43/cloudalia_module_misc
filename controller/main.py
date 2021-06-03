@@ -16,7 +16,7 @@ class AuthSignupHome(AuthSignupHome):
     def do_signup_escola(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
         values = {key: qcontext.get(key) for key in (
-            'login', 'firstname', 'lastname', 'name', 'password', 'escola')}
+            'name', 'login', 'password', 'phone', 'vat', 'street', 'street2', 'zip', 'city', 'country_id', 'state_id', 'escola')}
 
         print(values.get('name'))
         if not values:
