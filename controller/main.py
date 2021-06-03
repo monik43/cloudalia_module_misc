@@ -13,10 +13,20 @@ _logger = logging.getLogger(__name__)
 
 class AuthSignupHome(AuthSignupHome):
 
+    def get_name(self):
+        values = {key: qcontext.get(key) for key in (
+            'firstname', 'lastname', 'escola')}
+
+        values.setdefault('name') = values.get('firstname') + " " + values.get('lastname')
+
+        print(values.get('name'))
+        
     def do_signup_escola(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
         values = {key: qcontext.get(key) for key in (
-            'login', 'name', 'password', 'escola')}
+            'login', 'firstname', 'lastname', 'name', 'password', 'escola')}
+
+        print(values.get('name'))
         if not values:
             raise UserError(_("The form was not properly filled in."))
         if values.get('password') != qcontext.get('confirm_password'):
@@ -82,7 +92,6 @@ class AuthSignupHome(AuthSignupHome):
                             "Could not create a new account.")
 
             response = request.render('cloudalia_module_misc.registro_login', qcontext)
-
         else:
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
@@ -127,21 +136,3 @@ class AuthSignupHome(AuthSignupHome):
         response.headers['X-Frame-Options'] = 'DENY'
         return response
 
-    def get_auth_signup_qcontext(self):
-        """ Shared helper returning the rendering context for signup and reset password """
-        qcontext = request.params.copy()
-        print(request.params)
-        qcontext.update(self.get_auth_signup_config())
-        if not qcontext.get('token') and request.session.get('auth_signup_token'):
-            qcontext['token'] = request.session.get('auth_signup_token')
-        if qcontext.get('token'):
-            try:
-                # retrieve the user info (name, login or email) corresponding to a signup token
-                token_infos = request.env['res.partner'].sudo(
-                ).signup_retrieve_info(qcontext.get('token'))
-                for k, v in token_infos.items():
-                    qcontext.setdefault(k, v)
-            except:
-                qcontext['error'] = _("Invalid signup token")
-                qcontext['invalid_token'] = True
-        return qcontext
