@@ -13,23 +13,24 @@ _logger = logging.getLogger(__name__)
 
 class AuthSignupHome(AuthSignupHome):
 
-    def do_signup_escola(self, qcontext):
-        """ Shared helper that creates a res.partner out of a token """
-        values = {key: qcontext.get(key) for key in (
-            'name', 'login', 'password', 'phone', 'vat', 'street', 
-            'street2', 'zip', 'city', 'state_id', 'country_id',
-            'escola')}
-        print(values.get('escola'))
-        if not values:
-            raise UserError(_("The form was not properly filled in."))
-        if values.get('password') != qcontext.get('confirm_password'):
-            raise UserError(_("Passwords do not match; please retype them."))
-        supported_langs = [lang['code'] for lang in request.env[
-            'res.lang'].sudo().search_read([], ['code'])]
-        if request.lang in supported_langs:
-            values['lang'] = request.lang
-        self._signup_with_values(qcontext.get('token'), values)
-        request.env.cr.commit()
+    def get_auth_signup_qcontext(self):
+        """ Shared helper returning the rendering context for signup and reset password """
+        qcontext = request.params.copy()
+        print(qcontext, "#/"*50)
+        qcontext.update(self.get_auth_signup_config())
+        if not qcontext.get('token') and request.session.get('auth_signup_token'):
+            qcontext['token'] = request.session.get('auth_signup_token')
+        if qcontext.get('token'):
+            try:
+                # retrieve the user info (name, login or email) corresponding to a signup token
+                token_infos = request.env['res.partner'].sudo(
+                ).signup_retrieve_info(qcontext.get('token'))
+                for k, v in token_infos.items():
+                    qcontext.setdefault(k, v)
+            except:
+                qcontext['error'] = _("Invalid signup token")
+                qcontext['invalid_token'] = True
+        return qcontext
 
     @http.route('/web/signup', type='http', auth='public', website=True,
                 sitemap=False)
@@ -129,3 +130,22 @@ class AuthSignupHome(AuthSignupHome):
 
         response.headers['X-Frame-Options'] = 'DENY'
         return response
+
+
+    def do_signup_escola(self, qcontext):
+        """ Shared helper that creates a res.partner out of a token """
+        values = {key: qcontext.get(key) for key in (
+            'name', 'login', 'password', 'phone', 'vat', 'street',
+            'street2', 'zip', 'city', 'state_id', 'country_id',
+            'escola')}
+        print(values.get('escola'), "#|"*50)
+        if not values:
+            raise UserError(_("The form was not properly filled in."))
+        if values.get('password') != qcontext.get('confirm_password'):
+            raise UserError(_("Passwords do not match; please retype them."))
+        supported_langs = [lang['code'] for lang in request.env[
+            'res.lang'].sudo().search_read([], ['code'])]
+        if request.lang in supported_langs:
+            values['lang'] = request.lang
+        self._signup_with_values(qcontext.get('token'), values)
+        request.env.cr.commit()
