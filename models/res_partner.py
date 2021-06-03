@@ -5,7 +5,7 @@ from odoo import models, fields, api, _
 class respartner(models.Model):
     _inherit = 'res.partner'
 
-    escola = fields.Char(compute="_assignar_escola")
+    escola = fields.Char()
     """user_id = fields.Many2one('res.users', compute="_assignar_usuari")
 
     
