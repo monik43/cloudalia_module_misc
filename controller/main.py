@@ -16,8 +16,9 @@ class AuthSignupHome(AuthSignupHome):
     def do_signup(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
         if qcontext.get('escola'):
+            print("escola si")
             values = {key: qcontext.get(key)
-                      for key in ('login', 'name', 'password','escola')}
+                for key in ('login', 'name', 'password','escola')}
             if not values:
                 raise UserError(_("The form was not properly filled in."))
             if values.get('password') != qcontext.get('confirm_password'):
@@ -30,6 +31,7 @@ class AuthSignupHome(AuthSignupHome):
             self._signup_with_values(qcontext.get('token'), values)
             request.env.cr.commit()
         else:
+            print("escola no")
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password')}
             if not values:
@@ -69,7 +71,7 @@ class AuthSignupHome(AuthSignupHome):
 
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
-                    self.do_signup_escola(qcontext)
+                    self.do_signup(qcontext)
                     # Send an account creation confirmation email
                     if qcontext.get('token'):
                         user_sudo = request.env['res.users'].sudo().search(
