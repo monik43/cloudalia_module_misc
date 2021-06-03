@@ -13,14 +13,6 @@ _logger = logging.getLogger(__name__)
 
 class AuthSignupHome(AuthSignupHome):
 
-    def get_name(self):
-        values = {key: qcontext.get(key) for key in (
-            'firstname', 'lastname', 'escola')}
-
-        values.setdefault('name') = values.get('firstname') + " " + values.get('lastname')
-
-        print(values.get('name'))
-        
     def do_signup_escola(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
         values = {key: qcontext.get(key) for key in (

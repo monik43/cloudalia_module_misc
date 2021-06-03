@@ -7,6 +7,13 @@ class respartner(models.Model):
 
     escola = fields.Char()
 
+    name = fields.Char(index=True, compute="get_name")
+
+    @api.depends('firstname')
+    def get_name(self):
+        if self.name == "":
+            self.name = self.firstname + " " + self.lastname
+
     """@api.depends('escola')
     def assignar_cmontserrat(self):
         """
