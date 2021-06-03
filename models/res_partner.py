@@ -11,7 +11,7 @@ class respartner(models.Model):
     @api.depends('user_id')
     def _assignar_escola(self):
         for record in self:
-            escola = record.user_id.escola
+            record.escola = record.user_id.escola
 
     def _assignar_usuari(self):
 
