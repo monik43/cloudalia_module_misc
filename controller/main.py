@@ -16,7 +16,9 @@ class AuthSignupHome(AuthSignupHome):
     def do_signup_escola(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
         values = {key: qcontext.get(key) for key in (
-            'name', 'login', 'password', 'phone', 'vat', 'street', 'street2', 'zip', 'city', 'country_id', 'state_id', 'escola')}
+            'name', 'login', 'password', 'phone', 'vat', 'street', 
+            'street2', 'zip', 'city', 'state_id', 'country_id',
+            'escola')}
         if not values:
             raise UserError(_("The form was not properly filled in."))
         if values.get('password') != qcontext.get('confirm_password'):
@@ -81,7 +83,8 @@ class AuthSignupHome(AuthSignupHome):
                         qcontext['error'] = _(
                             "Could not create a new account.")
 
-            response = request.render('cloudalia_module_misc.registro_login', qcontext)
+            response = request.render(
+                'cloudalia_module_misc.registro_login', qcontext)
         else:
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
@@ -125,4 +128,3 @@ class AuthSignupHome(AuthSignupHome):
 
         response.headers['X-Frame-Options'] = 'DENY'
         return response
-
