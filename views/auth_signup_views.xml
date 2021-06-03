@@ -8,7 +8,7 @@
             </div>
             <div class="clearfix" />
             <div class="form-group field-login">
-                <label class="control-label" for="email">Correo electrónico</label>
+                <label class="control-label" for="login">Correo electrónico</label>
                 <input type="text" name="login" t-att-value="login" id="login" class="form-control" placeholder="ejemplo@dominio.com" autofocus="autofocus" autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
             </div>
             <div class="form-group field-password">
@@ -19,53 +19,48 @@
                 <label for="confirm_password" class="control-label">Confirmar contraseña</label>
                 <input type="password" name="confirm_password" id="confirm_password" class="form-control" required="required"/>
             </div>
-            <div t-attf-class="form-group" id="div_phone">
-                <label class="control-label" for="phone">Teléfono</label>
-                <input type="tel" name="phone" t-att-value="phone" class="form-control" autofocus="autofocus" autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+            <div class="form-group field-phone">
+                <label for="phone" class="control-label">Teléfono</label>
+                <input type="text" name="phone" t-att-value="phone" id="phone" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
             </div>
-            <div class="clearfix" />
-            <div t-attf-class="form-group div_vat">
-                <label class="control-label font-weight-normal" for="vat">DNI </label>
-                <input type="text" name="vat" t-att-value="vat" class="form-control" autofocus="autofocus" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+            <div class="form-group ">
+                <label for="vat" class="control-label">DNI</label>
+                <input type="text" name="vat" t-att-value="vat" id="vat" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
             </div>
-            <div class="clearfix" />
-            <div t-attf-class="form-group div_street">
-                <label class="control-label" for="street">Calle <span class="hidden-xs"> y número</span>
-                </label>
-                <input type="text" name="street" class="form-control" t-att-value="street" autofocus="autofocus" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+            <div class="form-group field-street_name">
+                <label for="street" class="control-label">Calle</label>
+                <input type="text" name="street" t-att-value="street" id="street" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
             </div>
-            <div t-attf-class="form-group div_street2">
-                <label class="control-label label-optional" for="street2">Calle 2</label>
-                <input type="text" name="street2" class="form-control" t-att-value="street2" autofocus="autofocus" t-att-readonly="'readonly' if only_passwords else None"/>
+            <div class="form-group field-street">
+                <label for="street2" class="control-label">Calle2</label>
+                <input type="text" name="street2" t-att-value="street2" id="street2" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
             </div>
-            <div class="clearfix" />
-            <div t-attf-class="form-group">
-                <label class="control-label label-optional">Código Postal</label>
-                <input type="text" name="zip" class="form-control"  autofocus="autofocus" t-att-readonly="'readonly' if only_passwords else None"/>
+            <div class="form-group field-zip">
+                <label for="zip" class="control-label">Código postal</label>
+                <input type="text" name="zip" id="zip" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
             </div>
-            <div t-attf-class="form-group div_city">
-                <label class="control-label" for="city">Ciudad</label>
-                <input type="text" name="city" class="form-control" t-att-value="city" autofocus="autofocus" t-att-readonly="'readonly' if only_passwords else None"/>
+            <div class="form-group field-city">
+                <label for="city" class="control-label">Ciudad</label>
+                <input type="text" name="city" t-att-value="city" id="city" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
             </div>
-            <div class="clearfix" />
-            <div t-attf-class="form-group div_country">
-                <label class="control-label" for="country_id">País</label>
-                <select id="country_id" name="country_id" class="form-control">
-                    <option value="" selected="selected">España</option>
-                    <t t-foreach="countries" t-as="c">
-                        <option t-att-value="c.id" t-att-selected="c.id == (country and country.id or -1)">
-                            <t t-esc="c.name" />
+            <div class="form-group field-country">
+                <label for="state_id" class="control-label">Provincia</label>
+                <select name="state_id" class="form-control" t-att-value="state_id" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None">
+                    <option value="">Select</option>
+                    <t t-foreach="states or []" t-as="state">
+                        <option t-att-value="state.id">
+                            <t t-esc="state.name" />
                         </option>
                     </t>
                 </select>
             </div>
-            <div t-attf-class="form-group div_state">
-                <label class="control-label" for="state_id">Provincia</label>
-                <select name="state_id" class="form-control" data-init="1">
-                    <option value="" selected="selected">Barcelona</option>
-                    <t t-foreach="country and country.state_ids or []" t-as="s">
-                        <option t-att-value="s.id" t-att-selected="s.id == state_id">
-                            <t t-esc="s.name" />
+            <div class="form-group field-country">
+                <label for="country_id" class="control-label">País</label>
+                <select name="country_id" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None">
+                    <option value="">Select</option>
+                    <t t-foreach="countries or []" t-as="country">
+                        <option t-att-value="country.id">
+                            <t t-esc="country.name" />
                         </option>
                     </t>
                 </select>
