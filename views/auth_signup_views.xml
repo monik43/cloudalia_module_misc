@@ -41,7 +41,7 @@
             <div class="clearfix" />
             <div t-attf-class="form-group">
                 <label class="control-label label-optional">Código Postal</label>
-                <input type="text" name="zip" class="form-control" t-att-value="zip" autofocus="autofocus" t-att-readonly="'readonly' if only_passwords else None"/>
+                <input type="text" name="zip" class="form-control"  autofocus="autofocus" t-att-readonly="'readonly' if only_passwords else None"/>
             </div>
             <div t-attf-class="form-group div_city">
                 <label class="control-label" for="city">Ciudad</label>
