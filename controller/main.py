@@ -48,13 +48,10 @@ class AuthSignupHome(AuthSignupHome):
 
         if url_escola:
             qcontext = self.get_auth_signup_qcontext()
-            qcontext['states'] = request.env['res.country.state'].sudo().search([
-            ])
-            qcontext['countries'] = request.env['res.country'].sudo().search([])
-
+            print("if 1", "/\\"*50)
             if not qcontext.get('token') and not qcontext.get('signup_enabled'):
                 raise werkzeug.exceptions.NotFound()
-
+            print("if 2", "/\\"*50)
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
                     self.do_signup_escola(qcontext)
