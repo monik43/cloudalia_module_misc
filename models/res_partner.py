@@ -6,7 +6,7 @@ class respartner(models.Model):
     _inherit = 'res.partner'
 
     escola = fields.Char(compute="_assignar_escola")
-    user_id = fields.Many2one('res.users', compute="_assignar_usuari")
+    """user_id = fields.Many2one('res.users', compute="_assignar_usuari")
 
     
 
@@ -19,4 +19,4 @@ class respartner(models.Model):
         for record in self:
             print(record.user_id, "#/"*50)
             print(record.user_id.escola, "#/"*50)
-            record.escola = record.user_id.escola
+            record.escola = record.user_id.escola"""
