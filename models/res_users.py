@@ -13,7 +13,7 @@ from odoo.addons.auth_signup.models.res_partner import SignupError, now
 class resusers(models.Model):
     _inherit = 'res.users'
 
-    phone = fields.Char()
+    mobile = fields.Char()
     vat = fields.Char()
     street = fields.Char()
     street2 = fields.Char()
@@ -75,20 +75,3 @@ class resusers(models.Model):
             self._signup_create_user(values)
 
         return (self.env.cr.dbname, values.get('login'), values.get('password'))
-
-    @api.multi
-    def copy(self, default=None):
-        self.ensure_one()
-        sup = super(resusers, self)
-        if default.get('escola'):
-            print(default.get('escola'), '1'*50)
-
-        if not default or not default.get('email'):
-            # avoid sending email to the user we are duplicating
-            sup = super(resusers, self.with_context(no_reset_password=True))
-            if default.get('escola'):
-                print(default.get('escola'), '2'*50)
-
-        if default.get('escola'):
-            print(default.get('escola'), '3'*50)
-        return sup.copy(default=default)
