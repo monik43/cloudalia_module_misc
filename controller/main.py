@@ -17,7 +17,7 @@ class AuthSignupHome(AuthSignupHome):
         """ Shared helper that creates a res.partner out of a token """
         if qcontext.get('escola'):
             values = {key: qcontext.get(key)
-                for key in ('login', 'name', 'password','escola')}
+                      for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
             if not values:
                 raise UserError(_("The form was not properly filled in."))
             if values.get('password') != qcontext.get('confirm_password'):
@@ -30,9 +30,8 @@ class AuthSignupHome(AuthSignupHome):
             self._signup_with_values(qcontext.get('token'), values)
             request.env.cr.commit()
         else:
-            print("escola no")
             values = {key: qcontext.get(key)
-                for key in ('login', 'name', 'password')}
+                      for key in ('login', 'name', 'password')}
             if not values:
                 raise UserError(_("The form was not properly filled in."))
             if values.get('password') != qcontext.get('confirm_password'):
@@ -55,9 +54,7 @@ class AuthSignupHome(AuthSignupHome):
 
         for escola in escoles:
             if last_url.find(escola) != -1:
-                print("holi es el url anterior")
                 url_escola = True
-                print(url_escola)
 
         if url_escola:
             qcontext = self.get_auth_signup_qcontext()
