@@ -6,13 +6,13 @@ class respartner(models.Model):
     _inherit = 'res.partner'
 
     escola = fields.Char(string="Escola")
-    user_id = fields.Many2one('res.users', compute="_assignar_usuari", string="Usuari relacionat")
+    rel_user_id = fields.Many2one('res.users', compute="_assignar_usuari", string="Usuari relacionat")
 
     
 
     def _assignar_usuari(self):
         for record in self:
-            record.user_id = record.env['res.users'].search([('partner_id','=',self.id)])
+            record.rel_user_id = record.env['res.users'].search([('partner_id','=',self.id)])
             print(record.user_id, "#/"*50)
 """
     def _assignar_escola(self):
