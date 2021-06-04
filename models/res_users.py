@@ -10,6 +10,7 @@ from odoo.tools.misc import ustr
 from odoo.addons.base.ir.ir_mail_server import MailDeliveryException
 from odoo.addons.auth_signup.models.res_partner import SignupError, now
 
+
 class resusers(models.Model):
     _inherit = 'res.users'
 
@@ -19,7 +20,8 @@ class resusers(models.Model):
     street2 = fields.Char()
     zip = fields.Char()
     city = fields.Char()
-    country_id = fields.Char()
-    state_id = fields.Char()
+    state_id = fields.Many2one(
+        "res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
+    country_id = fields.Many2one(
+        'res.country', string='Country', ondelete='restrict', compute="_compute_country_id")
     escola = fields.Char()
-
