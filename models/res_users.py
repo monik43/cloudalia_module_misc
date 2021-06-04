@@ -22,5 +22,5 @@ class resusers(models.Model):
     city = fields.Char()
     state_id = fields.Many2one(
         "res.country.state", string='State', ondelete='restrict')
-    
+    #country_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
     escola = fields.Char()
