@@ -5,8 +5,8 @@ from odoo import models, fields, api, _
 class respartner(models.Model):
     _inherit = 'res.partner'
 
-    escola = fields.Char()
-    """user_id = fields.Many2one('res.users', compute="_assignar_usuari")
+    escola = fields.Char(string="Escola")
+    user_id = fields.Many2one('res.users', compute="_assignar_usuari", string="Usuari relacionat")
 
     
 
@@ -14,7 +14,7 @@ class respartner(models.Model):
         for record in self:
             record.user_id = record.env['res.users'].search([('partner_id','=',self.id)])
             print(record.user_id, "#/"*50)
-
+"""
     def _assignar_escola(self):
         for record in self:
             print(record.user_id, "#/"*50)
