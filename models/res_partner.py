@@ -16,7 +16,7 @@ class respartner(models.Model):
     state_id = fields.Many2one(
         "res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
     country_id = fields.Many2one(
-        'res.country', string='Country', ondelete='restrict', compute="_compute_country_id")
+        'res.country', string='Country', compute="_compute_country_id")
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
