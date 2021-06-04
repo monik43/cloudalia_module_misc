@@ -5,7 +5,7 @@ from odoo import models, fields, api, _
 class respartner(models.Model):
     _inherit = 'res.partner'
 
-    escola = fields.Char(string="Escola") #, compute="_compute_escola"
+    escola = fields.Char(string="Escola", compute="_compute_escola")
     """mobile = fields.Char(compute="_compute_mobile")
     street = fields.Char(compute="_compute_street")
     street2 = fields.Char(compute="_compute_street2")
@@ -20,12 +20,13 @@ class respartner(models.Model):
         for record in self:
             if record.env['res.users'].search([('partner_id','=',self.id)]).escola != False:
                 record.rel_user_id = record.env['res.users'].search([('partner_id','=',self.id)])
-"""
+
     @api.depends('re_user_id')
     def _compute_escola(self):
         for record in self:
-            record.escola = record.rel_user_id.escola
-
+            if record.env['res.users'].search([('partner_id','=',self.id)]).escola != False:
+                record.escola = record.rel_user_id.escola
+"""
     @api.depends('re_user_id')
     def _compute_mobile(self):
         for record in self:
