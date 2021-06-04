@@ -5,6 +5,7 @@ from odoo import models, fields, api, _
 class respartner(models.Model):
     _inherit = 'res.partner'
 
+    rel_user_id = fields.Many2one('res.users', compute="_compute_usuari", string="Usuari relacionat")
     escola = fields.Char(string="Escola", compute="_compute_escola")
     """mobile = fields.Char(compute="_compute_mobile")
     street = fields.Char(compute="_compute_street")
@@ -14,7 +15,6 @@ class respartner(models.Model):
     state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict', compute="_compute_country_id")"""
 
-    rel_user_id = fields.Many2one('res.users', compute="_compute_usuari", string="Usuari relacionat")
 
     def _compute_usuari(self):
         for record in self:
