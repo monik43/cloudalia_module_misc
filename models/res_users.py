@@ -21,7 +21,7 @@ class resusers(models.Model):
     zip = fields.Char()
     city = fields.Char()
     state_id = fields.Many2one(
-        "res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
+        "res.country.state", string='State', ondelete='restrict')
     country_id = fields.Many2one(
-        'res.country', string='Country', ondelete='restrict', compute="_compute_country_id")
+        'res.country', string='Country', ondelete='restrict')
     escola = fields.Char()
