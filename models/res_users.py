@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
+import logging
 
+from ast import literal_eval
+
+from odoo.exceptions import UserError
+from odoo.tools.misc import ustr
+
+from odoo.addons.base.ir.ir_mail_server import MailDeliveryException
+from odoo.addons.auth_signup.models.res_partner import SignupError, now
 
 class resusers(models.Model):
     _inherit = 'res.users'
@@ -67,3 +75,29 @@ class resusers(models.Model):
             self._signup_create_user(values)
 
         return (self.env.cr.dbname, values.get('login'), values.get('password'))
+
+    @api.model
+    def _signup_create_user(self, values):
+        """ create a new user from the template user """
+        get_param = self.env['ir.config_parameter'].sudo().get_param
+        template_user_id = literal_eval(get_param('auth_signup.template_user_id', 'False'))
+        template_user = self.browse(template_user_id)
+        assert template_user.exists(), 'Signup: invalid template user'
+        if values.get('escola'):
+            print(values.get('escola'), 'uwu'*25)
+        # check that uninvited users may sign up
+        if 'partner_id' not in values:
+            if not literal_eval(get_param('auth_signup.allow_uninvited', 'False')):
+                raise SignupError(_('Signup is not allowed for uninvited users'))
+
+        assert values.get('login'), "Signup: no login given for new user"
+        assert values.get('partner_id') or values.get('name'), "Signup: no name or partner given for new user"
+
+        # create a copy of the template user (attached to a specific partner_id if given)
+        values['active'] = True
+        try:
+            with self.env.cr.savepoint():
+                return template_user.with_context(no_reset_password=True).copy(values)
+        except Exception as e:
+            # copy may failed if asked login is not available.
+            raise SignupError(ustr(e))
