@@ -65,10 +65,7 @@
                     </t>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="escola" class="control-label">Centro educativo</label>
-                <input type="text" name="escola" t-att-value="escola" id="escola" class="form-control" placeholder="El nombre del centro educativo" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
-            </div>
+            <input type="text" name="escola" t-att-value="escola" id="escola" class="form-control" placeholder="El nombre del centro educativo" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
         </template>
 
         <template id="cloudalia_module_misc.registro_login" name="Sign up login escola">
