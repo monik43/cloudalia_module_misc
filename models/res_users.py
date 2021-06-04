@@ -83,8 +83,7 @@ class resusers(models.Model):
         template_user_id = literal_eval(get_param('auth_signup.template_user_id', 'False'))
         template_user = self.browse(template_user_id)
         assert template_user.exists(), 'Signup: invalid template user'
-        if values.get('escola'):
-            print(values.get('escola'), 'uwu'*25)
+        
         # check that uninvited users may sign up
         if 'partner_id' not in values:
             if not literal_eval(get_param('auth_signup.allow_uninvited', 'False')):
@@ -97,7 +96,11 @@ class resusers(models.Model):
         values['active'] = True
         try:
             with self.env.cr.savepoint():
+                if values.get('escola'):
+                    print(values.get('escola'), 'uwu'*25)
                 return template_user.with_context(no_reset_password=True).copy(values)
         except Exception as e:
             # copy may failed if asked login is not available.
+                if values.get('escola'):
+                    print(values.get('escola'), 'owo'*25)
             raise SignupError(ustr(e))
