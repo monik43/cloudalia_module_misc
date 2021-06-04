@@ -14,7 +14,7 @@ class respartner(models.Model):
     zip = fields.Char(change_default=True, compute="_compute_zip")
     city = fields.Char(compute="_compute_city")
     state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
-    country_id = fields.Many2one('res.country', string='Country', ondelete='restrict', compute="_compute_country_id")
+    """country_id = fields.Many2one('res.country', string='Country', ondelete='restrict', compute="_compute_country_id")"""
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
@@ -56,11 +56,6 @@ class respartner(models.Model):
             record.city = record.rel_user_id.city
 
     @api.depends('rel_user_id')
-    def _compute_country_id(self):
-        for record in self:
-            record.country_id = record.rel_user_id.country_id
-
-    @api.depends('rel_user_id')
     def _compute_state_id(self):
         for record in self:
             record.state_id = record.rel_user_id.state_id
@@ -69,3 +64,10 @@ class respartner(models.Model):
     def _compute_vat(self):
         for record in self:
             record.state_id = record.rel_user_id.vat
+            
+"""    @api.depends('rel_user_id')
+    def _compute_country_id(self):
+        for record in self:
+            record.country_id = record.rel_user_id.country_id"""
+
+    
