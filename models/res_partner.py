@@ -5,8 +5,8 @@ from odoo import models, fields, api, _
 class respartner(models.Model):
     _inherit = 'res.partner'
 
-    """escola = fields.Char(string="Escola", compute="_compute_escola")
-    mobile = fields.Char(compute="_compute_mobile")
+    escola = fields.Char(string="Escola") #, compute="_compute_escola"
+    """mobile = fields.Char(compute="_compute_mobile")
     street = fields.Char(compute="_compute_street")
     street2 = fields.Char(compute="_compute_street2")
     zip = fields.Char(change_default=True, compute="_compute_zip")
