@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='lang']" position="after">
                     <field name="escola" />
-                    <field name="user_id"/>
+                    <field name="rel_user_id"/>
                 </xpath>
             </field>
         </record>
