@@ -23,7 +23,8 @@ class respartner(models.Model):
     def _compute_usuari(self):
         for record in self:
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
-                record.rel_user_id = record.env['res.users'].search([('partner_id', '=', record.id)])
+                record.rel_user_id = record.env['res.users'].search(
+                    [('partner_id', '=', record.id)])
 
     @api.depends('rel_user_id')
     def _compute_escola(self):
