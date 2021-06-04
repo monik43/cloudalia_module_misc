@@ -103,4 +103,4 @@ class resusers(models.Model):
             # copy may failed if asked login is not available.
                 if values.get('escola'):
                     print(values.get('escola'), 'owo'*25)
-            raise SignupError(ustr(e))
+                raise SignupError(ustr(e))
