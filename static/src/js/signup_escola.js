@@ -12,7 +12,7 @@ base.ready().then(function() {
         });
     }
 
-    if ($('.oe_signup_form').length> 0) {
+    if ($('.oe_signup_form').length) {
         var state_options = $("select[name='state_id']:enabled option:not(:first)");
         $('.oe_signup_form').on('change', "select[name='country_id']", function () {
             var select = $("select[name='state_id']");
