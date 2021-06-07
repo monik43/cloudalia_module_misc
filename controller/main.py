@@ -18,6 +18,7 @@ class AuthSignupHome(AuthSignupHome):
         if qcontext.get('mobile'):
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
+            values.update({'escola': escola})
             if not values:
                 raise UserError(_("The form was not properly filled in."))
             if values.get('password') != qcontext.get('confirm_password'):
@@ -44,11 +45,6 @@ class AuthSignupHome(AuthSignupHome):
             self._signup_with_values(qcontext.get('token'), values)
             request.env.cr.commit()
 
-    def set_escola_qcontext(self,qcontext,escola):
-        values = {key: qcontext.get(key)
-                      for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
-        values.update({'escola': escola})
-
     @http.route('/web/signup', type='http', auth='public', website=True,
                 sitemap=False)
     def web_auth_signup(self, *args, **kw):
@@ -59,6 +55,7 @@ class AuthSignupHome(AuthSignupHome):
         for school in escoles:
             if last_url.find(school) != -1:
                 url_escola = True
+                global escola 
                 escola = school
 
         if url_escola:
@@ -68,10 +65,10 @@ class AuthSignupHome(AuthSignupHome):
             qcontext['countries'] = request.env['res.country'].sudo().search([])
             if not qcontext.get('token') and not qcontext.get('signup_enabled'):
                 raise werkzeug.exceptions.NotFound()
-            self.set_escola_qcontext(qcontext,escola)
+
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
-                    self.do_signup(qcontext)
+                    self.do_signup(qcontext, escola)
                     # Send an account creation confirmation email
                     if qcontext.get('token'):
                         user_sudo = request.env['res.users'].sudo().search(
