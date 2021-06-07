@@ -46,7 +46,7 @@
             <div class="form-group field-country">
                 <label for="country_id" class="control-label">País</label>
                 <select name="country_id" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None">
-                    <option value="España" selected="true">España</options>
+                    <option value="España" selected="true">España</option>
                     <t t-foreach="countries or []" t-as="country">
                         <option t-att-value="country.id">
                             <t t-esc="country.name" />
@@ -59,7 +59,7 @@
                 <select name="state_id" class="form-control" t-att-value="state_id" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None">
                     <option value="">Select</option>
                     <t t-foreach="states or []" t-as="state">
-                        <option t-att-value="state.id" >
+                        <option t-att-value="state.id">
                             <t t-esc="state.name" />
                         </option>
                     </t>
