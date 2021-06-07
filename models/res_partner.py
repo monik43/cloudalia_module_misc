@@ -5,9 +5,6 @@ from odoo import models, fields, api, _
 class respartner(models.Model):
     _inherit = 'res.partner'
 
-    product_ids = fields.Many2many('product.template', 'product_template_id',
-                                   'res_partner_id', 'product_partner_res', string='Products', compute="add_products_visibility_escoles")
-
     rel_user_id = fields.Many2one("res.users", compute="_compute_usuari")
 
     escola = fields.Char(string="Escola", compute="_compute_escola")
