@@ -5,6 +5,9 @@ from odoo import models, fields, api, _
 class respartner(models.Model):
     _inherit = 'res.partner'
 
+    product_ids = fields.Many2many('product.template', 'product_template_id',
+                                   'res_partner_id', 'product_partner_res', string='Products', compute="add_products_visibility_escoles")
+
     rel_user_id = fields.Many2one("res.users", compute="_compute_usuari")
 
     escola = fields.Char(string="Escola", compute="_compute_escola")
@@ -19,6 +22,8 @@ class respartner(models.Model):
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
+
+
 
     def _compute_usuari(self):
         for record in self:
@@ -71,3 +76,15 @@ class respartner(models.Model):
     def _compute_country_id(self):
         for record in self:
             record.country_id = record.rel_user_id.country_id
+
+    """'cmontserrat', 'eminguella', 'jpelegri'"""
+
+    @api.depends('escola')
+    def add_products_visibility_escoles(self):
+        for record in self:
+            if record.escola == "cmontserrat":
+                prod = record.env['product.template'].search([('id', '=', 3526)])
+                record.write({'product_ids':[(prod.id)]})
+
+
+    
