@@ -50,10 +50,11 @@ class AuthSignupHome(AuthSignupHome):
 
         last_url = request.httprequest.environ['HTTP_REFERER']
         url_escola = False
-        escoles = {'holi', 'cmontserrat'}
-
+        escoles = {'holi', 'cmontserrat', 'eminguella', 'jpelegri'}
+        var = ""
         for escola in escoles:
             if last_url.find(escola) != -1:
+                escola = var
                 url_escola = True
 
         if url_escola:
@@ -61,7 +62,7 @@ class AuthSignupHome(AuthSignupHome):
             qcontext['states'] = request.env['res.country.state'].sudo().search([
             ])
             qcontext['countries'] = request.env['res.country'].sudo().search([])
-
+            qcontext['escola'] = var
             if not qcontext.get('token') and not qcontext.get('signup_enabled'):
                 raise werkzeug.exceptions.NotFound()
 
