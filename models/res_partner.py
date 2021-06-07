@@ -34,6 +34,11 @@ class respartner(models.Model):
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
                 record.escola = record.rel_user_id.escola
 
+                if record.escola == "holi":
+                    prod = record.env['product.template'].search([('id', '=', 3526)])
+                    print(prod.id, "//*50")
+                    record.product_ids = [(4, prod.id)]
+
     @api.depends('rel_user_id')
     def _compute_mobile(self):
         for record in self:
@@ -75,13 +80,3 @@ class respartner(models.Model):
             record.country_id = record.rel_user_id.country_id
 
     """'cmontserrat', 'eminguella', 'jpelegri'"""
-
-    @api.depends('escola')
-    def add_products_visibility_escoles(self):
-        for record in self:
-            if record.escola == "holi":
-                prod = record.env['product.template'].search([('id', '=', 3526)])
-                record.product_ids = [(4, prod.id)]
-
-
-    
