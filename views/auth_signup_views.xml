@@ -57,7 +57,6 @@
             <div class="form-group field-country">
                 <label for="state_id" class="control-label">Provincia</label>
                 <select name="state_id" class="form-control" t-att-value="state_id" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None">
-                    <option value="Barcelona" selected="true">Barcelona</option>
                     <option value="Àlava" selected="">Àlava</option>
                     <option value="Albacete" selected="">Albacete</option>
                     <option value="Alicante" selected="">Alicante</option>
@@ -108,6 +107,7 @@
                     <option value="Bizkaia (Vizkaya)" selected="">Bizkaia (Vizkaya)</option>
                     <option value="Zamora" selected="">Zamora</option>
                     <option value="Zaragoza" selected="">Zaragoza</option>
+                    <option value="Barcelona" selected="true">Barcelona</option>
                 </select>
             </div>
             <input type="hidden" name="escola" t-att-value="escola" id="escola" class="form-control" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
