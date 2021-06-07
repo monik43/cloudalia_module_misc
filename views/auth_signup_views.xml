@@ -64,7 +64,7 @@
                     <option value="Asturias" selected="">Asturias</option>
                     <option value="Ávila" selected="">Ávila</option>
                     <option value="Badajoz" selected="">Badajoz</option>
-                    <option value="Barcelona" selected="true">Barcelona</option>
+                    <option value="Barcelona" selected="selected">Barcelona</option>
                     <option value="Burgos" selected="">Burgos</option>
                     <option value="Cáceres" selected="">Cáceres</option>
                     <option value="Cádiz" selected="">Cádiz</option>
