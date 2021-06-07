@@ -94,7 +94,7 @@
                     <option value="Ourense (Orense)" selected="">Ourense (Orense)</option>
                     <option value="Palencia" selected="">Palencia</option>
                     <option value="Pontevedra" selected="">Pontevedra</option>
-                    <option value="Salamanca" selected="">Salamanca</option>
+                    <option value="Salamanca" selected="selected">Salamanca</option>
                     <option value="Santa Cruz de Tenerife" selected="">Santa Cruz de Tenerife</option>
                     <option value="Segovia" selected="">Segovia</option>
                     <option value="Sevilla" selected="">Sevilla</option>
