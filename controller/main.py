@@ -13,12 +13,12 @@ _logger = logging.getLogger(__name__)
 
 class AuthSignupHome(AuthSignupHome):
 
-    def do_signup(self, qcontext):
+    def do_signup(self, qcontext, escola=False):
         """ Shared helper that creates a res.partner out of a token """
         if qcontext.get('mobile'):
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
-            values.update({'escola': request.httprequest.environ['HTTP_REFERER']})
+            values.update({'escola': escola})
             if not values:
                 raise UserError(_("The form was not properly filled in."))
             if values.get('password') != qcontext.get('confirm_password'):
@@ -52,9 +52,10 @@ class AuthSignupHome(AuthSignupHome):
         last_url = request.httprequest.environ['HTTP_REFERER']
         url_escola = False
         escoles = {'holi', 'cmontserrat', 'eminguella', 'jpelegri'}
-        for escola in escoles:
-            if last_url.find(escola) != -1:
+        for school in escoles:
+            if last_url.find(school) != -1:
                 url_escola = True
+                escola = school
 
         if url_escola:
             qcontext = self.get_auth_signup_qcontext()
@@ -66,7 +67,7 @@ class AuthSignupHome(AuthSignupHome):
 
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
-                    self.do_signup(qcontext)
+                    self.do_signup(qcontext, escola)
                     # Send an account creation confirmation email
                     if qcontext.get('token'):
                         user_sudo = request.env['res.users'].sudo().search(
