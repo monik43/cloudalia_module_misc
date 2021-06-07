@@ -18,7 +18,8 @@ class AuthSignupHome(AuthSignupHome):
         if qcontext.get('mobile'):
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
-            if escola:
+            print(escola)
+            if escola != False:
                 values.update({'escola': escola})
             if not values:
                 raise UserError(_("The form was not properly filled in."))
