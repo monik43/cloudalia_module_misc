@@ -82,7 +82,7 @@ class respartner(models.Model):
     @api.depends('escola')
     def add_products_visibility_escoles(self):
         for record in self:
-            if record.escola == "cmontserrat":
+            if record.escola == "holi":
                 prod = record.env['product.template'].search([('id', '=', 3526)])
                 record.write({'product_ids':[(prod.id)]})
 
