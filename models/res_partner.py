@@ -81,7 +81,7 @@ class respartner(models.Model):
         for record in self:
             if record.escola == "holi":
                 prod = record.env['product.template'].search([('id', '=', 3526)])
-                record.write({'product_ids':[(prod.id)]})
+                record.product_ids = [(4, prod.id)]
 
 
     
