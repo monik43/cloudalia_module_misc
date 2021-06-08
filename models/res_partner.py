@@ -32,7 +32,7 @@ class respartner(models.Model):
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
                 record.escola = record.rel_user_id.escola
                 product_list = []
-                res = super(respartner, self)._compute_escola()
+                res = super(respartner, record)._compute_escola()
                 if record.escola == "holi":
                     product_list.append(record.env['product.template'].search(
                         [('id', '=', 3526)]).id)
