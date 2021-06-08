@@ -6,6 +6,8 @@ class respartner(models.Model):
     _inherit = 'res.partner'
 
     rel_user_id = fields.Many2one("res.users", compute="_compute_usuari")
+    
+    productes_ids = fields.Many2many('product.template', 'productes_template_id','res_partner_id','product_partner_res',string='Productes')
 
     escola = fields.Char(string="Escola", compute="_compute_escola")
     mobile = fields.Char(compute="_compute_mobile")
