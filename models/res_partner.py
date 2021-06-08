@@ -32,12 +32,14 @@ class respartner(models.Model):
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
                 record.escola = record.rel_user_id.escola
                 product_list = []
-
+                res = super(respartner, self)._compute_escola()
                 if record.escola == "holi":
                     product_list.append(record.env['product.template'].search(
                         [('id', '=', 3526)]).id)
-
-                    print(product_list, "//*50")
+                    res.update({
+                        'product_ids': [(6, 0, product_list)],
+                    })
+                    print(product_list, "//"*50)
 
     @api.depends('rel_user_id')
     def _compute_mobile(self):
