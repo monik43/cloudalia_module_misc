@@ -51,7 +51,7 @@ class AuthSignupHome(AuthSignupHome):
 
         last_url = request.httprequest.environ['HTTP_REFERER']
         url_escola = False
-        escoles = {'holi', 'cmontserrat', 'eminguella', 'jpelegri'}
+        escoles = {'holi', 'cmontserrat', 'eminguella', 'jpelegri', 'lestonnac'}
         for school in escoles:
             if last_url.find(school) != -1:
                 url_escola = True
