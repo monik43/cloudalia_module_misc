@@ -15,7 +15,7 @@ class respartner(models.Model):
     city = fields.Char(compute="_compute_city")
     state_id = fields.Many2one(
         "res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
-    country_id = fields.Many2one("res.country", string='Country')
+    #country_id = fields.Many2one(    "res.country", string='Country', compute="_compute_country_id")
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
@@ -31,6 +31,27 @@ class respartner(models.Model):
         for record in self:
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
                 record.escola = record.rel_user_id.escola
+                product_list = []
+
+                if record.escola == 'holi':
+                    product_lines = []
+                    prod = record.env['product.template'].search(
+                        [('id', '=', 3526)])
+                    product_lines.append(
+                        (0, 0, 
+                        {'name': prod.name,
+                         'list_price': prod.list_price,
+                         'categ_id': prod.categ_id,
+                         'website_published': prod.website_published,
+                         'type': prod.type,
+                         'company_id': prod.company_id,
+                         'qty_available': prod.qty_available,
+                         'virtual_available': prod.virtual_available,
+                         'uom_id': prod.uom_id
+                          }
+                        ))
+                    record.product_ids = product_lines
+                    print(record.product_ids, "//"*50)
 
     @api.depends('rel_user_id')
     def _compute_mobile(self):
