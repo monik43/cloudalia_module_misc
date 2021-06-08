@@ -20,8 +20,6 @@ class respartner(models.Model):
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
 
-
-
     def _compute_usuari(self):
         for record in self:
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
@@ -33,11 +31,13 @@ class respartner(models.Model):
         for record in self:
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
                 record.escola = record.rel_user_id.escola
+                product_list = []
 
                 if record.escola == "holi":
-                    prod = record.env['product.template'].search([('id', '=', 3526)])
-                    print(prod.id, "//*50")
-                    record.product_ids = [(4, prod.id)]
+                    product_list.append(record.env['product.template'].search(
+                        [('id', '=', 3526)]).id)
+
+                    print(product_list, "//*50")
 
     @api.depends('rel_user_id')
     def _compute_mobile(self):

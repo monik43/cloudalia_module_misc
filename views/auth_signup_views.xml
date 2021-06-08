@@ -57,57 +57,66 @@
             <div class="form-group field-country">
                 <label for="state_id" class="control-label">Provincia</label>
                 <select name="state_id" class="form-control" t-att-value="state_id" required="required" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None">
-                    <option value="Àlava" selected="">Àlava</option>
-                    <option value="Albacete" selected="">Albacete</option>
-                    <option value="Alicante" selected="">Alicante</option>
-                    <option value="Almería" selected="">Almería</option>
-                    <option value="Asturias" selected="">Asturias</option>
-                    <option value="Ávila" selected="">Ávila</option>
-                    <option value="Badajoz" selected="">Badajoz</option>
-                    <option value="Barcelona" selected="true">Barcelona</option>
-                    <option value="Burgos" selected="">Burgos</option>
-                    <option value="Cáceres" selected="">Cáceres</option>
-                    <option value="Cádiz" selected="">Cádiz</option>
-                    <option value="Cantabria" selected="">Cantabria</option>
-                    <option value="Castellón" selected="">Castellón</option>
-                    <option value="Ciudad Real" selected="">Ciudad Real</option>
-                    <option value="Córdoba" selected="">Córdoba</option>
-                    <option value="Cuenca" selected="">Cuenca</option>
-                    <option value="Gerona (Girona)" selected="">Gerona (Girona)</option>
-                    <option value="Granada" selected="">Granada</option>
-                    <option value="Guadalajara" selected="">Guadalajara</option>
-                    <option value="Gipuzkoa" selected="">Gipuzkoa</option>
-                    <option value="Huelva" selected="">Huelva</option>
-                    <option value="Huesca" selected="">Huesca</option>
-                    <option value="Islas Baleares" selected="">Islas Baleares</option>
-                    <option value="Jaén" selected="">Jaén</option>
-                    <option value="La Coruña (A Coruña)" selected="">La Coruña (A Coruña)</option>
-                    <option value="La Rioja" selected="">La Rioja</option>
-                    <option value="Las Palmas" selected="">Las Palmas</option>
-                    <option value="León" selected="">León</option>
-                    <option value="Lérida (Lleida)" selected="">Lérida (Lleida)</option>
-                    <option value="Lugo" selected="">Lugo</option>
-                    <option value="Madrid" selected="">Madrid</option>
-                    <option value="Málaga" selected="">Málaga</option>
-                    <option value="Murcia" selected="">Murcia</option>
-                    <option value="Navarra" selected="">Navarra</option>
-                    <option value="Ourense (Orense)" selected="">Ourense (Orense)</option>
-                    <option value="Palencia" selected="">Palencia</option>
-                    <option value="Pontevedra" selected="">Pontevedra</option>
-                    <option value="Salamanca" selected="">Salamanca</option>
-                    <option value="Santa Cruz de Tenerife" selected="">Santa Cruz de Tenerife</option>
-                    <option value="Segovia" selected="">Segovia</option>
-                    <option value="Sevilla" selected="">Sevilla</option>
-                    <option value="Soria" selected="">Soria</option>
-                    <option value="Tarragona" selected="">Tarragona</option>
-                    <option value="Teruel" selected="">Teruel</option>
-                    <option value="Toledo" selected="">Toledo</option>
-                    <option value="Valencia" selected="">Valencia</option>
-                    <option value="Valladolid" selected="">Valladolid</option>
-                    <option value="Bizkaia (Vizkaya)" selected="">Bizkaia (Vizkaya)</option>
-                    <option value="Zamora" selected="">Zamora</option>
-                    <option value="Zaragoza" selected="">Zaragoza</option>
-                    <option value="Barcelona" selected="true">Barcelona</option>
+                    <option value="417" selected="">Àlava</option>
+                    <option value="418" selected="">Albacete</option>
+                    <option value="420" selected="">Almería</option>
+                    <option value="421" selected="">Asturias</option>
+                    <option value="422" selected="">Ávila</option>
+                    <option value="423" selected="">Badajoz</option>
+                    <option value="425" selected="true">Barcelona</option>
+                    <option value="426" selected="">Burgos</option>
+                    <option value="427" selected="">Cáceres</option>
+                    <option value="428" selected="">Cádiz</option>
+                    <option value="429" selected="">Cantabria</option>
+                    <option value="431" selected="">Ceuta</option>
+                    <option value="432" selected="">Ciudad Real</option>
+                    <option value="433" selected="">Córdoba</option>
+                    <option value="434" selected="">Cuenca</option>
+                    <option value="436" selected="">Granada</option>
+                    <option value="437" selected="">Guadalajara</option>
+                    <option value="439" selected="">Huelva</option>
+                    <option value="440" selected="">Huesca</option>
+                    <option value="441" selected="">Jaén</option>
+                    <option value="442" selected="">La Rioja</option>
+                    <option value="444" selected="">León</option>
+                    <option value="446" selected="">Lugo</option>
+                    <option value="447" selected="">Madrid</option>
+                    <option value="448" selected="">Málaga</option>
+                    <option value="449" selected="">Melilla</option>
+                    <option value="450" selected="">Murcia</option>
+                    <option value="453" selected="">Palencia</option>
+                    <option value="454" selected="">Pontevedra</option>
+                    <option value="455" selected="">Salamanca</option>
+                    <option value="457" selected="">Segovia</option>
+                    <option value="458" selected="">Sevilla</option>
+                    <option value="459" selected="">Soria</option>
+                    <option value="460" selected="">Tarragona</option>
+                    <option value="461" selected="">Teruel</option>
+                    <option value="462" selected="">Toledo</option>
+                    <option value="464" selected="">Valladolid</option>
+                    <option value="466" selected="">Zamora</option>
+                    <option value="467" selected="">Zaragoza</option>
+                    <option value="416" selected="">A coruña</option>
+                    <option value="419" selected="">Alicante/Alacant</option>
+                    <option value="465" selected="">Bizkaia</option>
+                    <option value="430" selected="">Castellón/Castelló</option>
+                    <option value="438" selected="">Gipuzkoa</option>
+                    <option value="435" selected="">Girona</option>
+                    <option value="424" selected="">Mallorca</option>
+                    <option value="443" selected="">Gran Canaria</option>
+                    <option value="445" selected="">Lleida</option>
+                    <option value="451" selected="">Navarra</option>
+                    <option value="452" selected="">Ourense</option>
+                    <option value="456" selected="">Tenerife</option>
+                    <option value="463" selected="">Valencia/València</option>
+                    <option value="5197" selected="">Eivissa y Formentera</option>
+                    <option value="5198" selected="">El Hierro</option>
+                    <option value="5202" selected="">Lanzarote</option>
+                    <option value="5199" selected="">Fuerteventura</option>
+                    <option value="5200" selected="">La Gomera</option>
+                    <option value="5201" selected="">La Palma</option>
+                    <option value="5203" selected="">Menorca</option>
+                    <option value="425" selected="true">Barcelona</option>
                 </select>
             </div>
             <input type="hidden" name="escola" t-att-value="escola" id="escola" class="form-control" t-att-readonly="'readonly' if only_passwords else None" t-att-autofocus="'autofocus' if login and not only_passwords else None" />
