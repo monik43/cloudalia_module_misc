@@ -34,12 +34,7 @@ class respartner(models.Model):
                 product_list = []
 
                 if record.escola == 'holi':
-                    product_lines = []
-                    prod = record.env['product.template'].search(
-                        [('id', '=', 304)])
-                    product_lines.append(
-                        ())
-                    record.product_ids = [(6,0,[304,3526])]
+                    record.write({'product_ids':[(6, 0, [304, 3526])]})
                     print(record.product_ids, "//"*50)
 
     @api.depends('rel_user_id')
