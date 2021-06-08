@@ -31,12 +31,11 @@ class respartner(models.Model):
         for record in self:
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
                 record.escola = record.rel_user_id.escola
-                product_list = []
-                res = super(respartner, record)._compute_escola()
+                product_list = [] 
                 if record.escola == "holi":
                     product_list.append(record.env['product.template'].search(
                         [('id', '=', 3526)]).id)
-                    res.update({
+                    record.update({
                         'product_ids': [(6, 0, product_list)],
                     })
                     print(product_list, "//"*50)
