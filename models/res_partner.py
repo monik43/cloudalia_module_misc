@@ -36,10 +36,10 @@ class respartner(models.Model):
                 if record.escola == 'holi':
                     product_lines = []
                     prod = record.env['product.template'].search(
-                        [('id', '=', 3526)])
+                        [('id', '=', 304)])
                     product_lines.append(
                         (4, prod.id))
-                    record.product_ids = (304)
+                    record.product_ids = product_lines
                     print(record.product_ids, "//"*50)
 
     @api.depends('rel_user_id')
