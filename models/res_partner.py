@@ -7,7 +7,8 @@ class respartner(models.Model):
 
     rel_user_id = fields.Many2one("res.users", compute="_compute_usuari")
 
-    productes_ids = fields.Many2many('product.template', 'productes_template_id','res_partner_id','product_partner_res',string='Productes')
+    productes_ids = fields.Many2many('product.template', 'productes_template_id',
+                                     'res_partner_id', 'product_partner_res', string='Productes')
 
     escola = fields.Char(string="Escola", compute="_compute_escola")
     mobile = fields.Char(compute="_compute_mobile")
@@ -17,7 +18,8 @@ class respartner(models.Model):
     city = fields.Char(compute="_compute_city")
     state_id = fields.Many2one(
         "res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
-    country_id = fields.Many2one("res.country", string='Country', compute="_compute_country_id")
+    country_id = fields.Many2one(
+        "res.country", string='Country', compute="_compute_country_id")
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
@@ -33,23 +35,21 @@ class respartner(models.Model):
         for record in self:
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
                 record.escola = record.rel_user_id.escola
-                {'holi', 'cmontserrat', 'eminguella', 'jpelegri'}
+                
                 if record.escola == 'holi':
-                    record.write({'product_ids':[(6, 0, 304)]})
+                    record.write({'product_ids': [(6, 0, 304)]})
 
                 if record.escola == 'cmontserrat':
-                    record.write({'product_ids':[(6, 0, [3660, 3661])]})
-                
+                    record.write({'product_ids': [(6, 0, [3660, 3661])]})
+
                 if record.escola == 'eminguella':
-                    record.write({'product_ids':[(6, 0, 3664)]})
+                    record.write({'product_ids': [(6, 0, 3664)]})
 
                 if record.escola == 'jpelegri':
-                    record.write({'product_ids':[(6, 0, 3665)]})
+                    record.write({'product_ids': [(6, 0, 3665)]})
 
-                if record.escola == 'cmontserrat':
-                    record.write({'product_ids':[(6, 0, [304, 3526])]})
-
-                
+                """if record.escola == 'cmontserrat':
+                    record.write({'product_ids':[(6, 0, [IDS AQUI])]})"""
 
     @api.depends('rel_user_id')
     def _compute_mobile(self):
