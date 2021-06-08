@@ -38,18 +38,7 @@ class respartner(models.Model):
                     prod = record.env['product.template'].search(
                         [('id', '=', 3526)])
                     product_lines.append(
-                        (0, 0, 
-                        {'name': prod.name,
-                         'list_price': prod.list_price,
-                         'categ_id': prod.categ_id,
-                         'website_published': prod.website_published,
-                         'type': prod.type,
-                         'company_id': prod.company_id,
-                         'qty_available': prod.qty_available,
-                         'virtual_available': prod.virtual_available,
-                         'uom_id': prod.uom_id
-                          }
-                        ))
+                        (0, 0, prod))
                     record.product_ids = product_lines
                     print(record.product_ids, "//"*50)
 
