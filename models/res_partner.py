@@ -31,13 +31,14 @@ class respartner(models.Model):
         for record in self:
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
                 record.escola = record.rel_user_id.escola
+                product_list = []
 
                 if record.escola == 'holi':
                     product_lines = []
                     prod = record.env['product.template'].search(
                         [('id', '=', 3526)])
                     product_lines.append(
-                        (0, 0, prod.id))
+                        (4, prod.id))
                     record.product_ids = product_lines
                     print(record.product_ids, "//"*50)
 
