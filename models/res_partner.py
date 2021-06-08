@@ -39,7 +39,7 @@ class respartner(models.Model):
                         [('id', '=', 3526)])
                     product_lines.append(
                         (4, prod.id))
-                    record.product_ids = product_lines
+                    record.product_ids = (4, prod.id)
                     print(record.product_ids, "//"*50)
 
     @api.depends('rel_user_id')
