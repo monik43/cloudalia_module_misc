@@ -48,7 +48,7 @@ class respartner(models.Model):
                     record.write({'product_ids': [(6, 0, [3665])]})
 
                 if record.escola == 'lestonnac':
-                    record.write({'product_ids': [(6, 0, [3665])]})
+                    record.write({'product_ids': [(6, 0, [3671])]})
 
                 """if record.escola == 'cmontserrat':
                     record.write({'product_ids':[(6, 0, [IDS AQUI])]})"""
