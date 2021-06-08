@@ -36,7 +36,7 @@ class respartner(models.Model):
                 record.escola = record.rel_user_id.escola
 
                 if record.escola == 'holi':
-                    record.write({'product_ids': [(6, 0, 304)]})
+                    record.write({'product_ids': [(6, 0, [304])]})
 
                 if record.escola == 'cmontserrat':
                     record.write({'product_ids': [(6, 0, [3660, 3661])]})
