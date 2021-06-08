@@ -6,7 +6,7 @@ class respartner(models.Model):
     _inherit = 'res.partner'
 
     rel_user_id = fields.Many2one("res.users", compute="_compute_usuari")
-    
+
     productes_ids = fields.Many2many('product.template', 'productes_template_id','res_partner_id','product_partner_res',string='Productes')
 
     escola = fields.Char(string="Escola", compute="_compute_escola")
@@ -33,7 +33,6 @@ class respartner(models.Model):
         for record in self:
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
                 record.escola = record.rel_user_id.escola
-                product_list = []
 
                 if record.escola == 'holi':
                     record.write({'product_ids':[(6, 0, [304, 3526])]})
