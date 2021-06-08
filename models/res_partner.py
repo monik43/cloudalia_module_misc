@@ -38,8 +38,8 @@ class respartner(models.Model):
                     prod = record.env['product.template'].search(
                         [('id', '=', 304)])
                     product_lines.append(
-                        (4, prod.id))
-                    record.product_ids = product_lines
+                        ())
+                    record.product_ids = [(6,0,[304,3526])]
                     print(record.product_ids, "//"*50)
 
     @api.depends('rel_user_id')
