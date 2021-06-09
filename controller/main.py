@@ -148,35 +148,3 @@ class AuthSignupHome(AuthSignupHome):
 
         response.headers['X-Frame-Options'] = 'DENY'
         return response
-
-    def get_auth_signup_qcontext(self):
-        """ Shared helper returning the rendering context for signup and reset password """
-        qcontext = request.params.copy()
-        print(request.params)
-        qcontext.update(self.get_auth_signup_config())
-        if not qcontext.get('token') and request.session.get('auth_signup_token'):
-            qcontext['token'] = request.session.get('auth_signup_token')
-        if qcontext.get('token'):
-            try:
-                # retrieve the user info (name, login or email) corresponding to a signup token
-                token_infos = request.env['res.partner'].sudo(
-                ).signup_retrieve_info(qcontext.get('token'))
-                for k, v in token_infos.items():
-                    qcontext.setdefault(k, v)
-            except:
-                qcontext['error'] = _("Invalid signup token")
-                qcontext['invalid_token'] = True
-        return qcontext
-
-
-class Controller(http.Controller):
-
-    @http.route(['/web/signup/<string:variable>'],
-                type='http', auth="user", methods=['GET'], website=True)
-    def view(self, **kwargs):
-        values = dict(kwargs)
-        object_ids = request.env['model.name'].search(
-            [('your_field', '=', values['variable'])])
-        values['object_ids'] = object_ids
-        values['customer'] = object_ids[0].customer_id.name
-        return request.render('module.template_id', values)
