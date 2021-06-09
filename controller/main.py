@@ -45,7 +45,7 @@ class AuthSignupHome(AuthSignupHome):
             self._signup_with_values(qcontext.get('token'), values)
             request.env.cr.commit()
 
-    @http.route(['/web/signup/<string:variable>'], type='http', auth='public', website=True,
+    @http.route('/web/signup/<string:variable>', type='http', auth='public', website=True,
                 sitemap=False, methods=['GET'])
     def web_auth_signup(self, *args, **kw):
         values = dict(kw)
