@@ -46,7 +46,7 @@ class AuthSignupHome(AuthSignupHome):
             request.env.cr.commit()
 
     @http.route('/web/signup/<string:escola_id>', type='http', auth='public', website=True,
-                sitemap=False, methods=['GET'])
+                sitemap=False, methods=['GET','POST'])
     def web_auth_signup(self, *args, **kw):
         value_dict = dict(kw)
         url_escola = False
