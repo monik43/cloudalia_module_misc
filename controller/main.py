@@ -50,15 +50,18 @@ class AuthSignupHome(AuthSignupHome):
     def web_auth_signup(self, *args, **kw):
 
         last_url = request.httprequest.environ['HTTP_REFERER']
+        print(last_url)
         url_escola = False
         escoles = {'holi', 'cmontserrat', 'eminguella', 'jpelegri', 'lestonnac'}
         for school in escoles:
             if last_url.find(school) != -1:
+                print(last_url)
                 url_escola = True
                 global escola 
                 escola = school
 
         if url_escola:
+            print(last_url)
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
             ])
@@ -101,6 +104,7 @@ class AuthSignupHome(AuthSignupHome):
                 'cloudalia_module_misc.registro_login', qcontext)
 
         else:
+            print(last_url)
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
             ])
