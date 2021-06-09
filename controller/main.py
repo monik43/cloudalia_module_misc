@@ -49,7 +49,7 @@ class AuthSignupHome(AuthSignupHome):
                 sitemap=False, methods=['GET'])
     def web_auth_signup(self, *args, **kw):
         value_dict = dict(kw)
-
+        url_escola = False
         escoles = {'holi': 1, 'cmontserrat': 29,
                    'eminguella': 19, 'jpelegri': 9, 'lestonnac': 14, 'inscassaselva': 32}
 
