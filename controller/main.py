@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from urllib.parse import urlparse
 import logging
 import werkzeug
 from odoo import http, _
@@ -49,7 +49,7 @@ class AuthSignupHome(AuthSignupHome):
                 sitemap=False)
     def web_auth_signup(self, *args, **kw):
 
-        last_url = request.httprequest.environ['HTTP_HOST']
+        last_url = request.httprequest.environ['HTTP_REFERER'].hostname
         print(last_url)
         url_escola = False
         escoles = {'holi', 'cmontserrat', 'eminguella', 'jpelegri', 'lestonnac'}
