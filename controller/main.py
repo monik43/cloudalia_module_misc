@@ -49,7 +49,7 @@ class AuthSignupHome(AuthSignupHome):
                 sitemap=False)
     def web_auth_signup(self, *args, **kw):
 
-        last_url = request.httprequest.environ['HTTP_REFERER']
+        last_url = request.httprequest.environ['HTTP_COOKIE']
         print(last_url)
         url_escola = False
         escoles = {'holi', 'cmontserrat', 'eminguella', 'jpelegri', 'lestonnac'}
