@@ -45,19 +45,20 @@ class AuthSignupHome(AuthSignupHome):
             self._signup_with_values(qcontext.get('token'), values)
             request.env.cr.commit()
 
-    @http.route('/web/signup', type='http', auth='public', website=True,
-                sitemap=False)
+    @http.route(['/web/signup/<string:variable>'], type='http', auth='public', website=True,
+                sitemap=False, methods=['GET'])
     def web_auth_signup(self, *args, **kw):
+        values = dict(kw)
+        print(values)
 
-        last_url = request.httprequest.environ['HTTP_REFERER']
-        print(last_url)
         url_escola = False
-        escoles = {'holi', 'cmontserrat', 'eminguella', 'jpelegri', 'lestonnac'}
+        escoles = {'holi', 'cmontserrat',
+                   'eminguella', 'jpelegri', 'lestonnac'}
         for school in escoles:
             if last_url.find(school) != -1:
                 print(last_url)
                 url_escola = True
-                global escola 
+                global escola
                 escola = school
 
         if url_escola:
@@ -66,7 +67,7 @@ class AuthSignupHome(AuthSignupHome):
             qcontext['states'] = request.env['res.country.state'].sudo().search([
             ])
             qcontext['countries'] = request.env['res.country'].sudo().search([])
-            
+
             if not qcontext.get('token') and not qcontext.get('signup_enabled'):
                 raise werkzeug.exceptions.NotFound()
 
@@ -166,3 +167,16 @@ class AuthSignupHome(AuthSignupHome):
                 qcontext['error'] = _("Invalid signup token")
                 qcontext['invalid_token'] = True
         return qcontext
+
+
+class Controller(http.Controller):
+
+    @http.route(['/web/signup/<string:variable>'],
+                type='http', auth="user", methods=['GET'], website=True)
+    def view(self, **kwargs):
+        values = dict(kwargs)
+        object_ids = request.env['model.name'].search(
+            [('your_field', '=', values['variable'])])
+        values['object_ids'] = object_ids
+        values['customer'] = object_ids[0].customer_id.name
+        return request.render('module.template_id', values)
