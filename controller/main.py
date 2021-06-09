@@ -13,7 +13,7 @@ _logger = logging.getLogger(__name__)
 
 class AuthSignupHome(AuthSignupHome):
 
-    def do_signup(self, qcontext):
+    def do_signup(self, qcontext, *kw):
         """ Shared helper that creates a res.partner out of a token """
         if qcontext.get('mobile'):
             values = {key: qcontext.get(key)
