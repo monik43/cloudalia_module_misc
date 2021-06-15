@@ -18,7 +18,7 @@ class respartner(models.Model):
     city = fields.Char(compute="_compute_city")
     state_id = fields.Many2one(
         "res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
-    #country_id = fields.Many2one("res.country", string='Country', compute="_compute_country_id")
+    # country_id = fields.Many2one("res.country", string='Country', compute="_compute_country_id")
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
@@ -32,13 +32,12 @@ class respartner(models.Model):
     @api.onchange
     def _compute_escola(self):
         for record in self:
-            if record.escola_id == False:
 
-                if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
-                    record.escola_id = record.rel_user_id.escola
-
+            if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
+                record.escola_id = record.rel_user_id.escola
+            """
             if record.credit_limit == 0:
-                record.credit_limit = 600
+                record.credit_limit = 600"""
 
             if record.escola_id == 'holi':
                 record.write({'product_ids': [(6, 0, [304])]})
