@@ -83,7 +83,7 @@ class AuthSignupHome(AuthSignupHome):
 
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
-                    self.do_signup(qcontext)
+                    self.do_signup(qcontext, escola=    escola)
                     # Send an account creation confirmation email
                     if qcontext.get('token'):
                         user_sudo = request.env['res.users'].sudo().search(
@@ -119,8 +119,8 @@ class AuthSignupHome(AuthSignupHome):
     def do_signup(self, qcontext, *kw):
         """ Shared helper that creates a res.partner out of a token """
         if qcontext.get('mobile'):
-            value_dict = dict(kw)
-            escola = value_dict["escola"]
+            dict = kw.items()
+            escola = dict["escola"]
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
             values.update({'escola': escola})
