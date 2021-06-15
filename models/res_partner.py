@@ -29,12 +29,13 @@ class respartner(models.Model):
                 record.rel_user_id = record.env['res.users'].search(
                     [('partner_id', '=', record.id)])
 
-    @api.onchange
+    @api.depends('rel_user_id')
     def _compute_escola(self):
         for record in self:
 
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
                 record.escola_id = record.rel_user_id.escola
+
             """
             if record.credit_limit == 0:
                 record.credit_limit = 600"""
