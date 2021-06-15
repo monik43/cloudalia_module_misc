@@ -10,7 +10,7 @@ class respartner(models.Model):
     productes_ids = fields.Many2many('product.template', 'productes_template_id',
                                      'res_partner_id', 'product_partner_res', string='Productes')
 
-    escola = fields.Char(string="Escola", compute="_compute_escola", index=True)
+    escola = fields.Char(string="Escola", index=True)
     mobile = fields.Char(compute="_compute_mobile")
     street = fields.Char(compute="_compute_street")
     street2 = fields.Char(compute="_compute_street2")
@@ -29,7 +29,7 @@ class respartner(models.Model):
                 record.rel_user_id = record.env['res.users'].search(
                     [('partner_id', '=', record.id)])
 
-    @api.depends('rel_user_id')
+    @api.onchange
     def _compute_escola(self):
         for record in self:
             if record.escola == False:
