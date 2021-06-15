@@ -4,13 +4,13 @@ from odoo import models, fields, api, _
 
 class respartner(models.Model):
     _inherit = 'res.partner'
-
+    escola = fields.Char()
     rel_user_id = fields.Many2one("res.users", compute="_compute_usuari")
 
     productes_ids = fields.Many2many('product.template', 'productes_template_id',
                                      'res_partner_id', 'product_partner_res', string='Productes')
 
-    escola = fields.Char(string="Escola", index=True)
+    escola_id = fields.Char(string="Escola", index=True)
     mobile = fields.Char(compute="_compute_mobile")
     street = fields.Char(compute="_compute_street")
     street2 = fields.Char(compute="_compute_street2")
