@@ -10,5 +10,18 @@
                 </xpath>
             </field>
         </record>
+        <record id="res_partner_add_escola_field" model="ir.ui.view">
+            <field name="name">cloud_base.view_partner_form_botiga</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <button name="toggle_active" position="before">
+                    <span class="o_stat_value">
+                        <field name="total_invoiced" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    </span>
+                    <span class="o_stat_text">Invoiced</span>
+                </button>
+            </field>
+        </record>
     </data>
 </odoo>

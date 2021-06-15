@@ -10,7 +10,7 @@ class respartner(models.Model):
     productes_ids = fields.Many2many('product.template', 'productes_template_id',
                                      'res_partner_id', 'product_partner_res', string='Productes')
 
-    escola = fields.Char(string="Escola", compute="_compute_escola")
+    escola = fields.Char(string="Escola", compute="_compute_escola", index=True)
     mobile = fields.Char(compute="_compute_mobile")
     street = fields.Char(compute="_compute_street")
     street2 = fields.Char(compute="_compute_street2")
@@ -32,25 +32,30 @@ class respartner(models.Model):
     @api.depends('rel_user_id')
     def _compute_escola(self):
         for record in self:
-            if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
-                record.escola = record.rel_user_id.escola
+            if record.escola == False:
 
-                if record.escola == 'holi':
-                    record.write({'product_ids': [(6, 0, [304])]})
+                if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
+                    record.escola = record.rel_user_id.escola
 
-                if record.escola == 'cmontserrat':
-                    record.write({'product_ids': [(6, 0, [3660, 3661])]})
+            if record.credit_limit == 0:
+                record.credit_limit = 600
 
-                if record.escola == 'eminguella':
-                    record.write({'product_ids': [(6, 0, [3664])]})
+            if record.escola == 'holi':
+                record.write({'product_ids': [(6, 0, [304])]})
 
-                if record.escola == 'jpelegri':
-                    record.write({'product_ids': [(6, 0, [3665])]})
+            if record.escola == 'cmontserrat':
+                record.write({'product_ids': [(6, 0, [3660, 3661])]})
 
-                if record.escola == 'lestonnac':
-                    record.write({'product_ids': [(6, 0, [3671])]})
+            if record.escola == 'eminguella':
+                record.write({'product_ids': [(6, 0, [3664])]})
 
-                """if record.escola == 'cmontserrat':
+            if record.escola == 'jpelegri':
+                record.write({'product_ids': [(6, 0, [3665])]})
+
+            if record.escola == 'lestonnac':
+                record.write({'product_ids': [(6, 0, [3671])]})
+
+            """if record.escola == 'cmontserrat':
                     record.write({'product_ids':[(6, 0, [IDS AQUI])]})"""
 
     @api.depends('rel_user_id')
