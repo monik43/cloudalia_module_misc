@@ -28,7 +28,7 @@ class AuthSignupHome(AuthSignupHome):
         for school in escoles:
             if str(value_dict["escola_id"]).find(str(escoles[school])) != -1:
                 print(value_dict["escola_id"], "/"*60)
-                print(escoles[school], "/"*60)
+                print(escoles[school], "/" *60)
                 url_escola = True
                 escola = escoles[school]
 
@@ -42,7 +42,7 @@ class AuthSignupHome(AuthSignupHome):
                 raise werkzeug.exceptions.NotFound()
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
-                    self.do_signup(qcontext, escola=escola)
+                    self.do_signup(qcontext, escola)
                     # Send an account creation confirmation email
                     if qcontext.get('token'):
                         user_sudo = request.env['res.users'].sudo().search(
