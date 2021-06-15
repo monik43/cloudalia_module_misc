@@ -13,7 +13,6 @@ _logger = logging.getLogger(__name__)
 
 
 class AuthSignupHome(AuthSignupHome):
-    escola = ""
 
     @http.route(['/web/signup', '/web/signup?escola_id=<int:escola_id>'], type='http', auth='public', website=True,
                 sitemap=False, methods=['GET', 'POST'])
@@ -28,6 +27,8 @@ class AuthSignupHome(AuthSignupHome):
 
         for school in escoles:
             if str(value_dict["escola_id"]).find(str(escoles[school])) != -1:
+                print(value_dict["escola_id"], "/"*60)
+                print(escoles[school], "/"*60)
                 url_escola = True
                 escola = escoles[school]
 
