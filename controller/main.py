@@ -13,41 +13,10 @@ _logger = logging.getLogger(__name__)
 
 
 class AuthSignupHome(AuthSignupHome):
+    escola = ""
 
-    def do_signup(self, qcontext, *kw):
-        """ Shared helper that creates a res.partner out of a token """
-        if qcontext.get('mobile'):
-            values = {key: qcontext.get(key)
-                      for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
-            values.update({'escola': escola})
-            if not values:
-                raise UserError(_("The form was not properly filled in."))
-            if values.get('password') != qcontext.get('confirm_password'):
-                raise UserError(
-                    _("Passwords do not match; please retype them."))
-            supported_langs = [
-                lang['code'] for lang in request.env['res.lang'].sudo().search_read([], ['code'])]
-            if request.lang in supported_langs:
-                values['lang'] = request.lang
-            self._signup_with_values(qcontext.get('token'), values)
-            request.env.cr.commit()
-        else:
-            values = {key: qcontext.get(key)
-                      for key in ('login', 'name', 'password')}
-            if not values:
-                raise UserError(_("The form was not properly filled in."))
-            if values.get('password') != qcontext.get('confirm_password'):
-                raise UserError(
-                    _("Passwords do not match; please retype them."))
-            supported_langs = [
-                lang['code'] for lang in request.env['res.lang'].sudo().search_read([], ['code'])]
-            if request.lang in supported_langs:
-                values['lang'] = request.lang
-            self._signup_with_values(qcontext.get('token'), values)
-            request.env.cr.commit()
-
-    @http.route(['/web/signup','/web/signup?escola_id=<int:escola_id>'], type='http', auth='public', website=True,
-                sitemap=False, methods=['GET','POST'])
+    @http.route(['/web/signup', '/web/signup?escola_id=<int:escola_id>'], type='http', auth='public', website=True,
+                sitemap=False, methods=['GET', 'POST'])
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
         value_dict = dict(kw)
@@ -60,20 +29,19 @@ class AuthSignupHome(AuthSignupHome):
         for school in escoles:
             if str(value_dict["escola_id"]).find(str(escoles[school])) != -1:
                 url_escola = True
-                global escola
-                escola = school
+                escola = escoles[school]
 
         if url_escola:
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
             ])
             qcontext['countries'] = request.env['res.country'].sudo().search([])
-            
+
             if not qcontext.get('token') and not qcontext.get('signup_enabled'):
                 raise werkzeug.exceptions.NotFound()
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
-                    self.do_signup(qcontext, escola)
+                    self.do_signup(qcontext, escola=escola)
                     # Send an account creation confirmation email
                     if qcontext.get('token'):
                         user_sudo = request.env['res.users'].sudo().search(
@@ -146,3 +114,37 @@ class AuthSignupHome(AuthSignupHome):
 
         response.headers['X-Frame-Options'] = 'DENY'
         return response
+
+    def do_signup(self, qcontext, *kw):
+        """ Shared helper that creates a res.partner out of a token """
+        if qcontext.get('mobile'):
+            value_dict = dict(kw)
+            escola = value_dict["escola"]
+            values = {key: qcontext.get(key)
+                      for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
+            values.update({'escola': escola})
+            if not values:
+                raise UserError(_("The form was not properly filled in."))
+            if values.get('password') != qcontext.get('confirm_password'):
+                raise UserError(
+                    _("Passwords do not match; please retype them."))
+            supported_langs = [
+                lang['code'] for lang in request.env['res.lang'].sudo().search_read([], ['code'])]
+            if request.lang in supported_langs:
+                values['lang'] = request.lang
+            self._signup_with_values(qcontext.get('token'), values)
+            request.env.cr.commit()
+        else:
+            values = {key: qcontext.get(key)
+                      for key in ('login', 'name', 'password')}
+            if not values:
+                raise UserError(_("The form was not properly filled in."))
+            if values.get('password') != qcontext.get('confirm_password'):
+                raise UserError(
+                    _("Passwords do not match; please retype them."))
+            supported_langs = [
+                lang['code'] for lang in request.env['res.lang'].sudo().search_read([], ['code'])]
+            if request.lang in supported_langs:
+                values['lang'] = request.lang
+            self._signup_with_values(qcontext.get('token'), values)
+            request.env.cr.commit()
