@@ -50,6 +50,8 @@ class AuthSignupHome(AuthSignupHome):
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
         value_dict = dict(kw)
+
+        print(value_dict["escola_id"], "/\\"*50)
         url_escola = False
         escoles = {'holi': 1, 'cmontserrat': 29,
                    'eminguella': 19, 'jpelegri': 9, 'lestonnac': 14, 'inscassaselva': 32}
