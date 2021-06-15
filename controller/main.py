@@ -119,11 +119,11 @@ class AuthSignupHome(AuthSignupHome):
     def do_signup(self, qcontext, *kw):
         """ Shared helper that creates a res.partner out of a token """
         if qcontext.get('mobile'):
-            dict = kw.items()
-            escola = dict["escola"]
+            for it in kw.items():
+                print(it)
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
-            values.update({'escola': escola})
+            #values.update({'escola': escola})
             if not values:
                 raise UserError(_("The form was not properly filled in."))
             if values.get('password') != qcontext.get('confirm_password'):
