@@ -48,6 +48,7 @@ class AuthSignupHome(AuthSignupHome):
     @http.route('/web/signup/<string:escola_id>', type='http', auth='public', website=True,
                 sitemap=False, methods=['GET','POST'])
     def web_auth_signup(self, *args, **kw):
+        qcontext = self.get_auth_signup_qcontext()
         value_dict = dict(kw)
         url_escola = False
         escoles = {'holi': 1, 'cmontserrat': 29,
