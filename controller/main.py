@@ -2,6 +2,7 @@
 from urllib.parse import urlparse
 import logging
 import werkzeug
+from werkzeug import routing
 from odoo import http, _
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 from odoo.addons.auth_signup.models.res_users import SignupError
@@ -45,7 +46,7 @@ class AuthSignupHome(AuthSignupHome):
             self._signup_with_values(qcontext.get('token'), values)
             request.env.cr.commit()
 
-    @http.route('/web/signup?escola_id=<string:escola_id>', type='http', auth='public', website=True,
+    @http.route('/web/signup<int:escola_id>', type='http', auth='public', website=True,
                 sitemap=False, methods=['GET','POST'])
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
