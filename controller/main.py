@@ -14,7 +14,7 @@ _logger = logging.getLogger(__name__)
 
 class AuthSignupHome(AuthSignupHome):
 
-    @http.route(['/web/signup', '/web/signup?escola_id=<int:escola_id>'], type='http', auth='public', website=True,
+    @http.route(['/web/signup', '/web/signup?es=<int:es>'], type='http', auth='public', website=True,
                 sitemap=False, methods=['GET', 'POST'])
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
@@ -23,7 +23,6 @@ class AuthSignupHome(AuthSignupHome):
                    'eminguella': 19, 'jpelegri': 9, 'lestonnac': 14, 'inscassaselva': 32}
 
         if dict(kw):
-
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
             ])
