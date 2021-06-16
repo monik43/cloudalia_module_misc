@@ -21,8 +21,9 @@ class AuthSignupHome(AuthSignupHome):
         value_dict = dict(kw)
         escoles = {'holi': 1, 'cmontserrat': 29,
                    'eminguella': 19, 'jpelegri': 9, 'lestonnac': 14, 'inscassaselva': 32}
-                   
-        if value_dict["escola_id"]:
+
+        if value_dict["escola_id"] in (1,29,19,9,14,32):
+
             for school in escoles:
                 if str(value_dict["escola_id"]).find(str(escoles[school])) != -1:
                     escola = escoles[school]
