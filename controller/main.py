@@ -21,8 +21,8 @@ class AuthSignupHome(AuthSignupHome):
 
         if dict(kw):
             print(dict(kw))
-            escoles = {'holi': 1, 'cmontserrat': 29,
-                       'eminguella': 19, 'jpelegri': 9, 'lestonnac': 14, 'inscassaselva': 32}
+            escoles = {'holi': 1, 'cmontserrat': 2,
+                       'eminguella': 3, 'jpelegri': 4, 'lestonnac': 5, 'inscassaselva': 6}
             value_dict = dict(kw)
             for school in escoles:
                 if str(value_dict["es"]).find(str(escoles[school])) != -1:
