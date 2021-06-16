@@ -119,8 +119,7 @@ class AuthSignupHome(AuthSignupHome):
     def do_signup(self, qcontext, *kw):
         """ Shared helper that creates a res.partner out of a token """
         if qcontext.get('mobile'):
-            for it in kw.items():
-                print(it)
+            print(kw[0],"//"*50)
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
             #values.update({'escola': escola})
