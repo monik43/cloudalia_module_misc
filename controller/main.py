@@ -14,15 +14,18 @@ _logger = logging.getLogger(__name__)
 
 class AuthSignupHome(AuthSignupHome):
 
-    @http.route(['/web/signup', '/web/signup?es=<int:es>'], type='http', auth='public', website=True,
+    @http.route(['/web/signup', '/web/signup?escola_id=<int:escola_id>'], type='http', auth='public', website=True,
                 sitemap=False, methods=['GET', 'POST'])
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
-        value_dict = dict(kw)
-        escoles = {'holi': 1, 'cmontserrat': 29,
-                   'eminguella': 19, 'jpelegri': 9, 'lestonnac': 14, 'inscassaselva': 32}
 
         if dict(kw):
+            escoles = {'holi': 1, 'cmontserrat': 29,
+                       'eminguella': 19, 'jpelegri': 9, 'lestonnac': 14, 'inscassaselva': 32}
+            value_dict = dict(kw)
+            for school in escoles:
+                if str(value_dict["escola_id"]).find(str(escoles[school])) != -1:
+                    escola = escoles[school]
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
             ])
@@ -32,7 +35,7 @@ class AuthSignupHome(AuthSignupHome):
                 raise werkzeug.exceptions.NotFound()
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
-                    self.do_signup(qcontext)
+                    self.do_signup(qcontext, escola_id=escola)
                     # Send an account creation confirmation email
                     if qcontext.get('token'):
                         user_sudo = request.env['res.users'].sudo().search(
@@ -108,10 +111,11 @@ class AuthSignupHome(AuthSignupHome):
 
     def do_signup(self, qcontext, *kw):
         """ Shared helper that creates a res.partner out of a token """
-        if qcontext.get('mobile'):  
+        if qcontext.get('mobile'):
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
-
+            kwa = dict(kw)
+            values.update({'escola': kwa['escola_id']})
             if not values:
                 raise UserError(_("The form was not properly filled in."))
             if values.get('password') != qcontext.get('confirm_password'):
