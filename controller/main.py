@@ -20,12 +20,14 @@ class AuthSignupHome(AuthSignupHome):
         qcontext = self.get_auth_signup_qcontext()
 
         if dict(kw):
+            print(dict(kw))
             escoles = {'holi': 1, 'cmontserrat': 29,
                        'eminguella': 19, 'jpelegri': 9, 'lestonnac': 14, 'inscassaselva': 32}
             value_dict = dict(kw)
             for school in escoles:
                 if str(value_dict["es"]).find(str(escoles[school])) != -1:
                     escola = escoles[school]
+                    print(escola, "//"*50)
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
             ])
