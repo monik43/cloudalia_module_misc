@@ -42,7 +42,7 @@ class AuthSignupHome(AuthSignupHome):
                 raise werkzeug.exceptions.NotFound()
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
-                    self.do_signup(qcontext, escola)
+                    self.do_signup(qcontext, escola = value_dict["escola_id"])
                     # Send an account creation confirmation email
                     if qcontext.get('token'):
                         user_sudo = request.env['res.users'].sudo().search(
@@ -83,7 +83,7 @@ class AuthSignupHome(AuthSignupHome):
 
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
-                    self.do_signup(qcontext, escola=    escola)
+                    self.do_signup(qcontext, escola = escola)
                     # Send an account creation confirmation email
                     if qcontext.get('token'):
                         user_sudo = request.env['res.users'].sudo().search(
