@@ -21,16 +21,13 @@ class AuthSignupHome(AuthSignupHome):
         value_dict = dict(kw)
         val = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
-        
-        print(value_dict["escola_id"], "/\\"*50)
+
         url_escola = False
         escoles = {'holi': 1, 'cmontserrat': 29,
                    'eminguella': 19, 'jpelegri': 9, 'lestonnac': 14, 'inscassaselva': 32}
 
         for school in escoles:
             if str(value_dict["escola_id"]).find(str(escoles[school])) != -1:
-                print(value_dict["escola_id"], "/"*60)
-                print(escoles[school], "/" *60)
                 url_escola = True
                 val.update({'escola': escoles[school]})
 
@@ -120,11 +117,10 @@ class AuthSignupHome(AuthSignupHome):
 
     def do_signup(self, qcontext, *kw):
         """ Shared helper that creates a res.partner out of a token """
-        print("SINGUP"*25)
         if qcontext.get('mobile'):  
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
-            #values.update({'escola': escola})
+
             if not values:
                 raise UserError(_("The form was not properly filled in."))
             if values.get('password') != qcontext.get('confirm_password'):
