@@ -24,10 +24,6 @@ class AuthSignupHome(AuthSignupHome):
 
         if dict(kw):
 
-            """for school in escoles:
-                if str(value_dict["escola_id"]).find(str(escoles[school])) != -1:
-                    escola = escoles[school]"""
-
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
             ])
