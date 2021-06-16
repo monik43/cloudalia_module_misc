@@ -19,7 +19,9 @@ class AuthSignupHome(AuthSignupHome):
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
         value_dict = dict(kw)
-
+        val = {key: qcontext.get(key)
+                      for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
+        
         print(value_dict["escola_id"], "/\\"*50)
         url_escola = False
         escoles = {'holi': 1, 'cmontserrat': 29,
@@ -30,7 +32,7 @@ class AuthSignupHome(AuthSignupHome):
                 print(value_dict["escola_id"], "/"*60)
                 print(escoles[school], "/" *60)
                 url_escola = True
-                escola = escoles[school]
+                val.update({'escola': escoles[school]})
 
         if url_escola:
             qcontext = self.get_auth_signup_qcontext()
@@ -119,8 +121,7 @@ class AuthSignupHome(AuthSignupHome):
     def do_signup(self, qcontext, *kw):
         """ Shared helper that creates a res.partner out of a token """
         print("SINGUP"*25)
-        if qcontext.get('mobile'):
-            print(kw['escola'],"//"*50)
+        if qcontext.get('mobile'):  
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
             #values.update({'escola': escola})
