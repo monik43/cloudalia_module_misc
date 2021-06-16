@@ -37,7 +37,7 @@ class AuthSignupHome(AuthSignupHome):
                 raise werkzeug.exceptions.NotFound()
             if 'error' not in qcontext and request.httprequest.method == 'POST':
                 try:
-                    self.do_signup(qcontext, escola_id=escola)
+                    self.do_signup(qcontext, escola)
                     # Send an account creation confirmation email
                     if qcontext.get('token'):
                         user_sudo = request.env['res.users'].sudo().search(
@@ -117,7 +117,7 @@ class AuthSignupHome(AuthSignupHome):
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
             kwa = dict(kw)
-            values.update({'escola': kwa['escola_id']})
+            values.update({'escola': kwa})
             if not values:
                 raise UserError(_("The form was not properly filled in."))
             if values.get('password') != qcontext.get('confirm_password'):
