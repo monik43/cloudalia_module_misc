@@ -24,9 +24,9 @@ class AuthSignupHome(AuthSignupHome):
 
         if value_dict["escola_id"] in (1,29,19,9,14,32):
 
-            for school in escoles:
+            """for school in escoles:
                 if str(value_dict["escola_id"]).find(str(escoles[school])) != -1:
-                    escola = escoles[school]
+                    escola = escoles[school]"""
 
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
