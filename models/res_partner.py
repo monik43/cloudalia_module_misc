@@ -36,8 +36,8 @@ class respartner(models.Model):
             if record.rel_user_id.escola != False:
                 record.escola_id = record.rel_user_id.escola
 
-            if record.credit_limit == 0.00:
-                record.credit_limit = 600.00
+            if record.credit_limit == 0.0:
+                record.credit_limit = 600.0
 
             if record.escola_id == '1':
                 record.write({'product_ids': [(6, 0, [304])]})
