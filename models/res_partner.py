@@ -32,7 +32,7 @@ class respartner(models.Model):
     @api.depends('rel_user_id')
     def _compute_escola(self):
         for record in self:
-
+            print(record.credit_limit + " " *50)
             if record.rel_user_id.escola != False:
                 record.escola_id = record.rel_user_id.escola
 
