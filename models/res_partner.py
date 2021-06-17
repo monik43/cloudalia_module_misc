@@ -36,24 +36,32 @@ class respartner(models.Model):
             if record.rel_user_id.escola != False:
                 record.escola_id = record.rel_user_id.escola
 
-            """
-            if record.credit_limit == 0:
-                record.credit_limit = 600"""
+            if record.credit_limit == 0.00:
+                record.credit_limit = 600.00
 
-            if record.escola_id == 'holi':
+            if record.escola_id == '1':
                 record.write({'product_ids': [(6, 0, [304])]})
 
-            if record.escola_id  == 'cmontserrat':
+            if record.escola_id  == '2':
                 record.write({'product_ids': [(6, 0, [3660, 3661])]})
 
-            if record.escola_id  == 'eminguella':
+            if record.escola_id  == '3':
                 record.write({'product_ids': [(6, 0, [3664])]})
 
-            if record.escola_id  == 'jpelegri':
+            if record.escola_id  == '4':
                 record.write({'product_ids': [(6, 0, [3665])]})
 
-            if record.escola_id  == 'lestonnac':
+            if record.escola_id  == '5':
                 record.write({'product_ids': [(6, 0, [3671])]})
+
+            if record.escola_id  == '6':
+                record.write({'product_ids': [(6, 0, [3676,3677])]})
+
+            if record.escola_id  == '7':
+                record.write({'product_ids': [(6, 0, [3683])]})
+
+            if record.escola_id  == '8':
+                record.write({'product_ids': [(6, 0, [3683])]})
 
             """if record.escola == 'cmontserrat':
                     record.write({'product_ids':[(6, 0, [IDS AQUI])]})"""
