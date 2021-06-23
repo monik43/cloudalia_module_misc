@@ -18,12 +18,12 @@ class AuthSignupHome(AuthSignupHome):
                 sitemap=False, methods=['GET', 'POST'])
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
-
-        if dict(kw["es"]):
+        value_dict = dict(kw)
+        if value_dict["es"] != False:
             print(dict(kw))
             escoles = {'holi': 1, 'cmontserrat': 2,
                        'eminguella': 3, 'jpelegri': 4, 'lestonnac': 5, 'inscassaselva': 6, 'stesteve': 7, 'bitacola': 8}
-            value_dict = dict(kw)
+            
             for school in escoles:
                 if str(value_dict["es"]).find(str(escoles[school])) != -1:
                     escola = escoles[school]
