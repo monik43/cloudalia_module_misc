@@ -32,10 +32,9 @@ class respartner(models.Model):
                 record.rel_user_id = record.env['res.users'].search(
                     [('partner_id', '=', record.id)])
 
-    @api.depends('rel_user_id')
     def _compute_credit(self):
         for record in self:
-            if record.escola_id != False and float_is_zero(record.credit_limit):
+            if record.escola_id != False and float_is_zero(record.credit_limit,2,0.01):
                 record.credit_limit = 600.0
 
     @api.depends('rel_user_id')
