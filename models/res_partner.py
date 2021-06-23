@@ -34,7 +34,7 @@ class respartner(models.Model):
 
     def _compute_credit(self):
         for record in self:
-            if record.escola_id != False and float_is_zero(record.credit_limit,2,0.01):
+            if record.escola_id != False and float_is_zero(record.credit_limit, precision_digits = 2):
                 record.credit_limit = 600.0
 
     @api.depends('rel_user_id')
