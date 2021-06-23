@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
+from odoo.tools import float_is_zero
 
 
 class respartner(models.Model):
@@ -18,7 +19,7 @@ class respartner(models.Model):
     city = fields.Char(compute="_compute_city")
     state_id = fields.Many2one(
         "res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
-    # country_id = fields.Many2one("res.country", string='Country', compute="_compute_country_id")
+    country_id = fields.Many2one("res.country", string='Country', compute="_compute_country_id")
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
@@ -35,7 +36,8 @@ class respartner(models.Model):
             if record.rel_user_id.escola != False:
                 record.escola_id = record.rel_user_id.escola
 
-            record.credit_limit = float(600)
+            if float_is_zero(record.credit_limit):
+                 record.credit_limit = 600.00
 
             if record.escola_id == '1':
                 record.write({'product_ids': [(6, 0, [304])]})
