@@ -43,8 +43,6 @@ class respartner(models.Model):
             if record.rel_user_id.escola != False:
                 record.escola_id = record.rel_user_id.escola
 
-            
-
             if record.escola_id == '1':
                 record.write({'product_ids': [(6, 0, [304])]})
 

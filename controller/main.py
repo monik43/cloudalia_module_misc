@@ -25,7 +25,7 @@ class AuthSignupHome(AuthSignupHome):
         print(dict(kw))
         print(bool(kw))
         print(kw) # ???
-        if bool(value_dict["es"]):
+        if bool(kw):
             escoles = {'holi': 1, 'cmontserrat': 2,
                        'eminguella': 3, 'jpelegri': 4, 'lestonnac': 5, 'inscassaselva': 6, 'stesteve': 7, 'bitacola': 8}
             

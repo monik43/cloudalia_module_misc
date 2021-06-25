@@ -40,15 +40,21 @@ class stockpicking(models.Model):
 
         # If no lots when needed, raise error
         picking_type = self.picking_type_id
-        precision_digits = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+        precision_digits = self.env['decimal.precision'].precision_get(
+            'Product Unit of Measure')
 
-        no_quantities_done_sg = all(float_is_zero(move_line.qty_done, precision_digits=precision_digits) for move_line in self.move_line_ids.filtered(lambda m: m.state not in ('done', 'cancel')))
-        no_reserved_quantities_sg = all(float_is_zero(move_line.product_qty, precision_rounding=move_line.product_uom_id.rounding) for move_line in self.move_line_ids)
+        no_quantities_done_sg = all(float_is_zero(move_line.qty_done, precision_digits=precision_digits)
+                                    for move_line in self.move_line_ids.filtered(lambda m: m.state not in ('done', 'cancel')))
+        no_reserved_quantities_sg = all(float_is_zero(
+            move_line.product_qty, precision_rounding=move_line.product_uom_id.rounding) for move_line in self.move_line_ids)
 
-        no_quantities_done_nsg = all(float_is_zero(move_line.qty_done, precision_digits=precision_digits) for move_line in self.move_lines.filtered(lambda m: m.state not in ('done', 'cancel')))
-        no_reserved_quantities_nsg = all(float_is_zero(move_line.product_qty, precision_rounding=move_line.product_uom_id.rounding) for move_line in self.move_lines)
+        no_quantities_done_nsg = all(float_is_zero(move_line.qty_done, precision_digits=precision_digits)
+                                     for move_line in self.move_lines.filtered(lambda m: m.state not in ('done', 'cancel')))
+        no_reserved_quantities_nsg = all(float_is_zero(
+            move_line.product_qty, precision_rounding=move_line.product_uom_id.rounding) for move_line in self.move_lines)
         if no_reserved_quantities_sg and no_quantities_done_sg and no_quantities_done_nsg and no_reserved_quantities_nsg:
-            raise UserError(_('You cannot validate a transfer if you have not processed any quantity. You should rather cancel the transfer.'))
+            raise UserError(
+                _('You cannot validate a transfer if you have not processed any quantity. You should rather cancel the transfer.'))
 
         if picking_type.use_create_lots or picking_type.use_existing_lots:
             lines_to_check_sg = self.move_line_ids
@@ -70,17 +76,20 @@ class stockpicking(models.Model):
                 product = line.product_id
                 if product and product.tracking != 'none':
                     if not line.lot_name and not line.lot_id:
-                        raise UserError(_('You need to supply a lot/serial number for %s.') % product.display_name)
+                        raise UserError(
+                            _('You need to supply a lot/serial number for %s.') % product.display_name)
 
             for line in lines_to_check_nsg:
                 product = line.product_id
                 if product and product.tracking != 'none':
                     if not line.lot_name and not line.lot_id:
-                        raise UserError(_('You need to supply a lot/serial number for %s.') % product.display_name)
+                        raise UserError(
+                            _('You need to supply a lot/serial number for %s.') % product.display_name)
 
         if no_quantities_done_sg and no_quantities_done_nsg:
             view = self.env.ref('stock.view_immediate_transfer')
-            wiz = self.env['stock.immediate.transfer'].create({'pick_ids': [(4, self.id)]})
+            wiz = self.env['stock.immediate.transfer'].create(
+                {'pick_ids': [(4, self.id)]})
             return {
                 'name': _('Immediate Transfer?'),
                 'type': 'ir.actions.act_window',
@@ -96,7 +105,8 @@ class stockpicking(models.Model):
 
         if self._get_overprocessed_stock_moves() and not self._context.get('skip_overprocessed_check'):
             view = self.env.ref('stock.view_overprocessed_transfer')
-            wiz = self.env['stock.overprocessed.transfer'].create({'picking_id': self.id})
+            wiz = self.env['stock.overprocessed.transfer'].create(
+                {'picking_id': self.id})
             return {
                 'type': 'ir.actions.act_window',
                 'view_type': 'form',
@@ -115,18 +125,19 @@ class stockpicking(models.Model):
         self.action_done()
         return
 
-class stockmove(models.Model):
-    _inherit='stock.move'
 
-    ship_order_move=fields.Char(compute="_get_purchase_ship_order")
+class stockmove(models.Model):
+    _inherit = 'stock.move'
+
+    ship_order_move = fields.Char(compute="_get_purchase_ship_order")
 
     @api.depends('picking_id')
     def _get_purchase_ship_order(self):
 
         for record in self:
-            stock_picking=record.env['stock.picking']
+            stock_picking = record.env['stock.picking']
 
             if stock_picking.browse(record.picking_id.id):
 
-                record.ship_order_move=stock_picking.browse(
+                record.ship_order_move = stock_picking.browse(
                     record.picking_id.id).purchase_ship_order
