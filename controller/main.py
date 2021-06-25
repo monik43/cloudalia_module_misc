@@ -18,16 +18,14 @@ class AuthSignupHome(AuthSignupHome):
                 sitemap=False, methods=['GET', 'POST'])
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
-        value_dict = dict(kw)
-        escola = ""
-        escoles = {'holi': 1, 'cmontserrat': 2,
+
+        if "es" in kw:
+            escoles = {'holi': 1, 'cmontserrat': 2,
                        'eminguella': 3, 'jpelegri': 4, 'lestonnac': 5, 'inscassaselva': 6, 'stesteve': 7, 'bitacola': 8}
-
-        for school in escoles:
-                if str(value_dict["es"]).find(str(escoles[school])) != -1:
+            
+            for school in escoles:
+                if str(kw["es"]).find(str(escoles[school])) != -1:
                     escola = escoles[school]
-
-        if bool(escola):
             qcontext = self.get_auth_signup_qcontext()
             qcontext['states'] = request.env['res.country.state'].sudo().search([
             ])
