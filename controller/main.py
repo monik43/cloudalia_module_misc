@@ -20,7 +20,8 @@ class AuthSignupHome(AuthSignupHome):
         qcontext = self.get_auth_signup_qcontext()
         value_dict = dict(kw)
         print(kw) # ???
-        if bool(kw['es']):
+        kw['es'] = ""
+        if bool():
             escoles = {'holi': 1, 'cmontserrat': 2,
                        'eminguella': 3, 'jpelegri': 4, 'lestonnac': 5, 'inscassaselva': 6, 'stesteve': 7, 'bitacola': 8}
             
