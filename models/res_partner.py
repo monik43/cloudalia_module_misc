@@ -38,7 +38,6 @@ class respartner(models.Model):
             if record.escola_id != False and float_is_zero(record.credit_limit, precision_digits=2):
                 record.credit_limit = 600.0
 
-    @api.depends('rel_user_id')
     def _compute_escola(self):
         for record in self:
             if record.rel_user_id.escola != False:
@@ -106,7 +105,7 @@ class respartner(models.Model):
         for record in self:
             record.vat = record.rel_user_id.vat
 
-    @api.depends('rel_user_id')
+    @api.depends('state_id')
     def _compute_country_id(self):
         print(self.state_id.country_id)
         self.country_id = self.state_id.country_id
