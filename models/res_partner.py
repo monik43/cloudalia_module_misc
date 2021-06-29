@@ -26,6 +26,7 @@ class respartner(models.Model):
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
 
+    @api.onchange('id')
     def _compute_usuari(self):
         for record in self:
             if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
@@ -34,7 +35,7 @@ class respartner(models.Model):
 
     def _compute_credit(self):
         for record in self:
-            if record.escola_id != False and float_is_zero(record.credit_limit, precision_digits = 2):
+            if record.escola_id != False and float_is_zero(record.credit_limit, precision_digits=2):
                 record.credit_limit = 600.0
 
     @api.depends('rel_user_id')
@@ -108,6 +109,6 @@ class respartner(models.Model):
     @api.depends('rel_user_id')
     def _compute_country_id(self):
         for record in self:
-            record.country_id = record.rel_user_id.country_id
+            record.country_id = record.state_id.country_id
 
     """'cmontserrat', 'eminguella', 'jpelegri'"""
