@@ -108,4 +108,4 @@ class respartner(models.Model):
     @api.depends('rel_user_id')
     def _compute_country_id(self):
         for record in self:
-            record.country_id = record.rel_user_id.state_id
+            record.country_id = record.rel_user_id.state_id.country_id
