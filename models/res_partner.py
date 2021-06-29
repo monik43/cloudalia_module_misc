@@ -21,7 +21,7 @@ class respartner(models.Model):
     state_id = fields.Many2one(
         "res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
     country_id = fields.Many2one(
-        "res.country", string='Country', compute="_compute_country_id", store=True)
+        "res.country", string='Country', compute="_compute_country_id")#, store=True
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
@@ -108,5 +108,4 @@ class respartner(models.Model):
     @api.depends('rel_user_id')
     def _compute_country_id(self):
         for record in self:
-            print(record.rel_user_id.state_id.country_id)
             record.country_id = record.rel_user_id.state_id
