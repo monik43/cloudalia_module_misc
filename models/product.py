@@ -3,7 +3,7 @@ from odoo import models, fields, api, _
 from odoo.tools import float_is_zero
 
 
-class respartner(models.Model):
+class productproduct(models.Model):
     _inherit = 'product.product'
 
     @api.multi
