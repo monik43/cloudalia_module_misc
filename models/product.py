@@ -4,7 +4,7 @@ from odoo.tools import float_is_zero
 
 
 class productproduct(models.Model):
-    _inherit = 'product.template'
+    _inherit = 'product.product'
 
     @api.multi
     def print(self):
