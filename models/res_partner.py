@@ -5,6 +5,8 @@ from odoo.tools import float_is_zero
 
 class respartner(models.Model):
     _inherit = 'res.partner'
+
+    centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
     escola = fields.Char()
     rel_user_id = fields.Many2one("res.users", compute="_compute_usuari")
     credit_limit = fields.Float(
@@ -114,3 +116,34 @@ class respartner(models.Model):
     def _compute_country_id(self):
         for record in self:
             record.country_id = record.rel_user_id.state_id.country_id
+
+    def _compute_centro_educativo(self):
+        for record in self:
+
+            if record.escola_id == '2':#cmontserrat
+                record.centro_educativo = record.env['res.partner'].browse(16923)
+
+            if record.escola_id == '3':#eminguella
+                record.centro_educativo = record.env['res.partner'].browse(12794)
+
+            if record.escola_id == '4':#jpelegri
+                record.centro_educativo = record.env['res.partner'].browse(12359)
+
+            if record.escola_id == '5':#lestonnac
+                record.centro_educativo = record.env['res.partner'].browse(9583)
+
+            if record.escola_id == '6':#inscassaselva
+                record.centro_educativo = record.env['res.partner'].browse(19874)
+
+            if record.escola_id == '7':#stesteve
+                record.centro_educativo = record.env['res.partner'].browse(14984)
+
+            if record.escola_id == '8':#bitacola
+                record.centro_educativo = record.env['res.partner'].browse(9737)
+
+            if record.escola_id == '9':#gresol
+                record.centro_educativo = record.env['res.partner'].browse(13114)
+
+            if record.escola_id == '10':#fcambo
+                record.centro_educativo = record.env['res.partner'].browse(9839)
+
