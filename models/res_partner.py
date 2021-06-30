@@ -43,29 +43,35 @@ class respartner(models.Model):
             if record.rel_user_id.escola != False:
                 record.escola_id = record.rel_user_id.escola
 
-            if record.escola_id == '1':
+            if record.escola_id == '1':#test
                 record.write({'product_ids': [(6, 0, [304])]})
 
-            if record.escola_id == '2':
+            if record.escola_id == '2':#cmontserrat
                 record.write({'product_ids': [(6, 0, [3660, 3661])]})
 
-            if record.escola_id == '3':
+            if record.escola_id == '3':#eminguella
                 record.write({'product_ids': [(6, 0, [3664])]})
 
-            if record.escola_id == '4':
+            if record.escola_id == '4':#jpelegri
                 record.write({'product_ids': [(6, 0, [3665])]})
 
-            if record.escola_id == '5':
+            if record.escola_id == '5':#lestonnac
                 record.write({'product_ids': [(6, 0, [3671])]})
 
-            if record.escola_id == '6':
+            if record.escola_id == '6':#inscassaselva
                 record.write({'product_ids': [(6, 0, [3676, 3677])]})
 
-            if record.escola_id == '7':
+            if record.escola_id == '7':#stesteve
                 record.write({'product_ids': [(6, 0, [3683])]})
 
-            if record.escola_id == '8':
-                record.write({'product_ids': [(6, 0, [3683])]})
+            if record.escola_id == '8':#bitacola
+                record.write({'product_ids': [(6, 0, [3684])]})
+
+            if record.escola_id == '9':#gresol
+                record.write({'product_ids': [(6, 0, [3695,3696])]})
+
+            if record.escola_id == '10':#fcambo
+                record.write({'product_ids': [(6, 0, [3698])]})
 
             """if record.escola == 'cmontserrat':
                     record.write({'product_ids':[(6, 0, [IDS AQUI])]})"""

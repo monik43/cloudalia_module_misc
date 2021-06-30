@@ -20,9 +20,9 @@ class AuthSignupHome(AuthSignupHome):
         qcontext = self.get_auth_signup_qcontext()
 
         if "es" in kw:
-            escoles = {'holi': 1, 'cmontserrat': 2,
-                       'eminguella': 3, 'jpelegri': 4, 'lestonnac': 5, 'inscassaselva': 6, 'stesteve': 7, 'bitacola': 8}
-            
+            escoles = {'holi': 1, 'cmontserrat': 2, 'eminguella': 3, 'jpelegri': 4, 'lestonnac': 5,
+                       'inscassaselva': 6, 'stesteve': 7, 'bitacola': 8, 'gresol': 9, 'fcambo': 10}
+
             for school in escoles:
                 if str(kw["es"]).find(str(escoles[school])) != -1:
                     escola = escoles[school]
@@ -113,7 +113,7 @@ class AuthSignupHome(AuthSignupHome):
         if qcontext.get('mobile'):
             values = {key: qcontext.get(key)
                       for key in ('login', 'name', 'password', 'mobile', 'vat', 'street', 'street2', 'zip', 'city', 'state_id', 'country_id', 'escola')}
-            
+
             values.update({'escola': kw[0]})
             if not values:
                 raise UserError(_("The form was not properly filled in."))
