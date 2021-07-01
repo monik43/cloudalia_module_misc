@@ -20,7 +20,6 @@ class resusers(models.Model):
     street2 = fields.Char()
     zip = fields.Char()
     city = fields.Char()
-    state_id = fields.Many2one(
-        "res.country.state", string='State')
-    country_id = fields.Many2one('res.country', string='Country')
+    state_id = fields.Char()
+    country_id = fields.Char()
     escola = fields.Char()

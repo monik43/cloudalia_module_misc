@@ -66,42 +66,42 @@ class respartner(models.Model):
 
     def _compute_mobile(self):
         for record in self:
-            if record.rel_user_id.escola != False:
+            if record.rel_user_id.escola != False and record.rel_user_id.mobile != False:
                 record.mobile = record.rel_user_id.mobile
 
     def _compute_street(self):
         for record in self:
-            if record.rel_user_id.escola != False:
+            if record.rel_user_id.escola != False and record.rel_user_id.street != False:
                 record.street = record.rel_user_id.street
 
     def _compute_street2(self):
         for record in self:
-            if record.rel_user_id.escola != False:
+            if record.rel_user_id.escola != False and record.rel_user_id.street2 != False:
                 record.street2 = record.rel_user_id.street2
 
     def _compute_zip(self):
         for record in self:
-            if record.rel_user_id.escola != False:
+            if record.rel_user_id.escola != False and record.rel_user_id.zip != False:
                 record.zip = record.rel_user_id.zip
 
     def _compute_city(self):
         for record in self:
-            if record.rel_user_id.escola != False:
+            if record.rel_user_id.escola != False and record.rel_user_id.city != False:
                 record.city = record.rel_user_id.city
 
     def _compute_state_id(self):
         for record in self:
-            if record.rel_user_id.escola != False:
+            if record.rel_user_id.escola != False and record.rel_user_id.state_id != False:
                 record.state_id = record.rel_user_id.state_id
 
     def _compute_vat(self):
         for record in self:
-            if record.rel_user_id.escola != False:
+            if record.rel_user_id.escola != False and record.rel_user_id.vat != False:
                 record.vat = record.rel_user_id.vat
 
     def _compute_country_id(self):
         for record in self:
-            if record.rel_user_id.escola != False:
+            if record.rel_user_id.escola != False and record.rel_user_id.state_id.country_id != False:
                 record.country_id = record.rel_user_id.state_id.country_id
 
     def _compute_centro_educativo(self):
