@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
 from odoo.tools import float_is_zero
-from . import switch
+from switch import switch
 
 
 class respartner(models.Model):
