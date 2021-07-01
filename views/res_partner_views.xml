@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//div[2]/div[1]" position="after">
                     <div class="o_row">
-                        <field name="centro_educativo" />
+                        <field name="centro_educativo" attrs="{'invisible': [('x_centro_educativo', '=', True)]}"/>
                     </div>
                 </xpath>
                 <xpath expr="//field[@name='lang']" position="after">
