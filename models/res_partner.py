@@ -7,14 +7,14 @@ from .switch import switch
 class respartner(models.Model):
     _inherit = 'res.partner'
 
-    centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
+    centro_educativo = fields.Many2one(
+        "res.partner", compute="_compute_centro_educativo")
     escola = fields.Char()
     rel_user_id = fields.Many2one("res.users", compute="_compute_usuari")
     credit_limit = fields.Float(
         string='Credit Limit', compute="_compute_credit")
     productes_ids = fields.Many2many('product.template', 'productes_template_id',
                                      'res_partner_id', 'product_partner_res', string='Productes')
-
     escola_id = fields.Char(string="Escola", compute="_compute_escola")
     mobile = fields.Char(compute="_compute_mobile")
     street = fields.Char(compute="_compute_street")
@@ -29,12 +29,10 @@ class respartner(models.Model):
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
 
-    @api.onchange('id')
     def _compute_usuari(self):
         for record in self:
-            if record.env['res.users'].search([('partner_id', '=', record.id)]).escola != False:
-                record.rel_user_id = record.env['res.users'].search(
-                    [('partner_id', '=', record.id)])
+            if record.env['res.users'].browse(record.id).escola != False:
+                record.rel_user_id = record.env['res.users'].browse(record.id)
 
     def _compute_credit(self):
         for record in self:
@@ -47,86 +45,93 @@ class respartner(models.Model):
                 record.escola_id = record.rel_user_id.escola
 
                 with switch(record.escola_id) as e:
-                    if e.case('2'):#cmontserrat
+                    if e.case('2'):  # cmontserrat
                         record.write({'product_ids': [(6, 0, [3660, 3661])]})
-                    if e.case('3'):#eminguella
+                    if e.case('3'):  # eminguella
                         record.write({'product_ids': [(6, 0, [3664])]})
-                    if e.case('4'):#jpelegri
+                    if e.case('4'):  # jpelegri
                         record.write({'product_ids': [(6, 0, [3665])]})
-                    if e.case('5'):#lestonnac
+                    if e.case('5'):  # lestonnac
                         record.write({'product_ids': [(6, 0, [3671])]})
-                    if e.case('6'):#inscassaselva
+                    if e.case('6'):  # inscassaselva
                         record.write({'product_ids': [(6, 0, [3676, 3677])]})
-                    if e.case('7'):#stesteve
+                    if e.case('7'):  # stesteve
                         record.write({'product_ids': [(6, 0, [3683])]})
-                    if e.case('8'):#bitacola
+                    if e.case('8'):  # bitacola
                         record.write({'product_ids': [(6, 0, [3684])]})
-                    if e.case('9'):#gresol
-                        record.write({'product_ids': [(6, 0, [3695,3696])]})
-                    if e.case('10'):#fcambo
-                        record.write({'product_ids': [(6, 0, [3695,3696])]})
+                    if e.case('9'):  # gresol
+                        record.write({'product_ids': [(6, 0, [3695, 3696])]})
+                    if e.case('10'):  # fcambo
+                        record.write({'product_ids': [(6, 0, [3695, 3696])]})
 
-    @api.depends('rel_user_id')
     def _compute_mobile(self):
         for record in self:
-            record.mobile = record.rel_user_id.mobile
+            if record.rel_user_id.escola != False:
+                record.mobile = record.rel_user_id.mobile
 
-    @api.depends('rel_user_id')
     def _compute_street(self):
         for record in self:
-            record.street = record.rel_user_id.street
+            if record.rel_user_id.escola != False:
+                record.street = record.rel_user_id.street
 
-    @api.depends('rel_user_id')
     def _compute_street2(self):
         for record in self:
-            record.street2 = record.rel_user_id.street2
+            if record.rel_user_id.escola != False:
+                record.street2 = record.rel_user_id.street2
 
-    @api.depends('rel_user_id')
     def _compute_zip(self):
         for record in self:
-            record.zip = record.rel_user_id.zip
+            if record.rel_user_id.escola != False:
+                record.zip = record.rel_user_id.zip
 
-    @api.depends('rel_user_id')
     def _compute_city(self):
         for record in self:
-            record.city = record.rel_user_id.city
+            if record.rel_user_id.escola != False:
+                record.city = record.rel_user_id.city
 
-    @api.depends('rel_user_id')
     def _compute_state_id(self):
         for record in self:
-            record.state_id = record.rel_user_id.state_id
+            if record.rel_user_id.escola != False:
+                record.state_id = record.rel_user_id.state_id
 
-    @api.depends('rel_user_id')
     def _compute_vat(self):
         for record in self:
-            record.vat = record.rel_user_id.vat
+            if record.rel_user_id.escola != False:
+                record.vat = record.rel_user_id.vat
 
     def _compute_country_id(self):
         for record in self:
-            record.country_id = record.rel_user_id.state_id.country_id
+            if record.rel_user_id.escola != False:
+                record.country_id = record.rel_user_id.state_id.country_id
 
     def _compute_centro_educativo(self):
         for record in self:
-            if record.escola_id:
+            if record.rel_user_id.escola != False:
                 with switch(record.escola_id) as e:
-                    if e.case('2'):#cmontserrat
-                        record.centro_educativo = record.env['res.partner'].browse(16923)
-                    if e.case('3'):#eminguella
-                        record.centro_educativo = record.env['res.partner'].browse(12794)
-                    if e.case('4'):#jpelegri
-                        record.centro_educativo = record.env['res.partner'].browse(12359)
-                    if e.case('5'):#lestonnac
-                        record.centro_educativo = record.env['res.partner'].browse(9583)
-                    if e.case('6'):#inscassaselva
-                        record.centro_educativo = record.env['res.partner'].browse(19874)
-                    if e.case('7'):#stesteve
-                        record.centro_educativo = record.env['res.partner'].browse(14984)
-                    if e.case('8'):#bitacola
-                        record.centro_educativo = record.env['res.partner'].browse(9737)
-                    if e.case('9'):#gresol
-                        record.centro_educativo = record.env['res.partner'].browse(13114)
-                    if e.case('10'):#fcambo
-                        record.centro_educativo = record.env['res.partner'].browse(9839)
-            
-
-
+                    if e.case('2'):  # cmontserrat
+                        record.centro_educativo = record.env['res.partner'].browse(
+                            16923)
+                    if e.case('3'):  # eminguella
+                        record.centro_educativo = record.env['res.partner'].browse(
+                            12794)
+                    if e.case('4'):  # jpelegri
+                        record.centro_educativo = record.env['res.partner'].browse(
+                            12359)
+                    if e.case('5'):  # lestonnac
+                        record.centro_educativo = record.env['res.partner'].browse(
+                            9583)
+                    if e.case('6'):  # inscassaselva
+                        record.centro_educativo = record.env['res.partner'].browse(
+                            19874)
+                    if e.case('7'):  # stesteve
+                        record.centro_educativo = record.env['res.partner'].browse(
+                            14984)
+                    if e.case('8'):  # bitacola
+                        record.centro_educativo = record.env['res.partner'].browse(
+                            9737)
+                    if e.case('9'):  # gresol
+                        record.centro_educativo = record.env['res.partner'].browse(
+                            13114)
+                    if e.case('10'):  # fcambo
+                        record.centro_educativo = record.env['res.partner'].browse(
+                            9839)
