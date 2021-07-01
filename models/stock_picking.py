@@ -12,27 +12,22 @@ class stockpicking(models.Model):
 
     @api.depends('purchase_id')
     def _get_ship_order(self):
-
         for record in self:
-
             if record.purchase_id.ship_order:
-
                 record.purchase_ship_order = record.purchase_id.ship_order
 
-    @api.multi
+    """@api.multi
     def fill_all_product_quantities(self):
 
         for o in self.move_lines:
-            """
-            if product.quantity_done < product.product_uom_qty:
-                product.quantity_done = product.product_uom_qty
-            """
+            #if product.quantity_done < product.product_uom_qty:
+            #    product.quantity_done = product.product_uom_qty
             # print("" + str(o.product_id))
             print("#" * 25)
             print("" + str(o.quantity_done))
-            print("#" * 25)
+            print("#" * 25)"""
 
-    @api.multi
+    """@api.multi
     def button_validate(self):
         self.ensure_one()
         if not self.move_lines and not self.move_line_ids:
@@ -124,3 +119,4 @@ class stockpicking(models.Model):
             return self.action_generate_backorder_wizard()
         self.action_done()
         return
+    """
