@@ -47,23 +47,23 @@ class respartner(models.Model):
                 record.escola_id = record.rel_user_id.escola
 
                 with switch.switch(record.escola_id) as e:
-                    if e.case(2):#cmontserrat
+                    if e.case('2'):#cmontserrat
                         record.write({'product_ids': [(6, 0, [3660, 3661])]})
-                    if e.case(3):#eminguella
+                    if e.case('3'):#eminguella
                         record.write({'product_ids': [(6, 0, [3664])]})
-                    if e.case(4):#jpelegri
+                    if e.case('4'):#jpelegri
                         record.write({'product_ids': [(6, 0, [3665])]})
-                    if e.case(5):#lestonnac
+                    if e.case('5'):#lestonnac
                         record.write({'product_ids': [(6, 0, [3671])]})
-                    if e.case(6):#inscassaselva
+                    if e.case('6'):#inscassaselva
                         record.write({'product_ids': [(6, 0, [3676, 3677])]})
-                    if e.case(7):#stesteve
+                    if e.case('7'):#stesteve
                         record.write({'product_ids': [(6, 0, [3683])]})
-                    if e.case(8):#bitacola
+                    if e.case('8'):#bitacola
                         record.write({'product_ids': [(6, 0, [3684])]})
-                    if e.case(9):#gresol
+                    if e.case('9'):#gresol
                         record.write({'product_ids': [(6, 0, [3695,3696])]})
-                    if e.case(10):#fcambo
+                    if e.case('10'):#fcambo
                         record.write({'product_ids': [(6, 0, [3695,3696])]})
 
     @api.depends('rel_user_id')
@@ -109,23 +109,23 @@ class respartner(models.Model):
         for record in self:
             if record.escola_id:
                 with switch.switch(record.escola_id) as e:
-                    if e.case(2):#cmontserrat
+                    if e.case('2'):#cmontserrat
                         record.centro_educativo = record.env['res.partner'].browse(16923)
-                    if e.case(3):#eminguella
+                    if e.case('3'):#eminguella
                         record.centro_educativo = record.env['res.partner'].browse(12794)
-                    if e.case(4):#jpelegri
+                    if e.case('4'):#jpelegri
                         record.centro_educativo = record.env['res.partner'].browse(12359)
-                    if e.case(5):#lestonnac
+                    if e.case('5'):#lestonnac
                         record.centro_educativo = record.env['res.partner'].browse(9583)
-                    if e.case(6):#inscassaselva
+                    if e.case('6'):#inscassaselva
                         record.centro_educativo = record.env['res.partner'].browse(19874)
-                    if e.case(7):#stesteve
+                    if e.case('7'):#stesteve
                         record.centro_educativo = record.env['res.partner'].browse(14984)
-                    if e.case(8):#bitacola
+                    if e.case('8'):#bitacola
                         record.centro_educativo = record.env['res.partner'].browse(9737)
-                    if e.case(9):#gresol
+                    if e.case('9'):#gresol
                         record.centro_educativo = record.env['res.partner'].browse(13114)
-                    if e.case(10):#fcambo
+                    if e.case('10'):#fcambo
                         record.centro_educativo = record.env['res.partner'].browse(9839)
             
 
