@@ -45,8 +45,8 @@ class respartner(models.Model):
         for record in self:
             if record.rel_user_id.escola != False:
                 record.escola_id = record.rel_user_id.escola
-                
-                with switch(record.escola_id) as e:
+                escola = record.escola_id
+                with switch(escola) as e:
                     if e.case(2):#cmontserrat
                         record.write({'product_ids': [(6, 0, [3660, 3661])]})
                     if e.case(3):#eminguella
@@ -108,7 +108,8 @@ class respartner(models.Model):
     def _compute_centro_educativo(self):
         for record in self:
             if record.escola_id:
-                with switch(record.escola_id) as e:
+                escola = record.escola_id
+                with switch(escola) as e:
                     if e.case(2):#cmontserrat
                         record.centro_educativo = record.env['res.partner'].browse(16923)
                     if e.case(3):#eminguella
