@@ -17,9 +17,9 @@
             <field name="model">stock.picking</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//header" position="inside">
+                <!--<xpath expr="//header" position="inside">
                     <button name="fill_all_product_quantities" string="Recepcionar todo" type="object"/>
-                </xpath>
+                </xpath>-->
                 <xpath expr="//button[@name='action_show_details']" position="attributes">
                     <attribute name="icon"></attribute>
                     <attribute name="style">margin-right: -33px !important;</attribute>
