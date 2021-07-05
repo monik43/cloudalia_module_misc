@@ -4,11 +4,12 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
     var core = require('web.core');
     var field_registry = require('web.field_registry');
     var field_utils = require('web.field_utils');
+    var account_payment = require('account.payment');
 
     var QWeb = core.qweb;
 
 
-    var ShowPaymentLineWidget = AbstractField.extend({
+    account_payment.ShowPaymentLineWidget.include({
         events: _.extend({
             'click .outstanding_credit_assign': '_onOutstandingCreditAssign',
         }, AbstractField.prototype.events),
