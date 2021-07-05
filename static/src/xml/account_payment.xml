@@ -28,8 +28,8 @@
                             <i class="o_field_widget text-right o_payment_label" >Paid on <t t-esc="line.date"> </t></i>
                         </td>
                     </t>
-                        <td style="text-align:right;color:red;">  
-                            <span class="oe_form_field oe_form_field_float oe_form_field_monetary" style="margin-left: -10px;">
+                        <td style="text-align:right;">  
+                            <span class="oe_form_field oe_form_field_float oe_form_field_monetary" style="margin-left: -10px;color:red;">
                                 <t t-if="line.position === 'before'">
                                     <t t-esc="line.currency"/>
                                 </t>
