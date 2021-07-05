@@ -8,40 +8,21 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
 
     var QWeb = core.qweb;
 
-
+    console.log('test cloud payment widget a');
     account_payment.ShowPaymentLineWidget.include({
         events: _.extend({
             'click .outstanding_credit_assign': '_onOutstandingCreditAssign',
         }, AbstractField.prototype.events),
         supportedFieldTypes: ['char'],
-
-        //--------------------------------------------------------------------------
-        // Public
-        //--------------------------------------------------------------------------
-
-        /**
-         * @override
-         * @returns {boolean}
-         */
-        isSet: function () {
-            return true;
-        },
-
-        //--------------------------------------------------------------------------
-        // Private
-        //--------------------------------------------------------------------------
-
-        /**
-         * @private
-         * @override
-         */
+        
         _render: function () {
+            this._super.apply(this, arguments);
             var self = this;
             var info = JSON.parse(this.value);
             if (!info) {
                 this.$el.html('');
                 return;
-            }
+            }  console.log('test cloud payment widget b');
             _.each(info.content, function (k, v) {
                 k.index = v;
                 k.amount = field_utils.format.float(k.amount, {
@@ -53,7 +34,7 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
                     }));
                 }
             });
-            console.log('test cloud payment widget');
+            console.log('test cloud payment widget c');
             this.$el.html(QWeb.render('ShowPaymentInfoCloud', {
                 lines: info.content,
                 outstanding: info.outstanding,
