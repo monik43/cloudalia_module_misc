@@ -13,7 +13,10 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
         events: _.extend({
             'click .outstanding_credit_assign': '_onOutstandingCreditAssign',
         }, AbstractField.prototype.events),
-
+        supportedFieldTypes: ['char'],
+        isSet: function() {
+            return true;
+        },
         _render: function () {
             this._super.apply(this, arguments);
             var self = this;
@@ -73,15 +76,6 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
             });
         },
 
-        //--------------------------------------------------------------------------
-        // Handlers
-        //--------------------------------------------------------------------------
-
-        /**
-         * @private
-         * @override
-         * @param {MouseEvent} event
-         */
         _onOpenPayment: function (event) {
             var invoiceId = parseInt($(event.target).attr('invoice-id'));
             var invoiceViewId = parseInt($(event.target).attr('invoice-view-id'));
@@ -118,11 +112,6 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
                 });
             }
         },
-        /**
-         * @private
-         * @override
-         * @param {MouseEvent} event
-         */
         _onOutstandingCreditAssign: function (event) {
             var self = this;
             var id = $(event.target).data('id') || false;
@@ -134,11 +123,6 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
                 self.trigger_up('reload');
             });
         },
-        /**
-         * @private
-         * @override
-         * @param {MouseEvent} event
-         */
         _onRemoveMoveReconcile: function (event) {
             var self = this;
             var paymentId = parseInt($(event.target).attr('payment-id'));
@@ -155,11 +139,4 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
             }
         },
     });
-
-    field_registry.add('payment', ShowPaymentLineWidget);
-
-    return {
-        ShowPaymentLineWidget: ShowPaymentLineWidget
-    };
-
 });
