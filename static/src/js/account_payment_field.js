@@ -1,4 +1,4 @@
-odoo.define('account_payment_widget_amount.payment', function (require) {
+odoo.define('cloudalia_module_misc.payment', function (require) {
     "use strict";
     var AbstractField = require('web.AbstractField');
     var core = require('web.core');
