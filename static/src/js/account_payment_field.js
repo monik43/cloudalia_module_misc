@@ -8,13 +8,7 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
 
     var QWeb = core.qweb;
 
-    console.log('test cloud payment widget a');
     account_payment.ShowPaymentLineWidget.include({
-        events: _.extend({
-            'click .outstanding_credit_assign': '_onOutstandingCreditAssign',
-        }, AbstractField.prototype.events),
-        supportedFieldTypes: ['char'],
-        
         _render: function () {
             this._super.apply(this, arguments);
             var self = this;
@@ -73,88 +67,6 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
                 };
                 $(k).popover(options);
             });
-        },
-
-        //--------------------------------------------------------------------------
-        // Handlers
-        //--------------------------------------------------------------------------
-
-        /**
-         * @private
-         * @override
-         * @param {MouseEvent} event
-         */
-        _onOpenPayment: function (event) {
-            var invoiceId = parseInt($(event.target).attr('invoice-id'));
-            var invoiceViewId = parseInt($(event.target).attr('invoice-view-id'));
-            var paymentId = parseInt($(event.target).attr('payment-id'));
-            var moveId = parseInt($(event.target).attr('move-id'));
-            var res_model;
-            var id;
-            var views = [
-                [false, 'form']
-            ];
-            if (invoiceId !== undefined && !isNaN(invoiceId)) {
-                res_model = "account.invoice";
-                id = invoiceId;
-                if (invoiceViewId !== undefined && !isNaN(invoiceViewId)) {
-                    views = [
-                        [invoiceViewId, 'form']
-                    ];
-                }
-            } else if (paymentId !== undefined && !isNaN(paymentId)) {
-                res_model = "account.payment";
-                id = paymentId;
-            } else if (moveId !== undefined && !isNaN(moveId)) {
-                res_model = "account.move";
-                id = moveId;
-            }
-            //Open form view of account.move with id = move_id
-            if (res_model && id) {
-                this.do_action({
-                    type: 'ir.actions.act_window',
-                    res_model: res_model,
-                    res_id: id,
-                    views: views,
-                    target: 'current'
-                });
-            }
-        },
-        /**
-         * @private
-         * @override
-         * @param {MouseEvent} event
-         */
-        _onOutstandingCreditAssign: function (event) {
-            var self = this;
-            var id = $(event.target).data('id') || false;
-            this._rpc({
-                model: 'account.invoice',
-                method: 'assign_outstanding_credit',
-                args: [JSON.parse(this.value).invoice_id, id],
-            }).then(function () {
-                self.trigger_up('reload');
-            });
-        },
-        /**
-         * @private
-         * @override
-         * @param {MouseEvent} event
-         */
-        _onRemoveMoveReconcile: function (event) {
-            var self = this;
-            var paymentId = parseInt($(event.target).attr('payment-id'));
-            if (paymentId !== undefined && !isNaN(paymentId)) {
-                this._rpc({
-                    model: 'account.move.line',
-                    method: 'remove_move_reconcile',
-                    args: [paymentId, {
-                        'invoice_id': this.res_id
-                    }]
-                }).then(function () {
-                    self.trigger_up('reload');
-                });
-            }
         },
     });
 });
