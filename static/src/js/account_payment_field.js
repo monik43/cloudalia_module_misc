@@ -13,29 +13,9 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
         events: _.extend({
             'click .outstanding_credit_assign': '_onOutstandingCreditAssign',
         }, AbstractField.prototype.events),
-        supportedFieldTypes: ['char'],
 
-        //--------------------------------------------------------------------------
-        // Public
-        //--------------------------------------------------------------------------
-
-        /**
-         * @override
-         * @returns {boolean}
-         */
-        isSet: function () {
-            return true;
-        },
-
-        //--------------------------------------------------------------------------
-        // Private
-        //--------------------------------------------------------------------------
-
-        /**
-         * @private
-         * @override
-         */
         _render: function () {
+            this._super.apply(this, arguments);
             var self = this;
             var info = JSON.parse(this.value);
             if (!info) {
