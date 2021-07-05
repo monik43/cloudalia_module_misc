@@ -14,7 +14,7 @@
 
     'category': 'Technical Settings',
 
-    'version': '11.0.0.1',
+    'version': '11.0.0.4',
 
     'depends': ['base', 'stock', 'cloudedu_mods', 'auth_signup', 'website', 'account'],
 
@@ -24,7 +24,11 @@
         'views/res_partner_views.xml',
         'views/product_views.xml',
         'views/account_invoice_views.xml',
+        'views/account.xml'
         'views/stock_views.xml',
         #'views/views.xml',
+    ],
+    'qweb': [
+        "static/src/xml/account_payment.xml",
     ],
 }

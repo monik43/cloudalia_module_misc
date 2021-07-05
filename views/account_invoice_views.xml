@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
         <record id="cloud_invoice_supplier_form" model="ir.ui.view">
