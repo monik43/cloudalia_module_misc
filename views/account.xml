@@ -3,7 +3,7 @@
 <odoo>
 
     <data>
-        <template id="account_payment_ext" name="account assets" inherit_id="account.assets_backend">
+        <template id="account_payment_ext" name="account_ext_cloud" inherit_id="account.assets_backend">
             <xpath expr="." position="inside">
                 <script type="text/javascript" src="/cloudalia_module_misc/static/src/js/account_payment_field.js"></script>
             </xpath>
