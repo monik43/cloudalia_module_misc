@@ -11,15 +11,15 @@ class respartner(models.Model):
     escola = fields.Char()
 
 
-    credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
-    escola_id = fields.Char(string="Escola", compute="_compute_escola")
-    mobile = fields.Char(compute="_compute_mobile")
+    #credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
+    #escola_id = fields.Char(string="Escola", compute="_compute_escola")
+    #mobile = fields.Char(compute="_compute_mobile")
     #street = fields.Char(compute="_compute_street")
     #street2 = fields.Char(compute="_compute_street2")
     #zip = fields.Char(change_default=True, compute="_compute_zip")
     #city = fields.Char(compute="_compute_city")
     #state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
-    vat = fields.Char(string='TIN', help="Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.", compute="_compute_vat")
+    #vat = fields.Char(string='TIN', help="Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.", compute="_compute_vat")
 
     def _compute_credit(self):
         for record in self:
