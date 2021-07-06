@@ -33,7 +33,7 @@ class respartner(models.Model):
 
     def _compute_escola(self):
         for record in self:
-            rel_user = record.env['res.users'].search('partner_id', '=', record)
+            rel_user = record.env['res.users'].search('partner_id', '=', record.id)
             if rel_user and rel_user.escola != False:
                 record.escola_id = rel_user.escola
 
