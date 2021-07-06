@@ -18,7 +18,7 @@ class respartner(models.Model):
     #street2 = fields.Char(compute="_compute_street2")
     #zip = fields.Char(change_default=True, compute="_compute_zip")
     #city = fields.Char(compute="_compute_city")
-    state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
+    #state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
     vat = fields.Char(string='TIN', help="Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.", compute="_compute_vat")
 
     def _compute_credit(self):
