@@ -15,7 +15,7 @@ class respartner(models.Model):
     productes_ids = fields.Many2many('product.template', 'productes_template_id','res_partner_id', 'product_partner_res', string='Productes')
     escola_id = fields.Char(string="Escola", compute="_compute_escola")
     mobile = fields.Char(compute="_compute_mobile")
-    street = fields.Char(compute="_compute_street")
+    #street = fields.Char(compute="_compute_street")
     #street2 = fields.Char(compute="_compute_street2")
     #zip = fields.Char(change_default=True, compute="_compute_zip")
     #city = fields.Char(compute="_compute_city")
