@@ -110,23 +110,23 @@ class respartner(models.Model):
 
                 with switch(record.escola_id) as e:
                     if e.case('2',True):  # cmontserrat
-                        record.centro_educativo = record.env['res.users'].browse(16923)
+                        record.centro_educativo = record.env['res.users'].browse(16923).id
                     if e.case('3',True):  # eminguella
-                        record.centro_educativo = record.env['res.users'].browse(12794)
+                        record.centro_educativo = record.env['res.users'].browse(12794).id
                     if e.case('4',True):  # jpelegri
-                        record.centro_educativo = record.env['res.users'].browse(12359)
+                        record.centro_educativo = record.env['res.users'].browse(12359).id
                     if e.case('5',True):  # lestonnac
-                        record.centro_educativo = record.env['res.users'].browse(9583)
+                        record.centro_educativo = record.env['res.users'].browse(9583).id
                     if e.case('6',True):  # inscassaselva
-                        record.centro_educativo = record.env['res.users'].browse(19874)
+                        record.centro_educativo = record.env['res.users'].browse(19874).id
                     if e.case('7',True):  # stesteve
-                        record.centro_educativo = record.env['res.users'].browse(14984)
+                        record.centro_educativo = record.env['res.users'].browse(14984).id
                     if e.case('8',True):  # bitacola
-                        record.centro_educativo = record.env['res.users'].browse(9737)
+                        record.centro_educativo = record.env['res.users'].browse(9737).id
                     if e.case('9',True):  # gresol
-                        record.centro_educativo = record.env['res.users'].browse(13114)
+                        record.centro_educativo = record.env['res.users'].browse(13114).id
                     if e.case('10',True):  # fcambo
-                        record.centro_educativo = record.env['res.users'].browse(9839)
+                        record.centro_educativo = record.env['res.users'].browse(9839).id
 
 class switch:
 
