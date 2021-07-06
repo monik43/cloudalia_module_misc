@@ -28,8 +28,7 @@ class respartner(models.Model):
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
-    centro_educativo = fields.Many2one(
-        "res.partner", compute="_compute_centro_educativo")
+    #centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
 
     def _compute_credit(self):
         for record in self:
@@ -110,7 +109,7 @@ class respartner(models.Model):
             if rel_user and rel_user.escola != False and rel_user.country_id != False:
                 record.country_id = rel_user.state_id.country_id
 
-    def _compute_centro_educativo(self):
+    """def _compute_centro_educativo(self):
         for record in self:
             rel_user = record.env['res.users'].browse(record.id)
             if record.escola_id != False and rel_user.escola != False:
@@ -141,4 +140,4 @@ class respartner(models.Model):
                             13114)
                     if e.case('10'):  # fcambo
                         record.centro_educativo = record.env['res.partner'].browse(
-                            9839)
+                            9839)"""
