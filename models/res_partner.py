@@ -20,6 +20,7 @@ class respartner(models.Model):
     city = fields.Char(compute="_compute_city")
     state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
     vat = fields.Char(string='TIN', help="Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.", compute="_compute_vat")
+    centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
 
     @api.multi
     def print_nfo(self):
@@ -101,7 +102,31 @@ class respartner(models.Model):
             rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
             if rel_user and rel_user.escola != False and rel_user.vat != False:
                 record.vat = rel_user.vat
+    
+    def _compute_centro_educativo(self):
+        for record in self:
+            rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
+            if rel_user and rel_user.escola != False:
 
+                with switch(record.escola_id) as e:
+                    if e.case('2',True):  # cmontserrat
+                        record.centro_educativo = record.env['res.users'].browse(16923)
+                    if e.case('3',True):  # eminguella
+                        record.centro_educativo = record.env['res.users'].browse(12794)
+                    if e.case('4',True):  # jpelegri
+                        record.centro_educativo = record.env['res.users'].browse(12359)
+                    if e.case('5',True):  # lestonnac
+                        record.centro_educativo = record.env['res.users'].browse(9583)
+                    if e.case('6',True):  # inscassaselva
+                        record.centro_educativo = record.env['res.users'].browse(19874)
+                    if e.case('7',True):  # stesteve
+                        record.centro_educativo = record.env['res.users'].browse(14984)
+                    if e.case('8',True):  # bitacola
+                        record.centro_educativo = record.env['res.users'].browse(9737)
+                    if e.case('9',True):  # gresol
+                        record.centro_educativo = record.env['res.users'].browse(13114)
+                    if e.case('10',True):  # fcambo
+                        record.centro_educativo = record.env['res.users'].browse(9839)
 
 class switch:
 
