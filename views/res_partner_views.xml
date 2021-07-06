@@ -16,6 +16,16 @@
                 </xpath>
             </field>
         </record>-->
+        <record id="res_partner_add_escola_field" model="ir.ui.view">
+            <field name="name">cloud_base.view_partner_form_botiga</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="print_nfo" string="Print test" type="object"/>
+                </xpath>
+            </field>
+        </record>
         <!--
         <record id="res_partner_add_monetary_invoiced_field" model="ir.ui.view">
             <field name="name">cloud_base.view_partner_form_botiga</field>
