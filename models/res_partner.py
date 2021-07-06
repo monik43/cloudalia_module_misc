@@ -12,7 +12,7 @@ class respartner(models.Model):
 
 
     #credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
-    escola_id = fields.Char(string="Escola", compute="_compute_escola")
+    #escola_id = fields.Char(string="Escola", compute="_compute_escola")
     #mobile = fields.Char(compute="_compute_mobile")
     #street = fields.Char(compute="_compute_street")
     #street2 = fields.Char(compute="_compute_street2")
@@ -23,7 +23,7 @@ class respartner(models.Model):
 
     @api.multi
     def print_nfo(self):
-        print(self.env['res.users'].browse(self.id))
+        print(record.env['res.users'].search('partner_id', '=', record))
 
 
     def _compute_credit(self):
@@ -32,7 +32,8 @@ class respartner(models.Model):
                 record.credit_limit = 600.0
 
     def _compute_escola(self):
-            """rel_user = record.env['res.users'].browse(record.id)
+        for record in self:
+            rel_user = record.env['res.users'].search('partner_id', '=', record)
             if rel_user and rel_user.escola != False:
                 record.escola_id = rel_user.escola
 
@@ -54,7 +55,7 @@ class respartner(models.Model):
                     if e.case('9'):  # gresol
                         record.write({'product_ids': [(6, 0, [3695, 3696])]})
                     if e.case('10'):  # fcambo
-                        record.write({'product_ids': [(6, 0, [3695, 3696])]})"""
+                        record.write({'product_ids': [(6, 0, [3695, 3696])]})
 
     def _compute_mobile(self):
         for record in self:
