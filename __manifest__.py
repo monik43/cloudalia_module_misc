@@ -23,10 +23,10 @@
         'views/auth_signup_assets.xml',
         'views/res_partner_views.xml',
         'views/account_invoice_views.xml',
-        #'views/account.xml',
+        'views/account.xml',
         'views/stock_views.xml'
     ],
     'qweb': [
-        #'static/src/xml/account_payment.xml',
+        'static/src/xml/account_payment.xml',
     ],
 }
