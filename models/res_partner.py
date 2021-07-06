@@ -11,21 +11,16 @@ class respartner(models.Model):
     escola = fields.Char()
 
 
-    credit_limit = fields.Float(
-        string='Credit Limit', compute="_compute_credit")
-    productes_ids = fields.Many2many('product.template', 'productes_template_id',
-                                     'res_partner_id', 'product_partner_res', string='Productes')
+    """credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
+    productes_ids = fields.Many2many('product.template', 'productes_template_id','res_partner_id', 'product_partner_res', string='Productes')
     escola_id = fields.Char(string="Escola", compute="_compute_escola")
     mobile = fields.Char(compute="_compute_mobile")
     street = fields.Char(compute="_compute_street")
     street2 = fields.Char(compute="_compute_street2")
     zip = fields.Char(change_default=True, compute="_compute_zip")
     city = fields.Char(compute="_compute_city")
-    state_id = fields.Many2one(
-        "res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
-    vat = fields.Char(string='TIN', help="Tax Identification Number. "
-                                         "Fill it if the company is subjected to taxes. "
-                                         "Used by the some of the legal statements.", compute="_compute_vat")
+    state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
+    vat = fields.Char(string='TIN', help="Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.", compute="_compute_vat")"""
     centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
 
     def _compute_credit(self):
@@ -101,7 +96,7 @@ class respartner(models.Model):
             rel_user = record.env['res.users'].browse(record.id)
             if rel_user and rel_user.escola != False and rel_user.vat != False:
                 record.vat = rel_user.vat
-                
+
     def _compute_centro_educativo(self):
         for record in self:
             rel_user = record.env['res.users'].browse(record.id)
