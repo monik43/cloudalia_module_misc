@@ -21,7 +21,7 @@ class respartner(models.Model):
     #city = fields.Char(compute="_compute_city")
     """state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
     vat = fields.Char(string='TIN', help="Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.", compute="_compute_vat")"""
-    centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
+    #centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
 
     def _compute_credit(self):
         for record in self:
