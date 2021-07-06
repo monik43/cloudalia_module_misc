@@ -23,12 +23,10 @@ class respartner(models.Model):
     city = fields.Char(compute="_compute_city")
     state_id = fields.Many2one(
         "res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
-    country_id = fields.Many2one(
-        "res.country", string='Country', compute="_compute_country_id", store=True)
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
-    #centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
+    centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
 
     def _compute_credit(self):
         for record in self:
@@ -96,20 +94,15 @@ class respartner(models.Model):
             rel_user = record.env['res.users'].browse(record.id)
             if rel_user and rel_user.escola != False and rel_user.state_id != False:
                 record.state_id = rel_user.state_id
+                record.country_id = rel_user.state_id.country_id
 
     def _compute_vat(self):
         for record in self:
             rel_user = record.env['res.users'].browse(record.id)
             if rel_user and rel_user.escola != False and rel_user.vat != False:
                 record.vat = rel_user.vat
-
-    def _compute_country_id(self):
-        for record in self:
-            rel_user = record.env['res.users'].browse(record.id)
-            if rel_user and rel_user.escola != False and rel_user.country_id != False:
-                record.country_id = rel_user.state_id.country_id
-
-    """def _compute_centro_educativo(self):
+                
+    def _compute_centro_educativo(self):
         for record in self:
             rel_user = record.env['res.users'].browse(record.id)
             if record.escola_id != False and rel_user.escola != False:
@@ -140,4 +133,4 @@ class respartner(models.Model):
                             13114)
                     if e.case('10'):  # fcambo
                         record.centro_educativo = record.env['res.partner'].browse(
-                            9839)"""
+                            9839)
