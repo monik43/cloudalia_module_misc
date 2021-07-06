@@ -11,8 +11,8 @@ class respartner(models.Model):
     escola = fields.Char()
 
 
-    #credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
-    #escola_id = fields.Char(string="Escola", compute="_compute_escola")
+    credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
+    escola_id = fields.Char(string="Escola", compute="_compute_escola")
     #mobile = fields.Char(compute="_compute_mobile")
     #street = fields.Char(compute="_compute_street")
     #street2 = fields.Char(compute="_compute_street2")
@@ -25,7 +25,7 @@ class respartner(models.Model):
     def print_nfo(self):
         for record in self:
 
-            print(record.env['res.users'].search([('partner_id', '=', record.id)]))
+            print()
 
 
     def _compute_credit(self):
@@ -35,7 +35,7 @@ class respartner(models.Model):
 
     def _compute_escola(self):
         for record in self:
-            rel_user = record.env['res.users'].search('partner_id', '=', record)
+            rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
             if rel_user and rel_user.escola != False:
                 record.escola_id = rel_user.escola
 
@@ -61,44 +61,44 @@ class respartner(models.Model):
 
     def _compute_mobile(self):
         for record in self:
-            rel_user = record.env['res.users'].browse(record.id)
+            rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
             if rel_user and rel_user.escola != False and rel_user.mobile != False:
                 record.mobile = rel_user.mobile
 
     def _compute_street(self):
         for record in self:
-            rel_user = record.env['res.users'].browse(record.id)
+            rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
             if rel_user and rel_user.escola != False and rel_user.street != False:
                 record.street = rel_user.street
 
     def _compute_street2(self):
         for record in self:
-            rel_user = record.env['res.users'].browse(record.id)
+            rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
             if rel_user and rel_user.escola != False and rel_user.street2 != False:
                 record.street2 = rel_user.street2
 
     def _compute_zip(self):
         for record in self:
-            rel_user = record.env['res.users'].browse(record.id)
+            rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
             if rel_user and rel_user.escola != False and rel_user.zip != False:
                 record.zip = rel_user.zip
 
     def _compute_city(self):
         for record in self:
-            rel_user = record.env['res.users'].browse(record.id)
+            rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
             if rel_user and rel_user.escola != False and rel_user.city != False:
                 record.city = rel_user.city
 
     def _compute_state_id(self):
         for record in self:
-            rel_user = record.env['res.users'].browse(record.id)
+            rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
             if rel_user and rel_user.escola != False and rel_user.state_id != False:
                 record.state_id = rel_user.state_id
                 record.country_id = rel_user.state_id.country_id
 
     def _compute_vat(self):
         for record in self:
-            rel_user = record.env['res.users'].browse(record.id)
+            rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
             if rel_user and rel_user.escola != False and rel_user.vat != False:
                 record.vat = rel_user.vat
 
