@@ -11,7 +11,7 @@ class respartner(models.Model):
     escola = fields.Char()
 
 
-    credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
+    #credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
     escola_id = fields.Char(string="Escola", compute="_compute_escola")
     #mobile = fields.Char(compute="_compute_mobile")
     #street = fields.Char(compute="_compute_street")
@@ -25,7 +25,7 @@ class respartner(models.Model):
     def print_nfo(self):
         for record in self:
 
-            print()
+            print(record.escola_id)
 
 
     def _compute_credit(self):
@@ -40,23 +40,23 @@ class respartner(models.Model):
                 record.escola_id = rel_user.escola
 
                 with switch(record.escola_id) as e:
-                    if e.case('2'):  # cmontserrat
+                    if e.case('2',True):  # cmontserrat
                         record.write({'product_ids': [(6, 0, [3660, 3661])]})
-                    if e.case('3'):  # eminguella
+                    if e.case('3',True):  # eminguella
                         record.write({'product_ids': [(6, 0, [3664])]})
-                    if e.case('4'):  # jpelegri
+                    if e.case('4',True):  # jpelegri
                         record.write({'product_ids': [(6, 0, [3665])]})
-                    if e.case('5'):  # lestonnac
+                    if e.case('5',True):  # lestonnac
                         record.write({'product_ids': [(6, 0, [3671])]})
-                    if e.case('6'):  # inscassaselva
+                    if e.case('6',True):  # inscassaselva
                         record.write({'product_ids': [(6, 0, [3676, 3677])]})
-                    if e.case('7'):  # stesteve
+                    if e.case('7',True):  # stesteve
                         record.write({'product_ids': [(6, 0, [3683])]})
-                    if e.case('8'):  # bitacola
+                    if e.case('8',True):  # bitacola
                         record.write({'product_ids': [(6, 0, [3684])]})
-                    if e.case('9'):  # gresol
+                    if e.case('9',True):  # gresol
                         record.write({'product_ids': [(6, 0, [3695, 3696])]})
-                    if e.case('10'):  # fcambo
+                    if e.case('10',True):  # fcambo
                         record.write({'product_ids': [(6, 0, [3695, 3696])]})
 
     def _compute_mobile(self):
