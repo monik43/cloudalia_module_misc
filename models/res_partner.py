@@ -11,7 +11,7 @@ class respartner(models.Model):
     escola = fields.Char()
 
 
-    credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
+    #credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
     escola_id = fields.Char(string="Escola", compute="_compute_escola")
     #mobile = fields.Char(compute="_compute_mobile")
     #street = fields.Char(compute="_compute_street")
@@ -28,7 +28,8 @@ class respartner(models.Model):
 
     def _compute_escola(self):
         for record in self:
-            rel_user = record.env['res.users'].browse(record.id)
+            print(record.env['res.users'].browse(record.id))
+            """rel_user = record.env['res.users'].browse(record.id)
             if rel_user and rel_user.escola != False:
                 record.escola_id = rel_user.escola
 
@@ -50,7 +51,7 @@ class respartner(models.Model):
                     if e.case('9'):  # gresol
                         record.write({'product_ids': [(6, 0, [3695, 3696])]})
                     if e.case('10'):  # fcambo
-                        record.write({'product_ids': [(6, 0, [3695, 3696])]})
+                        record.write({'product_ids': [(6, 0, [3695, 3696])]})"""
 
     def _compute_mobile(self):
         for record in self:
