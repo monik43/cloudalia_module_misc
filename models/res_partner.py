@@ -11,7 +11,7 @@ class respartner(models.Model):
     escola = fields.Char()
 
 
-    #credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
+    credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
     #escola_id = fields.Char(string="Escola", compute="_compute_escola")
     #mobile = fields.Char(compute="_compute_mobile")
     #street = fields.Char(compute="_compute_street")
