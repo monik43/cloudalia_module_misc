@@ -1,14 +1,5 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
-import logging
-
-from ast import literal_eval
-
-from odoo.exceptions import UserError
-from odoo.tools.misc import ustr
-
-from odoo.addons.base.ir.ir_mail_server import MailDeliveryException
-from odoo.addons.auth_signup.models.res_partner import SignupError, now
 
 
 class resusers(models.Model):
