@@ -14,7 +14,7 @@
 
     'category': 'Technical Settings',
 
-    'version': '11.0.0.4',
+    'version': '11.0.0.1',
 
     'depends': ['base', 'stock', 'cloudedu_mods', 'auth_signup', 'website', 'account'],
 

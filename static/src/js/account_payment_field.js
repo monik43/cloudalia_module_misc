@@ -5,4 +5,4 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
     alert("ACCOUNT PAYMENT ");
     console.log("ACCOUNT PAYMENT ", account_payment);
         
-    });
+});
