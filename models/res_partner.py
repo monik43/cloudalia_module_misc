@@ -14,7 +14,7 @@ class respartner(models.Model):
     credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
     productes_ids = fields.Many2many('product.template', 'productes_template_id','res_partner_id', 'product_partner_res', string='Productes')
     escola_id = fields.Char(string="Escola", compute="_compute_escola")
-    #mobile = fields.Char(compute="_compute_mobile")
+    mobile = fields.Char(compute="_compute_mobile")
     #street = fields.Char(compute="_compute_street")
     #street2 = fields.Char(compute="_compute_street2")
     #zip = fields.Char(change_default=True, compute="_compute_zip")
@@ -97,7 +97,7 @@ class respartner(models.Model):
             if rel_user and rel_user.escola != False and rel_user.vat != False:
                 record.vat = rel_user.vat
 
-    def _compute_centro_educativo(self):
+    """def _compute_centro_educativo(self):
         for record in self:
             rel_user = record.env['res.users'].browse(record.id)
             if record.escola_id != False and rel_user.escola != False:
@@ -128,4 +128,4 @@ class respartner(models.Model):
                             13114)
                     if e.case('10'):  # fcambo
                         record.centro_educativo = record.env['res.partner'].browse(
-                            9839)
+                            9839)"""
