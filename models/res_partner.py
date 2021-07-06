@@ -12,7 +12,7 @@ class respartner(models.Model):
 
 
     #credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
-    escola_id = fields.Char(string="Escola", compute="_compute_escola")
+    #escola_id = fields.Char(string="Escola", compute="_compute_escola")
     #mobile = fields.Char(compute="_compute_mobile")
     #street = fields.Char(compute="_compute_street")
     #street2 = fields.Char(compute="_compute_street2")
@@ -25,7 +25,7 @@ class respartner(models.Model):
     def print_nfo(self):
         for record in self:
 
-            print(record.env['res.users'].search('partner_id', '=', record))
+            print(record.env['res.users'].search([('partner_id', '=', record)]))
 
 
     def _compute_credit(self):
