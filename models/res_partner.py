@@ -88,7 +88,8 @@ class respartner(models.Model):
             rel_user = record.env['res.users'].search([('partner_id', '=', record.id)])
             if rel_user and rel_user.escola != False and rel_user.state_id != False:
                 record.state_id = rel_user.state_id
-                record.country_id = rel_user.state_id.country_id
+                if rel_user.state_id.cpuntry_id != False:
+                    record.country_id = rel_user.state_id.country_id
 
     def _compute_vat(self):
         for record in self:
