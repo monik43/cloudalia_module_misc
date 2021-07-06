@@ -7,10 +7,10 @@ from .switch import switch
 class respartner(models.Model):
     _inherit = 'res.partner'
 
-    centro_educativo = fields.Many2one(
-        "res.partner", compute="_compute_centro_educativo")
+    
     escola = fields.Char()
-    rel_user_id = fields.Many2one("res.users", compute="_compute_usuari")
+
+
     credit_limit = fields.Float(
         string='Credit Limit', compute="_compute_credit")
     productes_ids = fields.Many2many('product.template', 'productes_template_id',
@@ -28,11 +28,8 @@ class respartner(models.Model):
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
                                          "Used by the some of the legal statements.", compute="_compute_vat")
-
-    def _compute_usuari(self):
-        for record in self:
-            if record.env['res.users'].browse(record.id).escola != False:
-                record.rel_user_id = record.env['res.users'].browse(record.id)
+    centro_educativo = fields.Many2one(
+        "res.partner", compute="_compute_centro_educativo")
 
     def _compute_credit(self):
         for record in self:
@@ -41,8 +38,9 @@ class respartner(models.Model):
 
     def _compute_escola(self):
         for record in self:
-            if record.rel_user_id.escola != False:
-                record.escola_id = record.rel_user_id.escola
+            rel_user = record.env['res.users'].browse(record.id)
+            if  rel_user and rel_user.escola != False:
+                record.escola_id = rel_user.escola
 
                 with switch(record.escola_id) as e:
                     if e.case('2'):  # cmontserrat
@@ -66,47 +64,56 @@ class respartner(models.Model):
 
     def _compute_mobile(self):
         for record in self:
-            if record.rel_user_id.escola != False and record.rel_user_id.mobile != False:
-                record.mobile = record.rel_user_id.mobile
+            rel_user = record.env['res.users'].browse(record.id)
+            if rel_user and rel_user.escola != False and rel_user.mobile != False:
+                record.mobile = rel_user.mobile
 
     def _compute_street(self):
         for record in self:
-            if record.rel_user_id.escola != False and record.rel_user_id.street != False:
-                record.street = record.rel_user_id.street
+            rel_user = record.env['res.users'].browse(record.id)
+            if rel_user and rel_user.escola != False and rel_user.street != False:
+                record.street = rel_user.street
 
     def _compute_street2(self):
         for record in self:
-            if record.rel_user_id.escola != False and record.rel_user_id.street2 != False:
-                record.street2 = record.rel_user_id.street2
+            rel_user = record.env['res.users'].browse(record.id)
+            if rel_user and rel_user.escola != False and rel_user.street2 != False:
+                record.street2 = rel_user.street2
 
     def _compute_zip(self):
         for record in self:
-            if record.rel_user_id.escola != False and record.rel_user_id.zip != False:
-                record.zip = record.rel_user_id.zip
+            rel_user = record.env['res.users'].browse(record.id)
+            if rel_user and rel_user.escola != False and rel_user.zip != False:
+                record.zip = rel_user.zip
 
     def _compute_city(self):
         for record in self:
-            if record.rel_user_id.escola != False and record.rel_user_id.city != False:
-                record.city = record.rel_user_id.city
+            rel_user = record.env['res.users'].browse(record.id)
+            if rel_user and rel_user.escola != False and rel_user.city != False:
+                record.city = rel_user.city
 
     def _compute_state_id(self):
         for record in self:
-            if record.rel_user_id.escola != False and record.rel_user_id.state_id != False:
-                record.state_id = record.rel_user_id.state_id
+            rel_user = record.env['res.users'].browse(record.id)
+            if rel_user and rel_user.escola != False and rel_user.state_id != False:
+                record.state_id = rel_user.state_id
 
     def _compute_vat(self):
         for record in self:
-            if record.rel_user_id.escola != False and record.rel_user_id.vat != False:
-                record.vat = record.rel_user_id.vat
+            rel_user = record.env['res.users'].browse(record.id)
+            if rel_user and rel_user.escola != False and rel_user.vat != False:
+                record.vat = rel_user.vat
 
     def _compute_country_id(self):
         for record in self:
-            if record.rel_user_id.escola != False and record.rel_user_id.state_id.country_id != False:
-                record.country_id = record.rel_user_id.state_id.country_id
+            rel_user = record.env['res.users'].browse(record.id)
+            if rel_user and rel_user.escola != False and rel_user.country_id != False:
+                record.country_id = rel_user.state_id.country_id
 
     def _compute_centro_educativo(self):
         for record in self:
-            if record.rel_user_id.escola != False:
+            rel_user = record.env['res.users'].browse(record.id)
+            if record.escola_id != False and rel_user.escola != False:
                 with switch(record.escola_id) as e:
                     if e.case('2'):  # cmontserrat
                         record.centro_educativo = record.env['res.partner'].browse(
