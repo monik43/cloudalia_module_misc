@@ -22,13 +22,6 @@ class respartner(models.Model):
     vat = fields.Char(string='TIN', help="Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.", compute="_compute_vat")
     centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
 
-    @api.multi
-    def print_nfo(self):
-        for record in self:
-
-            print(record.escola_id)
-
-
     def _compute_credit(self):
         for record in self:
             if record.escola_id != False and float_is_zero(record.credit_limit, precision_digits=2):
