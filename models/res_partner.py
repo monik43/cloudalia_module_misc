@@ -25,7 +25,7 @@ class respartner(models.Model):
     def print_nfo(self):
         for record in self:
 
-            print(record.env['res.users'].search([('partner_id', '=', record)]))
+            print(record.env['res.users'].search([('partner_id', '=', record.id)]))
 
 
     def _compute_credit(self):
