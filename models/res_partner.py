@@ -19,9 +19,8 @@ class respartner(models.Model):
     #street2 = fields.Char(compute="_compute_street2")
     #zip = fields.Char(change_default=True, compute="_compute_zip")
     #city = fields.Char(compute="_compute_city")
-    """state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
-    vat = fields.Char(string='TIN', help="Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.", compute="_compute_vat")"""
-    #centro_educativo = fields.Many2one("res.partner", compute="_compute_centro_educativo")
+    state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
+    vat = fields.Char(string='TIN', help="Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.", compute="_compute_vat")
 
     def _compute_credit(self):
         for record in self:
@@ -96,36 +95,3 @@ class respartner(models.Model):
             rel_user = record.env['res.users'].browse(record.id)
             if rel_user and rel_user.escola != False and rel_user.vat != False:
                 record.vat = rel_user.vat
-
-    """def _compute_centro_educativo(self):
-        for record in self:
-            rel_user = record.env['res.users'].browse(record.id)
-            if record.escola_id != False and rel_user.escola != False:
-                with switch(record.escola_id) as e:
-                    if e.case('2'):  # cmontserrat
-                        record.centro_educativo = record.env['res.partner'].browse(
-                            16923)
-                    if e.case('3'):  # eminguella
-                        record.centro_educativo = record.env['res.partner'].browse(
-                            12794)
-                    if e.case('4'):  # jpelegri
-                        record.centro_educativo = record.env['res.partner'].browse(
-                            12359)
-                    if e.case('5'):  # lestonnac
-                        record.centro_educativo = record.env['res.partner'].browse(
-                            9583)
-                    if e.case('6'):  # inscassaselva
-                        record.centro_educativo = record.env['res.partner'].browse(
-                            19874)
-                    if e.case('7'):  # stesteve
-                        record.centro_educativo = record.env['res.partner'].browse(
-                            14984)
-                    if e.case('8'):  # bitacola
-                        record.centro_educativo = record.env['res.partner'].browse(
-                            9737)
-                    if e.case('9'):  # gresol
-                        record.centro_educativo = record.env['res.partner'].browse(
-                            13114)
-                    if e.case('10'):  # fcambo
-                        record.centro_educativo = record.env['res.partner'].browse(
-                            9839)"""
