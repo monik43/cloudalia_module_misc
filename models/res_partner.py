@@ -12,7 +12,7 @@ class respartner(models.Model):
 
 
     #credit_limit = fields.Float(string='Credit Limit', compute="_compute_credit")
-    #escola_id = fields.Char(string="Escola", compute="_compute_escola")
+    escola_id = fields.Char(string="Escola", compute="_compute_escola")
     #mobile = fields.Char(compute="_compute_mobile")
     #street = fields.Char(compute="_compute_street")
     #street2 = fields.Char(compute="_compute_street2")
@@ -23,7 +23,9 @@ class respartner(models.Model):
 
     @api.multi
     def print_nfo(self):
-        print(record.env['res.users'].search('partner_id', '=', record))
+        for record in self:
+
+            print(record.env['res.users'].search('partner_id', '=', record))
 
 
     def _compute_credit(self):
@@ -33,7 +35,7 @@ class respartner(models.Model):
 
     def _compute_escola(self):
         for record in self:
-            rel_user = record.env['res.users'].search('partner_id', '=', record.id)
+            rel_user = record.env['res.users'].search('partner_id', '=', record)
             if rel_user and rel_user.escola != False:
                 record.escola_id = rel_user.escola
 
