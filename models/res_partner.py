@@ -21,14 +21,18 @@ class respartner(models.Model):
     #state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', compute="_compute_state_id")
     #vat = fields.Char(string='TIN', help="Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.", compute="_compute_vat")
 
+    @api.multi
+    def print_nfo(self):
+        print(self.env['res.users'].browse(self.id))
+
+
     def _compute_credit(self):
         for record in self:
             if record.escola_id != False and float_is_zero(record.credit_limit, precision_digits=2):
                 record.credit_limit = 600.0
 
     def _compute_escola(self):
-        for record in self:
-            print(record.env['res.users'].browse(record.id))
+            print(self.env['res.users'].browse(self.id))
             """rel_user = record.env['res.users'].browse(record.id)
             if rel_user and rel_user.escola != False:
                 record.escola_id = rel_user.escola
