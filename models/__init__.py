@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from . import  stock_picking, stock_move, res_users, res_partner
+from . import res_users, res_partner, stock_picking, stock_move
