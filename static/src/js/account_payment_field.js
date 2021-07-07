@@ -3,12 +3,9 @@ odoo.define('cloudalia_module_misc.payment', function (require) {
 
     var core = require('web.core');
     var field_utils = require('web.field_utils');
-
     var QWeb = core.qweb;
-
     var account_payment = require('account.payment');
-    
-    console.log("ACCOUNT PAYMENT ", account_payment);
+
     account_payment.ShowPaymentLineWidget.include({
         _render: function() {
             var self = this;
