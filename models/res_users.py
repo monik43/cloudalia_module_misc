@@ -11,7 +11,6 @@ class resusers(models.Model):
     street2 = fields.Char(store=True)
     zip = fields.Char(store=True)
     city = fields.Char(store=True)
-    state_id = fields.Many2one(
-        "res.country.state", string='State', store=True)
+    state_id = fields.Many2one("res.country.state", string='State', store=True)
     country_id = fields.Many2one('res.country', string='Country')
     escola = fields.Char(store=True)
