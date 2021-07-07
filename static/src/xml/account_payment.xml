@@ -30,7 +30,7 @@
                             </td>
                             <td>
                                 <i class="o_field_widget text-right o_payment_label" style="margin-left: -10px !important;">Paid on <t t-esc="line.date"></t>
-                                </i>&#160;
+                                </i>
                             </td>
                         </t>
                         <td style="text-align:right;">
