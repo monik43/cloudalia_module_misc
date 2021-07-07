@@ -21,7 +21,7 @@
             <field name="arch" type="xml">
                 <field name="outstanding_credits_debits_widget" position="replace"/>
                 <group class="oe_subtotal_footer oe_right" position="before">
-                    <div class="oe_inline" style="width: 8cm !important;">
+                    <div class="oe_inline" style="width: 20% !important;">
                         <field name="outstanding_credits_debits_widget" colspan="2" nolabel="1" widget="payment" attrs="{'invisible': [('state', 'not in', 'open')]}"/>
                     </div>
                 </group>
