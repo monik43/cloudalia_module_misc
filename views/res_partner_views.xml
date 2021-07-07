@@ -6,11 +6,12 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
+                <!--
                 <xpath expr="//div[hasclass('oe_title')]" position="inside">
                     <div class="o_row">
                         <field name="centro_educativo" attrs="{'invisible': [('x_centro_educativo', '!=', False)]}"/>
                     </div>
-                </xpath>
+                </xpath>-->
                 <xpath expr="//field[@name='lang']" position="after">
                     <field name="escola" attrs="{'invisible': [('escola', '=', False)]}"/>
                 </xpath>
