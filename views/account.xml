@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-
     <data>
         <template id="account_payment_ext" name="account_ext_cloud" inherit_id="account.assets_backend">
             <xpath expr="." position="inside">
@@ -9,5 +8,4 @@
             </xpath>
         </template>
     </data>
-
 </odoo>
