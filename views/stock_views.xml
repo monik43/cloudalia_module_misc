@@ -22,7 +22,7 @@
                     <attribute name="icon"></attribute>
                     <attribute name="style">margin-right: -33px !important;</attribute>
                     <attribute name="class">btn btn-primary</attribute>
-                    <attribute name="string">Ver más</attribute>
+                    <attribute name="string">...</attribute>
                 </xpath>
             </field>
         </record>
