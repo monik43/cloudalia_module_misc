@@ -21,7 +21,7 @@
     'data': [
         #'views/auth_signup_views.xml',
         #'views/auth_signup_assets.xml',
-        #'views/res_partner_views.xml',
+        'views/res_partner_views.xml',
         #'views/account_invoice_views.xml',
         #'views/account.xml',
         #'views/stock_views.xml'
