@@ -12,5 +12,5 @@ class mail_activity(models.Model):
             if record.filtro_check:
                 domain = [('share','=',False)]
             else:
-                domain = [()]
+                domain = [('name','!=',False)]
             return {'domain':{'user_id':domain}}
