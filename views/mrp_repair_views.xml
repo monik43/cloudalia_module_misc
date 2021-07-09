@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="mrp_repair.view_repair_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='operations']/tree" position="inside">
-                    <button name="action_set_pieza_añadida" type="object"><field name="pieza_añadida"/></button>
+                    <field name="pieza_añadida"/>
                 </xpath>
             </field>
         </record>

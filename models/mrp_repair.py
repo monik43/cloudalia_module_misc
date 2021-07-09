@@ -11,4 +11,3 @@ class repair_line(models.Model):
     def action_set_pieza_añadida(self):
         for record in self:
             record.pieza_añadida = not record.pieza_añadida
-            print(record.pieza_añadida)
