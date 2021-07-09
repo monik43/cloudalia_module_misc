@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="cloud_view_repair_order_form" model="ir.ui.view">
+            <field name="name">cloud_mrp.repair.form</field>
+            <field name="model">mrp.repair</field>
+            <field name="inherit_id" ref="mrp_repair.view_repair_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree[@string='Operations']" position="inside">
+                    <button name="action_set_pieza_añadida" string="Test pieza" type="object" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
