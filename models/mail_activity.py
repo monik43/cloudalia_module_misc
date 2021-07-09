@@ -9,7 +9,7 @@ class mail_activity(models.Model):
     @api.onchange('filtro_check')
     def onchange_filtro_check(self):
         for record in self:
-            if record.field_check:
+            if record.filtro_check:
                 domain = [('code','=','incoming')]
             else:
                 domain = []
