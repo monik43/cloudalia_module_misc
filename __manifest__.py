@@ -14,19 +14,21 @@
 
     'category': 'Technical Settings',
 
-    'version': '11.0.0.1',
+    'version': '11.0.0.5',
 
     'depends': ['base', 'stock', 'cloudedu_mods', 'auth_signup', 'website', 'account'],
 
     'data': [
-        #'views/auth_signup_views.xml',
-        #'views/auth_signup_assets.xml',
+        'views/auth_signup_views.xml',
+        'views/auth_signup_assets.xml',
         'views/res_partner_views.xml',
-        #'views/account_invoice_views.xml',
-        #'views/account.xml',
-        #'views/stock_views.xml'
+        'views/account_invoice_views.xml',
+        'views/account.xml',
+        'views/stock_views.xml'
     ],
     'qweb': [
-        #'static/src/xml/account_payment.xml',
+        'static/src/xml/account_payment.xml',
     ],
+    'installable': True,
+    'auto_install': True,
 }
