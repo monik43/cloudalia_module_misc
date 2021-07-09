@@ -10,7 +10,7 @@ class mail_activity(models.Model):
     def onchange_filtro_check(self):
         for record in self:
             if record.filtro_check:
-                domain = [('share','=',False)]
-            else:
                 domain = [('firstname','!=',False)]
+            else:
+                domain = [('share','=',False)]
             return {'domain':{'user_id':domain}}
