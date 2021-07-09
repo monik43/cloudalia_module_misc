@@ -9,7 +9,6 @@ class repair_line(models.Model):
 
     @api.multi
     def action_set_pieza_añadida(self):
-        self.ensure_one()
-        print(self.pieza_añadida)
-        self.pieza_añadida = not self.pieza_añadida
-        print(self.pieza_añadida)
+        for record in self:
+            record.pieza_añadida = not record.pieza_añadida
+            print(record.pieza_añadida)
