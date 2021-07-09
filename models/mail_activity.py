@@ -4,7 +4,7 @@ from odoo import models, fields, api, _
 class mail_activity(models.Model):
     _inherit = 'mail.activity'
 
-    filtro_check = fields.Boolean('Habilitar usuarios externos?', default=True)
+    filtro_check = fields.Boolean('Habilitar usuarios externos?')
 
     @api.onchange('filtro_check')
     def onchange_filtro_check(self):
