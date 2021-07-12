@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from . import res_users, res_partner, stock_picking, stock_move, mrp_repair, mail_activity
+from . import res_users, res_partner

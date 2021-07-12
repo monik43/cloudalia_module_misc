@@ -14,22 +14,13 @@
 
     'category': 'Technical Settings',
 
-    'version': '11.0.0.6',
+    'version': '11.0.0.7',
 
-    'depends': ['base', 'stock', 'cloudedu_mods', 'auth_signup', 'website', 'account', 'mail'],
+    'depends': ['base', 'auth_signup', 'website', 'account'],
 
     'data': [
         'views/auth_signup_views.xml',
-        'views/auth_signup_assets.xml',
-        'views/res_partner_views.xml',
-        'views/account_invoice_views.xml',
-        'views/account.xml',
-        'views/stock_views.xml',
-        'views/mrp_repair_views.xml',
-        'views/mail_views.xml'
-    ],
-    'qweb': [
-        'static/src/xml/account_payment.xml',
+        'views/auth_signup_assets.xml'
     ],
     'installable': True,
     'auto_install': True,
